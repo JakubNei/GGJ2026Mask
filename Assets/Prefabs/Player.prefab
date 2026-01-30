@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSfx: {fileID: 8300000, guid: 7f6615750e8d3ca45b017b3008dd1791, type: 3}
   poisonedSprite: {fileID: 0}
-  moveSpeed: 20
+  moveSpeed: 40
   Name: 
   IsPlayerCharacter: 1
   allowedFallDirections: 0
