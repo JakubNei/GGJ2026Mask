@@ -50,7 +50,6 @@ public class ItemBase : MonoBehaviour, IInteractable
 
     public void UpdateWhileInteracting()
     {
-        Debug.Log("hello");
         return;
     }
 

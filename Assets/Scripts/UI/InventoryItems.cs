@@ -46,7 +46,7 @@ public void AddItem(ItemBase item)
     }
     itemList.Add(item);
     UpdateItemSprites();
-        item.OnPickupToInventory();
+    item.OnPickupToInventory();
 }
 
 public void RemoveItem(ItemBase itemPrefab)
