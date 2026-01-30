@@ -95,7 +95,6 @@ public class GuardController : MonoBehaviour
         var originalPos = transform.position;
 
         player.isInteractingWithGuard = true;
-        GameController.Instance.TriggerKnockout();
         AudioManager.i.PlaySfx(playerFoundClip);
 
         yield return player.Character.Animator.IsMoving = false;
