@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovableObject : MonoBehaviour, IInteractable
 {
+    public bool Pullable = true;
+    public bool Pushable = true;
     Rigidbody2D rb;
     void Awake()
     {
@@ -11,13 +13,12 @@ public class MovableObject : MonoBehaviour, IInteractable
     }
     public bool CanInteract()
     {
-        return true;
+        return Pullable;
     }
-
 
     public void UpdateWhileInteracting()
     {
-        if (!PlayerController.Instance.CanPlayerPullObjects)
+        if (!PlayerController.Instance.CanPlayerPullObjects || !Pullable)
             return;
 
         // if (rb.bodyType == RigidbodyType2D.Dynamic)
@@ -29,7 +30,7 @@ public class MovableObject : MonoBehaviour, IInteractable
     void Update()
     {
         rb.bodyType =
-            PlayerController.Instance.CanPlayerPushObjects ?
+            PlayerController.Instance.CanPlayerPushObjects && Pushable ?
             RigidbodyType2D.Dynamic :
             RigidbodyType2D.Static;
     }
