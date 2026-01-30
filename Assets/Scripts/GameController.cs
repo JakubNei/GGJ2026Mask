@@ -19,7 +19,6 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-    [SerializeField] Camera worldCamera;
     [SerializeField] GameObject prefabItemBanana;
     [SerializeField] GameObject prefabItemPoison;
     [SerializeField] GameObject prefabItemScissors;
@@ -505,14 +504,14 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
-        worldCamera.gameObject.SetActive(true);
+       /* worldCamera.gameObject.SetActive(true);
         if (playerController.connectCamera)
         {
             Vector3 cameraPosition = worldCamera.transform.position;
             cameraPosition.x = playerController.gameObject.transform.position.x;
             cameraPosition.y = playerController.gameObject.transform.position.y;
             worldCamera.transform.position = cameraPosition;
-        }
+        }*/
         /*else if (playerController.Character.IsDead)
         {
             if (!openedMenuAfterPlayerDied)
@@ -567,18 +566,6 @@ public class GameController : MonoBehaviour
         }
 
 
-    }
-
-    public IEnumerator MoveCamera(Vector2 moveOffset, bool waitForFadeOut = false)
-    {
-        yield return Fader.i.FadeIn(0.5f);
-
-        worldCamera.transform.position += new Vector3(moveOffset.x, moveOffset.y);
-
-        if (waitForFadeOut)
-            yield return Fader.i.FadeOut(0.5f);
-        else
-            StartCoroutine(Fader.i.FadeOut(0.5f));
     }
 
     public void ShowRandomDialogThenFreeRoam(string[] dialogs, Action onDialogFinished = null)

@@ -363,10 +363,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSfx: {fileID: 8300000, guid: 7f6615750e8d3ca45b017b3008dd1791, type: 3}
   poisonedSprite: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 20
   Name: 
-  fallenForSeconds: 0
-  fallImunityForSeconds: 0
   allowedFallDirections: 0
   characterAnimator: {fileID: 4720159627808179391}
 --- !u!1 &6818011631293307235

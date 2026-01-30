@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + input.normalized * character.moveSpeed * Time.deltaTime);
 
 
+        var pos = Camera.main.transform.position;
+        pos.x = transform.position.x;
+        pos.y = transform.position.y;
+        Camera.main.transform.position = pos;
+
 
         if (lastMousePosition != Input.mousePosition)
         {
@@ -124,7 +129,7 @@ public class PlayerController : MonoBehaviour
             var interactible = interactableGameObject.GetComponent<IInteractable>();
             if (interactible != null)
             {
-                interactible.Interact(character.transform);
+                interactible.UpdateWhileInteracting();
             }
         }
 

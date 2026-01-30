@@ -20,9 +20,6 @@ public class Character : MonoBehaviour
     
     public bool IsAbleToMove => !HasFallen && !IsDead;
 
-    public float fallenForSeconds = 0;
-    public float fallImunityForSeconds = 0;
-
     public bool IsPlayerCharacter { get; private set; }
     public bool IsNPCCharacter => !IsPlayerCharacter;
 
@@ -110,61 +107,12 @@ public class Character : MonoBehaviour
         OnMoveOver?.Invoke();
     }
 
-    private bool IsOverlappingBanana()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.4f);
-
-        foreach (var collider in colliders)
-        {
-            if (collider.gameObject.GetComponent<Banana>())
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool IsOverlappingBananaInFront(Vector2 dir)
-    {
-        Vector2 offsetPosition = (Vector2)transform.position + dir;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(offsetPosition, 0.8f);
-
-        foreach (var collider in colliders)
-        {
-            if (collider.gameObject.GetComponent<Banana>())
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
+   
     public void HandleUpdate()
     {
         animator.IsMoving = IsMoving;
 
-        fallImunityForSeconds -= Time.deltaTime;
-        if (fallImunityForSeconds <= 0 && IsMoving && IsOverlappingBanana())
-        {
-            SetHasFallen(true);
-        }
 
-        if (HasFallen)
-        {
-            animator.SetfacingDirection(FacingDirection.Down);
-            animator.IsMoving = false;
-            fallenForSeconds += Time.deltaTime;
-            if (IsPlayerCharacter && fallenForSeconds > 2)
-            {
-                // stand back up
-                fallImunityForSeconds = 5;
-                SetHasFallen(false);
-            }
-        }
     }
 
     public void SetHasPoisoned()
@@ -186,7 +134,6 @@ public class Character : MonoBehaviour
         if (HasFallen == newFallenState)
             return;
 
-        fallenForSeconds = 0;
         if (newFallenState)
         {
             AudioManager.i.PlaySfx(fallSfx);
@@ -250,9 +197,6 @@ public class Character : MonoBehaviour
         Vector3 dir = diff.normalized;
 
         var collisionLayer = GameLayers.i.SolidLayer | GameLayers.i.InteractableLayer | GameLayers.i.PlayerLayer;
-
-        if (IsOverlappingBananaInFront(dir))
-            return true;
 
         if (Physics2D.BoxCast(transform.position + dir, new Vector2(0.2f, 0.2f), 0f, dir, diff.magnitude - 1, collisionLayer) == true)
             return false;

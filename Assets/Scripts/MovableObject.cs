@@ -8,7 +8,7 @@ public class MovableObject : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void Interact(Transform initiator)
+    public void UpdateWhileInteracting()
     {
         
     }
