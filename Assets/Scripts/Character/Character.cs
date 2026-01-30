@@ -4,6 +4,8 @@ using DG.Tweening;
 using UnityEngine;
 
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class Character : MonoBehaviour
 {
     [SerializeField] AudioClip fallSfx;
@@ -17,10 +19,10 @@ public class Character : MonoBehaviour
 
     public bool HasFallen { get; private set; } = false;
     public bool IsDead { get; private set; } = false;
-    
+
     public bool IsAbleToMove => !HasFallen && !IsDead;
 
-    public bool IsPlayerCharacter { get; private set; }
+    public bool IsPlayerCharacter;
     public bool IsNPCCharacter => !IsPlayerCharacter;
 
     public enum AllowedFallDirections
@@ -40,7 +42,6 @@ public class Character : MonoBehaviour
         animator = GetComponent<CharacterAnimator>();
         SetPositionAndSnapToTile(transform.position); // Snap do centra tilu
 
-        IsPlayerCharacter = gameObject.GetComponent<PlayerController>() != null;
     }
 
     public void OnEatenByDog()
@@ -107,7 +108,7 @@ public class Character : MonoBehaviour
         OnMoveOver?.Invoke();
     }
 
-   
+
     public void HandleUpdate()
     {
         animator.IsMoving = IsMoving;

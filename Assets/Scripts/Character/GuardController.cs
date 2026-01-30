@@ -94,7 +94,7 @@ public class GuardController : MonoBehaviour
 
         var originalPos = transform.position;
 
-        player.isInteractingWithGuard = true;
+        //player.isInteractingWithGuard = true;
         AudioManager.i.PlaySfx(playerFoundClip);
 
         yield return player.Character.Animator.IsMoving = false;
@@ -122,7 +122,7 @@ public class GuardController : MonoBehaviour
 
         // Free roam
         GameController.Instance.gameState = GameState.FreeRoam;
-        player.isInteractingWithGuard = false;
+        //player.isInteractingWithGuard = false;
 
         //Walk back after knocking out player
         var diffToOriginalPos = originalPos - transform.position;

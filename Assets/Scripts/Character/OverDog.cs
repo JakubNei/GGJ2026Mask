@@ -75,7 +75,7 @@ public class OverDog : MonoBehaviour
     {
         timeSpentInCurrentQuestState += Time.deltaTime;
 
-        if (!hintShownForCurrentQuestState && playerController && !playerController.isInteractingWithGuard)
+        if (!hintShownForCurrentQuestState && playerController/* && !playerController.isInteractingWithGuard*/)
         {
             if (timeSpentInCurrentQuestState > 40 + UnityEngine.Random.Range(0, 20))
             {

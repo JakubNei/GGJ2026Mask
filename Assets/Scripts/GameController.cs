@@ -189,10 +189,10 @@ public class GameController : MonoBehaviour
         dogQuestInProgressDialogsPool.Add("Do I have to do everything myself?");
     }
 
-    private void Start()
-    {
-        overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
-    }
+    // private void Start()
+    // {
+    //     overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
+    // }
 
    
     public void OnGenericNPCTalkedTo()

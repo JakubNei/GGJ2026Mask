@@ -14,7 +14,7 @@ public class DemonDogEatingAnimation : MonoBehaviour
     public void EatTarget(GameObject eatTarget)
     {        
         this.eatTarget = eatTarget;
-        eatTarget.GetComponentInChildren<PlayerController>()?.OnStartBeingEatenByDog();
+        //eatTarget.GetComponentInChildren<PlayerController>()?.OnStartBeingEatenByDog();
         gameObject.SetActive(true);
         originalSprite.SetActive(false);
     }

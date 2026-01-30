@@ -4,30 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     public bool CanPlayerPushObjects = true;
     public bool CanPlayerPullObjects = true;
+
     [SerializeField] ItemCursor itemCursor;
     [SerializeField] public InventoryItems inventoryItems;
 
     public static PlayerController Instance { get; private set; }
     public CharacterAnimator characterAnimator;
     private Vector2 input;
-    private Character character;
-    public bool connectCamera = true;
+    public Character controllingCharacter;
 
-    [HideInInspector] public bool isInteractingWithGuard;
-
-    Vector3 lastMousePosition;
+    public Vector3 lastMousePosition;
 
     public Vector3 lastCharacterPosition;
     public Vector3 lastCharacterDeltaMovement;
     private void Awake()
     {
         Instance = this;
-        character = GetComponent<Character>();
     }
 
     enum InteractPosMethod
@@ -36,11 +32,6 @@ public class PlayerController : MonoBehaviour
         TowardsMouse,
     }
     InteractPosMethod interactPosMethod;
-
-    public void OnStartBeingEatenByDog()
-    {
-        connectCamera = false;
-    }
 
     public static bool OpenMenuKeyDown()
     {
@@ -61,25 +52,41 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        var p = character.transform.position;
+        if (controllingCharacter == null)
+        {
+            foreach (var character in FindObjectsByType<Character>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            {
+                if (character.IsPlayerCharacter)
+                {
+                    controllingCharacter = character;
+                    break;
+                }
+            }
+            lastCharacterPosition = controllingCharacter.transform.position;
+        }
+        
+        if (controllingCharacter == null)
+            return;
+
+        var p = controllingCharacter.transform.position;
         lastCharacterDeltaMovement = p - lastCharacterPosition;
         lastCharacterPosition = p;
 
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        var rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.MovePosition(rigidBody.position + input.normalized * character.moveSpeed * Time.deltaTime);
+        var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
+        rigidBody.MovePosition(rigidBody.position + input.normalized * controllingCharacter.moveSpeed * Time.deltaTime);
 
 
         var cameraPos = Camera.main.transform.position;
-        cameraPos.x = transform.position.x;
-        cameraPos.y = transform.position.y;
+        cameraPos.x = controllingCharacter.transform.position.x;
+        cameraPos.y = controllingCharacter.transform.position.y;
         Camera.main.transform.position = cameraPos;
 
 
         // Aim interaction with either mouse or movement
-        Vector3 interactFocusPos = transform.position;
+        Vector3 interactFocusPos = controllingCharacter.transform.position;
         {
             if (lastMousePosition != Input.mousePosition)
             {
@@ -88,24 +95,24 @@ public class PlayerController : MonoBehaviour
             lastMousePosition = Input.mousePosition;
             if (interactPosMethod == InteractPosMethod.CharacterFacing)
             {
-                var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
-                interactFocusPos = transform.position + facingDir * (inventoryItems.selectedItem ? 1f : 0.4f);
+                var facingDir = new Vector3(controllingCharacter.Animator.MoveX, controllingCharacter.Animator.MoveY);
+                interactFocusPos = controllingCharacter.transform.position + facingDir * (inventoryItems.selectedItem ? 1f : 0.4f);
             }
             else if (interactPosMethod == InteractPosMethod.TowardsMouse)
             {
                 var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var facingDir = mouseWorldPosition - character.transform.position;
+                var facingDir = mouseWorldPosition - controllingCharacter.transform.position;
                 facingDir.z = 0;
                 var m = facingDir.magnitude;
                 var mc = Mathf.Clamp(m, 0, 1);
                 facingDir = facingDir / m * mc;
-                interactFocusPos = transform.position + facingDir;
+                interactFocusPos = controllingCharacter.transform.position + facingDir;
             }
         }
 
         GameObject interactableGameObject = null;
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(interactFocusPos, 1.0f, GameLayers.i.InteractableLayer | GameLayers.i.WaterLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(interactFocusPos, 1.0f);
             float bestWeight = float.MaxValue;
             Collider2D bestCandidate = null;
             foreach (var collider in colliders)
@@ -144,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     public void HandleUpdate()
     {
-        character.HandleUpdate();
+        controllingCharacter.HandleUpdate();
     }
 
 
@@ -172,5 +179,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public Character Character => character;
+    public Character Character => controllingCharacter;
 }

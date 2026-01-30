@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 4720159627808179388}
   - component: {fileID: 4720159627808179394}
   - component: {fileID: 4720159627808179393}
-  - component: {fileID: 4720159627808179386}
   - component: {fileID: 4720159627808179391}
   - component: {fileID: 4720159627808179392}
   m_Layer: 11
@@ -229,14 +228,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720159627808179385}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_LinearDamping: 1000
+  m_AngularDamping: 1000
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -247,7 +246,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4720159627808179393
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -294,23 +293,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4720159627808179386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720159627808179385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5abea401d1d834d448ce2ddff116797c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCursor: {fileID: 0}
-  inventoryItems: {fileID: 0}
-  characterAnimator: {fileID: 4720159627808179391}
-  connectCamera: 1
-  isInteractingWithGuard: 0
 --- !u!114 &4720159627808179391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +347,7 @@ MonoBehaviour:
   poisonedSprite: {fileID: 0}
   moveSpeed: 20
   Name: 
+  IsPlayerCharacter: 1
   allowedFallDirections: 0
   characterAnimator: {fileID: 4720159627808179391}
 --- !u!1 &6818011631293307235

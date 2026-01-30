@@ -9,9 +9,10 @@ public class PortalToLevel : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == PlayerController.Instance.gameObject)
+        if (other.gameObject == PlayerController.Instance.controllingCharacter)
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelName));
+            Debug.Log("Loading level: " + levelName);
+            SceneManager.LoadScene(levelName, LoadSceneMode.Single);
         }
     }
 }
