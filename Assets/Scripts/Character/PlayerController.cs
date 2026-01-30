@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    public bool CanPlayerPushObjects = true;
+    public bool CanPlayerPullObjects = true;
     [SerializeField] ItemCursor itemCursor;
     [SerializeField] public InventoryItems inventoryItems;
 
@@ -60,37 +62,39 @@ public class PlayerController : MonoBehaviour
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
-        var rb = GetComponent<Rigidbody2D>();
-        rb.MovePosition(rb.position + input.normalized * character.moveSpeed * Time.deltaTime);
+        var rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.MovePosition(rigidBody.position + input.normalized * character.moveSpeed * Time.deltaTime);
 
 
-        var pos = Camera.main.transform.position;
-        pos.x = transform.position.x;
-        pos.y = transform.position.y;
-        Camera.main.transform.position = pos;
+        var cameraPos = Camera.main.transform.position;
+        cameraPos.x = transform.position.x;
+        cameraPos.y = transform.position.y;
+        Camera.main.transform.position = cameraPos;
 
 
-        if (lastMousePosition != Input.mousePosition)
-        {
-            interactPosMethod = InteractPosMethod.TowardsMouse;
-        }
-        lastMousePosition = Input.mousePosition;
-
+        // Aim interaction with either mouse or movement
         Vector3 interactFocusPos = transform.position;
-        if (interactPosMethod == InteractPosMethod.CharacterFacing)
         {
-            var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
-            interactFocusPos = transform.position + facingDir * (inventoryItems.selectedItem ? 1f : 0.4f);
-        }
-        else if (interactPosMethod == InteractPosMethod.TowardsMouse)
-        {
-            var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var facingDir = mouseWorldPosition - character.transform.position;
-            facingDir.z = 0;
-            var m = facingDir.magnitude;
-            var mc = Mathf.Clamp(m, 0, 1);
-            facingDir = facingDir / m * mc;
-            interactFocusPos = transform.position + facingDir;
+            if (lastMousePosition != Input.mousePosition)
+            {
+                interactPosMethod = InteractPosMethod.TowardsMouse;
+            }
+            lastMousePosition = Input.mousePosition;
+            if (interactPosMethod == InteractPosMethod.CharacterFacing)
+            {
+                var facingDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
+                interactFocusPos = transform.position + facingDir * (inventoryItems.selectedItem ? 1f : 0.4f);
+            }
+            else if (interactPosMethod == InteractPosMethod.TowardsMouse)
+            {
+                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var facingDir = mouseWorldPosition - character.transform.position;
+                facingDir.z = 0;
+                var m = facingDir.magnitude;
+                var mc = Mathf.Clamp(m, 0, 1);
+                facingDir = facingDir / m * mc;
+                interactFocusPos = transform.position + facingDir;
+            }
         }
 
         GameObject interactableGameObject = null;
