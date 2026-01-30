@@ -20,8 +20,6 @@ public class ItemBase : MonoBehaviour, IInteractable
 
     public virtual void OnPickupToInventory()
     {
-        PlayerController.Instance.CanPlayerPushObjects = true;
-        PlayerController.Instance.CanPlayerPullObjects = true;
 
         GetComponent<SpriteRenderer>().enabled = false;
     }

@@ -2,5 +2,12 @@ using UnityEngine;
 
 public class ItemToughGuyMask : ItemBase
 {
+    public override void OnPickupToInventory()
+    {
+        base.OnPickupToInventory();
+
+        PlayerController.Instance.CanPlayerPushObjects = true;
+        PlayerController.Instance.CanPlayerPullObjects = true;
+    }
 
 }
