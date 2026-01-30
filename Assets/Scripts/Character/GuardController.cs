@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GuardController : MonoBehaviour, Interactable
+public class GuardController : MonoBehaviour
 {
+
     [SerializeField] GameObject exclamation;
     [SerializeField] GameObject fov;
 

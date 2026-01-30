@@ -189,12 +189,8 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         overdog.SetSprite(DogEvilState.CuteSad);
-
-    
-        ShowDialogThenFreeRoam("Jester: Let's make the villagers laugh!", () =>
-        {
-            overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
-        });
+   
+        overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
     }
 
    

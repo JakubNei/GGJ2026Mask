@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-public class OverDog : MonoBehaviour, Interactable
+public class OverDog : MonoBehaviour
 {
     [SerializeField] Animator cuteDogAnimator;
     [SerializeField] GameObject dogSprite;

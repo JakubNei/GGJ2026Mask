@@ -54,7 +54,7 @@ public class DialogManager : MonoBehaviour
 
     public static bool WaitForInput_GetKeyDown()
     {
-        return PlayerController.IsInteractInputKeyDown();
+        return PlayerController.IsInteractInputKey();
     }
 
     public void QueueDialogToShow(DialogData dialogData)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grandma : MonoBehaviour, Interactable
+public class Grandma : MonoBehaviour
 {
     [SerializeField] private Character character;
     [SerializeField] private Sprite scareSpite;

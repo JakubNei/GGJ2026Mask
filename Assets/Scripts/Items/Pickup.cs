@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Pickup : MonoBehaviour, Interactable
+public class Pickup : MonoBehaviour
 {
     static int inInventoryCounter = 0;
     public bool CanInteract()
