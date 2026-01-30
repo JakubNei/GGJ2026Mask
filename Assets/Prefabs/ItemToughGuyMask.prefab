@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2809190673221898082}
-  - component: {fileID: 8692146407582621056}
+  - component: {fileID: 7184679980301598313}
   - component: {fileID: 837309424628606514}
   m_Layer: 0
-  m_Name: Mask
+  m_Name: ItemToughGuyMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8692146407582621056
+--- !u!114 &7184679980301598313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,9 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5716198307412543048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ae630103cca40468efe6e6115374b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 80ce21ff7c4f5574b8dc83c2f49169e9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ItemBase
+  m_EditorClassIdentifier: '::'
 --- !u!212 &837309424628606514
 SpriteRenderer:
   serializedVersion: 2

@@ -30,106 +30,106 @@ public class InventoryItems : MonoBehaviour
                 itemImages.Add(image);
             }
         }
-    UpdateItemSprites();
-}
-
-private void Update()
-{
-    GetItemBasedOnKeyPressed();
-}
-
-public void AddItem(ItemBase item)
-{
-    if (itemList.Contains(item))
-    { 
-        return;
-    }
-    itemList.Add(item);
-    UpdateItemSprites();
-        item.OnPickupToInventory();
-}
-
-public void RemoveItem(ItemBase itemPrefab)
-{
-    ItemBase itemToRemove = itemPrefab;
-    if (itemToRemove != null)
-    {
-        itemList.Remove(itemToRemove);
         UpdateItemSprites();
     }
-}
 
-public void DropAllItemsAndPutThemOnANewPlace(PlayerController player)
-{
-    hasDropped = true;
-    float maxOffset = 5f;
-
-    foreach (var item in itemList)
+    private void Update()
     {
-        GameObject itemGameObject = item.gameObject;
-
-        itemGameObject.transform.position = player.transform.position;
-
-        float randomXOffset = Random.Range(-maxOffset, maxOffset);
-        float randomYOffset = Random.Range(-maxOffset, maxOffset);
-
-        Vector3 destination = new Vector3(randomXOffset, randomYOffset, 0);
-
-        itemGameObject.transform.DOMove(destination, 1f).SetEase(Ease.OutQuad).OnComplete(() =>
-        {
-            itemGameObject.GetComponent<ItemBase>().SnapToTileAtCurrentPosition();
-        });
+        GetItemBasedOnKeyPressed();
     }
 
-    itemList.Clear();
-    currentItemIndex = 0;
-    selectedItem = null;
-    UpdateItemSprites();
-}
-
-public ItemBase GetItemBasedOnKeyPressed()
-{
-    if (Input.GetKeyDown(KeyCode.Alpha1))
+    public void AddItem(ItemBase item)
     {
+        if (itemList.Contains(item))
+        {
+            return;
+        }
+        itemList.Add(item);
+        UpdateItemSprites();
+        item.OnPickupToInventory();
+    }
+
+    public void RemoveItem(ItemBase itemPrefab)
+    {
+        ItemBase itemToRemove = itemPrefab;
+        if (itemToRemove != null)
+        {
+            itemList.Remove(itemToRemove);
+            UpdateItemSprites();
+        }
+    }
+
+    public void DropAllItemsAndPutThemOnANewPlace(PlayerController player)
+    {
+        hasDropped = true;
+        float maxOffset = 5f;
+
+        foreach (var item in itemList)
+        {
+            GameObject itemGameObject = item.gameObject;
+
+            itemGameObject.transform.position = player.transform.position;
+
+            float randomXOffset = Random.Range(-maxOffset, maxOffset);
+            float randomYOffset = Random.Range(-maxOffset, maxOffset);
+
+            Vector3 destination = new Vector3(randomXOffset, randomYOffset, 0);
+
+            itemGameObject.transform.DOMove(destination, 1f).SetEase(Ease.OutQuad).OnComplete(() =>
+            {
+                itemGameObject.GetComponent<ItemBase>().SnapToTileAtCurrentPosition();
+            });
+        }
+
+        itemList.Clear();
         currentItemIndex = 0;
-        return selectedItem = itemList.Count >= 1 ? itemList[currentItemIndex] : null;
+        selectedItem = null;
+        UpdateItemSprites();
     }
-    else if (Input.GetKeyDown(KeyCode.Alpha2))
-    {
-        currentItemIndex = 1;
-        return selectedItem = itemList.Count >= 2 ? itemList[currentItemIndex] : null;
-    }
-    else if (Input.GetKeyDown(KeyCode.Alpha3))
-    {
-        currentItemIndex = 2;
-        return selectedItem = itemList.Count >= 3 ? itemList[currentItemIndex] : null;
-    }
-    else if (Input.GetKeyDown(KeyCode.Tab))
-    {
-        if (itemList.Count != 0)
-            currentItemIndex = (currentItemIndex + 1) % itemList.Count;
-        return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
-    }
-    else
-    {
-        return null;
-    }
-}
 
-private void UpdateItemSprites()
-{
-    for (int i = 0; i < itemImages.Count; i++)
+    public ItemBase GetItemBasedOnKeyPressed()
     {
-        if (i < itemList.Count)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            itemImages[i].enabled = true;
-            itemImages[i].color = itemList[i].GetIconColor();
-            itemImages[i].sprite = itemList[i].GetIcon();
+            currentItemIndex = 0;
+            return selectedItem = itemList.Count >= 1 ? itemList[currentItemIndex] : null;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            currentItemIndex = 1;
+            return selectedItem = itemList.Count >= 2 ? itemList[currentItemIndex] : null;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            currentItemIndex = 2;
+            return selectedItem = itemList.Count >= 3 ? itemList[currentItemIndex] : null;
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (itemList.Count != 0)
+                currentItemIndex = (currentItemIndex + 1) % itemList.Count;
+            return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
         }
         else
         {
-            itemImages[i].enabled = false;
+            return null;
         }
     }
-}
+
+    private void UpdateItemSprites()
+    {
+        for (int i = 0; i < itemImages.Count; i++)
+        {
+            if (i < itemList.Count)
+            {
+                itemImages[i].enabled = true;
+                itemImages[i].color = itemList[i].GetIconColor();
+                itemImages[i].sprite = itemList[i].GetIcon();
+            }
+            else
+            {
+                itemImages[i].enabled = false;
+            }
+        }
+    }
 }

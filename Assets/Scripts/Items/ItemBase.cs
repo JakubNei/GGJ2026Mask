@@ -6,8 +6,6 @@ using UnityEngine;
 public class ItemBase : MonoBehaviour, IInteractable
 {
     
-    public virtual bool InteractInsteadOfPlace => false;
-
     public virtual Sprite GetIcon()
     {
         return GetComponentInChildren<SpriteRenderer>()?.sprite;
@@ -22,6 +20,9 @@ public class ItemBase : MonoBehaviour, IInteractable
 
     public virtual void OnPickupToInventory()
     {
+        PlayerController.Instance.CanPlayerPushObjects = true;
+        PlayerController.Instance.CanPlayerPullObjects = true;
+
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -43,14 +44,9 @@ public class ItemBase : MonoBehaviour, IInteractable
         transform.position = pos;
     }
 
-    public virtual bool Interact(Vector3 position)
-    {
-        return true;
-    }
-
     public void UpdateWhileInteracting()
     {
-        Debug.Log("hello");
+        Debug.Log("UpdateWhileInteracting");
         return;
     }
 
@@ -59,7 +55,7 @@ public class ItemBase : MonoBehaviour, IInteractable
         return true;
     }
 
-    public bool canPickUp()
+    public bool CanPickUp()
     {
        return true;
     }

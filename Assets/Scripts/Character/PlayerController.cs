@@ -7,15 +7,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool CanPlayerPushObjects = true;
-    public bool CanPlayerPullObjects = true;
+    public bool CanPlayerPushObjects = false;
+    public bool CanPlayerPullObjects = false;
 
     [SerializeField] ItemCursor itemCursor;
-    [SerializeField] public InventoryItems inventoryItems;
+    public InventoryItems inventoryItems;
 
     public static PlayerController Instance { get; private set; }
-    public CharacterAnimator characterAnimator;
-    private Vector2 input;
+
+    public Vector2 input;
     public Character controllingCharacter;
 
     public Vector3 lastMousePosition;
@@ -50,6 +50,14 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.Mouse0);
     }
 
+    void FixedUpdate()
+    {
+        if (controllingCharacter == null)
+            return;
+
+        var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
+        rigidBody.MovePosition(rigidBody.position + input.normalized * controllingCharacter.moveSpeed * Time.fixedDeltaTime);
+    }
 
     void Update()
     {
@@ -65,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
             lastCharacterPosition = controllingCharacter.transform.position;
         }
-        
+
         if (controllingCharacter == null)
             return;
 
@@ -75,9 +83,6 @@ public class PlayerController : MonoBehaviour
 
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
-
-        var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
-        rigidBody.MovePosition(rigidBody.position + input.normalized * controllingCharacter.moveSpeed * Time.deltaTime);
 
 
         var cameraPos = Camera.main.transform.position;
@@ -119,7 +124,9 @@ public class PlayerController : MonoBehaviour
             foreach (var collider in colliders)
             {
                 var interactible = collider?.gameObject?.GetComponent<IInteractable>();
-                if (interactible == null || !interactible.CanInteract())
+                if (interactible == null)
+                    continue;
+                if (!interactible.CanInteract() && !interactible.CanPickUp())
                     continue;
                 float weight = Vector3.Distance(collider.transform.position, interactFocusPos);
                 if (weight < bestWeight)
@@ -146,20 +153,14 @@ public class PlayerController : MonoBehaviour
         if (interactInput && interactableGameObject)
         {
             interactableGameObject.GetComponent<IInteractable>()?.UpdateWhileInteracting();
-            if (interactableGameObject.GetComponent<IInteractable>().canPickUp()) 
+            if (interactableGameObject.GetComponent<IInteractable>().CanPickUp())
             {
-                ItemBase mask = interactableGameObject.GetComponent<ItemBase>();
-                if(mask != null)
+                ItemBase item = interactableGameObject.GetComponent<ItemBase>();
+                if (item)
                 {
-                    inventoryItems.AddItem(mask);
-              
+                    Debug.Log("Picking up " + item.name);
+                    inventoryItems.AddItem(item);
                 }
-                else 
-                {
-                    return;
-
-                }
-                
             }
         }
 
@@ -170,30 +171,6 @@ public class PlayerController : MonoBehaviour
         controllingCharacter.HandleUpdate();
     }
 
-
-   /* void PlaceOrInteractSelectedItem(Vector2 placeAtPosition)
-    {
-        ItemBase item = inventoryItems.selectedItem;
-        if (item.InteractInsteadOfPlace)
-        {
-            if (item.Interact(transform.position))
-            {
-                inventoryItems.RemoveItem(inventoryItems.selectedItem);
-                inventoryItems.selectedItem = null;
-                itemCursor.itemPreview.sprite = null;
-            }
-        }
-        else
-        {
-            //Instantiate(inventoryItems.selectedItem, position, Quaternion.identity);
-            inventoryItems.selectedItem.transform.position = placeAtPosition;
-            inventoryItems.selectedItem.transform.rotation = Quaternion.identity;
-
-            inventoryItems.RemoveItem(inventoryItems.selectedItem);
-            inventoryItems.selectedItem = null;
-            itemCursor.itemPreview.sprite = null;
-        }
-    }*/
 
     public Character Character => controllingCharacter;
 }

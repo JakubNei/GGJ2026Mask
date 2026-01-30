@@ -13,7 +13,7 @@ public class MovableObject : MonoBehaviour, IInteractable
     }
     public bool CanInteract()
     {
-        return Pullable;
+        return Pullable && PlayerController.Instance.CanPlayerPullObjects;
     }
 
     public void UpdateWhileInteracting()
@@ -35,7 +35,7 @@ public class MovableObject : MonoBehaviour, IInteractable
             RigidbodyType2D.Static;
     }
 
-    public bool canPickUp()
+    public bool CanPickUp()
     {
         return false;
     }
