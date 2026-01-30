@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
-    EvilDogSideview,
     FreeRoam,
     Menu,
     Paused,
-    Knocked,
+    Shaman,
+    ToughGuy,
 }
 
 public class GameController : MonoBehaviour
@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject prefabItemScissors;
     [SerializeField] GameObject prefabItemTorch;
     [SerializeField] GameObject evilDogSideviewUI;
+
+    [SerializeField] GameObject normalPlane;
+    [SerializeField] GameObject astralPlane;
+
     [SerializeField] OverDog overdog;
 
     [Header("Quests")]
@@ -509,7 +513,7 @@ public class GameController : MonoBehaviour
             cameraPosition.y = playerController.gameObject.transform.position.y;
             worldCamera.transform.position = cameraPosition;
         }
-        else if (playerController.Character.IsDead)
+        /*else if (playerController.Character.IsDead)
         {
             if (!openedMenuAfterPlayerDied)
             {
@@ -538,6 +542,11 @@ public class GameController : MonoBehaviour
         else
         {
             evilDogSideviewUI.gameObject.SetActive(false);
+        }*/
+        if(gameState == GameState.Shaman) 
+        {
+            astralPlane.SetActive(true);
+            normalPlane.SetActive(false);
         }
 
         if (gameState == GameState.FreeRoam && !DialogManager.Instance.isShowing)
@@ -556,15 +565,8 @@ public class GameController : MonoBehaviour
         {
             menuController.HandleUpdate();
         }
-        else if (gameState == GameState.Knocked)
-        {
-            // Stop the player Movement
-        }
-    }
 
-    public void TriggerKnockout()
-    {
-        gameState = GameState.Knocked;
+
     }
 
     public IEnumerator MoveCamera(Vector2 moveOffset, bool waitForFadeOut = false)
