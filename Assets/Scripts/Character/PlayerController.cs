@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     Vector3 lastMousePosition;
 
+    public Vector3 lastCharacterPosition;
+    public Vector3 lastCharacterDeltaMovement;
     private void Awake()
     {
         Instance = this;
@@ -59,6 +61,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        var p = character.transform.position;
+        lastCharacterDeltaMovement = p - lastCharacterPosition;
+        lastCharacterPosition = p;
+
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
 
@@ -99,7 +105,7 @@ public class PlayerController : MonoBehaviour
 
         GameObject interactableGameObject = null;
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(character.transform.position, 1.0f, GameLayers.i.InteractableLayer | GameLayers.i.WaterLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(interactFocusPos, 1.0f, GameLayers.i.InteractableLayer | GameLayers.i.WaterLayer);
             float bestWeight = float.MaxValue;
             Collider2D bestCandidate = null;
             foreach (var collider in colliders)
@@ -117,12 +123,13 @@ public class PlayerController : MonoBehaviour
             interactableGameObject = bestCandidate?.gameObject;
         }
 
-        itemCursor.transform.position = interactFocusPos;
+        /*itemCursor.transform.position = interactFocusPos;
         if (inventoryItems.selectedItem)
         {
             HighlightSprite.Highlight(itemCursor.itemPreview);
         }
-        else if (interactableGameObject)
+        else */
+        if (interactableGameObject)
         {
             HighlightSprite.Highlight(interactableGameObject);
         }
@@ -130,11 +137,7 @@ public class PlayerController : MonoBehaviour
         bool interactInput = IsInteractInputKey();
         if (interactInput && interactableGameObject)
         {
-            var interactible = interactableGameObject.GetComponent<IInteractable>();
-            if (interactible != null)
-            {
-                interactible.UpdateWhileInteracting();
-            }
+            interactableGameObject.GetComponent<IInteractable>()?.UpdateWhileInteracting();
         }
 
     }

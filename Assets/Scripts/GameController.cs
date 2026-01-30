@@ -191,8 +191,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        overdog.SetSprite(DogEvilState.CuteSad);
-   
         overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
     }
 
