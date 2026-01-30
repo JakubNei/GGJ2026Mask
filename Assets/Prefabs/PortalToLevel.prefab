@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f592467f42791494e8766bff2015977c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PortalToScene
-  levelName: Level1
+  levelName: Level2
 --- !u!212 &7504946406668434289
 SpriteRenderer:
   serializedVersion: 2
