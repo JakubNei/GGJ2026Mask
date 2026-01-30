@@ -35,4 +35,8 @@ public class MovableObject : MonoBehaviour, IInteractable
             RigidbodyType2D.Static;
     }
 
+    public bool canPickUp()
+    {
+        return false;
+    }
 }

@@ -40,8 +40,13 @@ private void Update()
 
 public void AddItem(ItemBase item)
 {
+    if (itemList.Contains(item))
+    { 
+        return;
+    }
     itemList.Add(item);
     UpdateItemSprites();
+        item.OnPickupToInventory();
 }
 
 public void RemoveItem(ItemBase itemPrefab)

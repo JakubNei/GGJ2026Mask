@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
+    bool canPickUp();
     void UpdateWhileInteracting();
     bool CanInteract();
 }

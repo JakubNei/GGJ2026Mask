@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemBase : MonoBehaviour
+public class ItemBase : MonoBehaviour, IInteractable
 {
-
+    
     public virtual bool InteractInsteadOfPlace => false;
 
     public virtual Sprite GetIcon()
@@ -22,7 +22,7 @@ public class ItemBase : MonoBehaviour
 
     public virtual void OnPickupToInventory()
     {
-
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     void Awake()
@@ -46,5 +46,21 @@ public class ItemBase : MonoBehaviour
     public virtual bool Interact(Vector3 position)
     {
         return true;
+    }
+
+    public void UpdateWhileInteracting()
+    {
+        Debug.Log("hello");
+        return;
+    }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
+
+    public bool canPickUp()
+    {
+       return true;
     }
 }

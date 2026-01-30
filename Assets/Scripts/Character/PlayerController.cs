@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -145,6 +146,21 @@ public class PlayerController : MonoBehaviour
         if (interactInput && interactableGameObject)
         {
             interactableGameObject.GetComponent<IInteractable>()?.UpdateWhileInteracting();
+            if (interactableGameObject.GetComponent<IInteractable>().canPickUp()) 
+            {
+                ItemBase mask = interactableGameObject.GetComponent<ItemBase>();
+                if(mask != null)
+                {
+                    inventoryItems.AddItem(mask);
+              
+                }
+                else 
+                {
+                    return;
+
+                }
+                
+            }
         }
 
     }
@@ -155,7 +171,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void PlaceOrInteractSelectedItem(Vector2 placeAtPosition)
+   /* void PlaceOrInteractSelectedItem(Vector2 placeAtPosition)
     {
         ItemBase item = inventoryItems.selectedItem;
         if (item.InteractInsteadOfPlace)
@@ -177,7 +193,7 @@ public class PlayerController : MonoBehaviour
             inventoryItems.selectedItem = null;
             itemCursor.itemPreview.sprite = null;
         }
-    }
+    }*/
 
     public Character Character => controllingCharacter;
 }
