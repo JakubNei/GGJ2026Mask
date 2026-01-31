@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2369184038496584170}
   - component: {fileID: 3964745721742473116}
   m_Layer: 10
-  m_Name: BaseMovableObject
+  m_Name: MovableBoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

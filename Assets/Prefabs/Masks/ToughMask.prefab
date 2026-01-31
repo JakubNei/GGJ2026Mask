@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2809190673221898082}
   - component: {fileID: 837309424628606514}
-  - component: {fileID: 6535097463453265179}
   - component: {fileID: 1019628549786924428}
+  - component: {fileID: 2095918272248551372}
   m_Layer: 10
-  m_Name: ItemToughGuyMask
+  m_Name: ToughMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!60 &6535097463453265179
+--- !u!114 &1019628549786924428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716198307412543048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ce21ff7c4f5574b8dc83c2f49169e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultMask
+--- !u!60 &2095918272248551372
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,24 +151,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.2875, y: 0.425}
-      - {x: -0.38750002, y: 0.275}
-      - {x: -0.38750002, y: -0.22500001}
-      - {x: -0.26250002, y: -0.425}
-      - {x: 0.3125, y: -0.425}
-      - {x: 0.3625, y: -0.32500002}
-      - {x: 0.3625, y: 0.22500001}
-      - {x: 0.2375, y: 0.425}
+    - - {x: -0.114999995, y: 0.17}
+      - {x: -0.155, y: 0.11}
+      - {x: -0.155, y: -0.089999996}
+      - {x: -0.105, y: -0.17}
+      - {x: 0.125, y: -0.17}
+      - {x: 0.145, y: -0.13}
+      - {x: 0.145, y: 0.089999996}
+      - {x: 0.095, y: 0.17}
   m_UseDelaunayMesh: 1
---- !u!114 &1019628549786924428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5716198307412543048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ce21ff7c4f5574b8dc83c2f49169e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultMask

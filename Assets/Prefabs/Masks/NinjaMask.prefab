@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2809190673221898082}
   - component: {fileID: 837309424628606514}
-  - component: {fileID: 6535097463453265179}
   - component: {fileID: 6883008017301168585}
+  - component: {fileID: -8588542042866811105}
   m_Layer: 10
   m_Name: NinjaMask
   m_TagString: Untagged
@@ -93,7 +93,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!60 &6535097463453265179
+--- !u!114 &6883008017301168585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716198307412543048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249f2fa30eec78c4fba79d4dc5bdc92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NinjaMask
+--- !u!60 &-8588542042866811105
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +135,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -139,28 +151,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.375, y: 0.8}
-      - {x: 0.275, y: 0.90000004}
-      - {x: -0.075, y: 0.90000004}
-      - {x: -0.25, y: 0.875}
-      - {x: -0.3, y: 0.7}
-      - {x: -0.275, y: -0.125}
-      - {x: -0.375, y: -0.52500004}
-      - {x: -0.375, y: -0.675}
-      - {x: -0.175, y: -0.875}
-      - {x: 0.22500001, y: -0.875}
-      - {x: 0.3, y: -0.85}
-      - {x: 0.375, y: -0.55}
+    - - {x: -0.17999999, y: 0.265}
+      - {x: -0.17999999, y: 0.005}
+      - {x: -0.08, y: -0.195}
+      - {x: 0.02, y: -0.275}
+      - {x: 0.11, y: -0.275}
+      - {x: 0.19, y: -0.125}
+      - {x: 0.19, y: 0.114999995}
+      - {x: 0.049999997, y: 0.265}
   m_UseDelaunayMesh: 1
---- !u!114 &6883008017301168585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5716198307412543048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249f2fa30eec78c4fba79d4dc5bdc92a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NinjaMask
