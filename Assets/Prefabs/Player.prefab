@@ -91,6 +91,63 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1111111111111111111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2222222222222222222}
+  - component: {fileID: 3333333333333333333}
+  m_Layer: 11
+  m_Name: Mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2222222222222222222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111111111111111111}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7104496144738428272}
+  - {fileID: 2317523506061013492}
+  - {fileID: 1649715224425523888}
+  - {fileID: 3725516871115139987}
+  m_Father: {fileID: 4720159627808179388}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3333333333333333333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111111111111111111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6789012345678abcdef90, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  masks:
+  - maskType: 0
+    maskObject: {fileID: 3262711770231287891}
+  - maskType: 2
+    maskObject: {fileID: 5437072379948521110}
+  - maskType: 3
+    maskObject: {fileID: 3977847633574796988}
+  - maskType: 1
+    maskObject: {fileID: 3004156774574265563}
 --- !u!1 &3004156774574265563
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4720159627808179388}
+  m_Father: {fileID: 2222222222222222222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2689123940713681988
 SpriteRenderer:
@@ -212,7 +269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4720159627808179388}
+  m_Father: {fileID: 2222222222222222222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2435690360445107896
 SpriteRenderer:
@@ -303,7 +360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4720159627808179388}
+  m_Father: {fileID: 2222222222222222222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1943042114592784414
 SpriteRenderer:
@@ -399,10 +456,7 @@ Transform:
   m_Children:
   - {fileID: 3045881393897595291}
   - {fileID: 831704266585546324}
-  - {fileID: 7104496144738428272}
-  - {fileID: 2317523506061013492}
-  - {fileID: 1649715224425523888}
-  - {fileID: 3725516871115139987}
+  - {fileID: 2222222222222222222}
   - {fileID: 2593806844478123756}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -489,8 +543,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7789e94aa80f9c7469761cda619e85ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   walkDownSprites:
   - {fileID: 21300000, guid: 2ecbe9727bc98194abba0edc08766663, type: 3}
   - {fileID: 21300000, guid: 92546df851d9491419b1d820de5524c1, type: 3}
@@ -527,16 +581,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 870da6001b74bf848a14d5767bb7a980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   fallSfx: {fileID: 8300000, guid: 7f6615750e8d3ca45b017b3008dd1791, type: 3}
   poisonedSprite: {fileID: 0}
-  defaultMask: {fileID: 3262711770231287891}
-  toughMask: {fileID: 5437072379948521110}
-  ninjaMask: {fileID: 3977847633574796988}
-  shamanMask: {fileID: 3004156774574265563}
+  maskDisplay: {fileID: 3333333333333333333}
   moveSpeed: 12
-  Name: 
+  Name:
   IsPlayerCharacter: 1
   allowedFallDirections: 0
   characterAnimator: {fileID: 4720159627808179391}
@@ -570,7 +621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4720159627808179388}
+  m_Father: {fileID: 2222222222222222222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8114226666341802314
 SpriteRenderer:
@@ -764,8 +815,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7789e94aa80f9c7469761cda619e85ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   walkDownSprites:
   - {fileID: 21300000, guid: 2ecbe9727bc98194abba0edc08766663, type: 3}
   - {fileID: 21300000, guid: 92546df851d9491419b1d820de5524c1, type: 3}

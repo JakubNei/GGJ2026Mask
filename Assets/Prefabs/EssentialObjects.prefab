@@ -78,6 +78,11 @@ MonoBehaviour:
   projectilePf: {fileID: 7961238306295408349, guid: bdc115f9889d5ae4f84653ba2401d689, type: 3}
   defaultMaskPf: {fileID: 5716198307412543048, guid: a6baa3849e8353747aabeb73f04cb8cc, type: 3}
   shootCooldown: 0.3
+  accelerationTime: 0.08
+  headBobFrequency: 12
+  headBobAmplitude: 0.08
+  wobbleFrequency: 10
+  wobbleAmplitude: 20
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -1126,6 +1131,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4273938893280159455, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273938893280159455, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273938893280159455, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273938893280159455, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4285316011350071702, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1267,7 +1288,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7782823935849529650, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
