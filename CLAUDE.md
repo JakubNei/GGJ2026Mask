@@ -73,3 +73,41 @@ Build order: StartMenu → Level1 → Level2 → Level2_Maggie → Level3 → Le
 
 Interact keys (defined in `PlayerController.IsInteractInputKey`): Q, E, LeftControl, Space, Return, Mouse0
 Menu keys (defined in `PlayerController.OpenMenuKeyDown`): Escape, KeypadEnter, Backspace
+
+## Audio Files
+
+### Dostupné zvuky (Assets/Audio/)
+**Menu SFX:**
+- `Click_Menu_Button` - kliknutí na tlačítko
+- `Select_Menu_Button` - výběr/hover tlačítka
+
+**Background Music:**
+- `BG Menu Music` - hudba v menu
+- `BG Spirit World Music` - hudba v Spirit Realm (Level 3)
+- `RW_Enter and Exit` - přechod Real World
+- `SR_World01_Enter` - vstup do Spirit Realm
+- `SR_World02_Exit` - výstup ze Spirit Realm
+
+**Character Sounds:**
+- `RW_Walk01/02/03` - chůze v Real World (3 varianty)
+- `SR_Char_Walk` - chůze v Spirit Realm
+
+**Interactions:**
+- `Switch Masks` - přepnutí masky
+- `Mask02 Push Block` - Tough: tlačení bloku
+- `Mask02 Push Cart` - Tough: tlačení vozíku
+- `Mask02 Pressure Tile` - Tough: nášlapná dlaždice
+- `Mask03 Shoot Blowgun` - Ninja: střelba foukačkou
+- `Mask03 Shoot Stick` - Ninja: střela
+- `Mask03 Hit Button` - Ninja: zásah tlačítka
+- `Mask03 Hit Vase` - Ninja: rozbití vázy
+- `Hidden Tile` (2 varianty) - skrytá dlaždice
+
+### Chybějící zvuky (TODO)
+- BG Music Real World (Level 1, 2)
+- BG Music Jungle (Level 4)
+- Shaman Talk01/02/03
+- Dead01/02/03
+- Hit Enemy / Get Hit
+- Pick Up Item
+- Interact Obj/Char

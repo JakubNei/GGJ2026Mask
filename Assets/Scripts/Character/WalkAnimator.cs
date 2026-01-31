@@ -8,6 +8,7 @@ public class WalkAnimator : MonoBehaviour
     [SerializeField] private float frameRate = 0.1f;
     [SerializeField] private float movementLingerTime = 0.1f; // How long to keep animating after movement stops
 
+
     private Sprite idleSprite;
     private int currentFrame = 0;
     private float animTimer = 0f;
