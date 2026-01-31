@@ -79,10 +79,6 @@ MonoBehaviour:
   defaultMaskPf: {fileID: 5716198307412543048, guid: a6baa3849e8353747aabeb73f04cb8cc, type: 3}
   shootCooldown: 0.3
   accelerationTime: 0.08
-  headBobFrequency: 12
-  headBobAmplitude: 0.08
-  wobbleFrequency: 10
-  wobbleAmplitude: 20
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -773,7 +769,7 @@ MonoBehaviour:
     m_Bits: 1024
   grassLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -785,13 +781,16 @@ MonoBehaviour:
     m_Bits: 8192
   triggersLayer:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 0
   ledgeLayer:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 0
   waterLayer:
     serializedVersion: 2
     m_Bits: 16
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &1804750652636808277
 MonoBehaviour:
   m_ObjectHideFlags: 0

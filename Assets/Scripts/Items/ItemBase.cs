@@ -42,6 +42,9 @@ public class ItemBase : MonoBehaviour, IInteractable
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    public virtual void OnEquip() { }
+    public virtual void OnUnequip() { }
+
     void Awake()
     {
         SnapToTileAtCurrentPosition();

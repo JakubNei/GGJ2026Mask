@@ -150,16 +150,18 @@ public class InventoryItems : MonoBehaviour
         }
     }
 
-    public void EquipItem(ItemBase newItem) 
+    public void EquipItem(ItemBase newItem)
     {
         if (equippedItem != newItem)
         {
             if (equippedItem != null)
             {
-                frames[itemList.IndexOf(equippedItem)].SetActive(false); 
+                equippedItem.OnUnequip();
+                frames[itemList.IndexOf(equippedItem)].SetActive(false);
             }
-            
+
             equippedItem = newItem;
+            equippedItem.OnEquip();
             frames[itemList.IndexOf(equippedItem)].SetActive(true);
 
             Debug.Log("Equipped " + newItem.MaskType);

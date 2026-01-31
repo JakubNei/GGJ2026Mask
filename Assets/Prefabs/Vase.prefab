@@ -162,4 +162,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab204a3654f80b4097250438585d535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Vase
-  fragmentedVasePrefab: {fileID: 7064045241013351017, guid: f5c10f8438115f244860b359384fc735, type: 3}
+  shardPrefabs:
+  - {fileID: 4260046976286947431, guid: d63f107fc3c1507458d54feaa0eb0a70, type: 3}
+  - {fileID: 4392512532462307389, guid: e8c728b61f469fa49b668708ee24c450, type: 3}
+  - {fileID: 334162121678023139, guid: 58f3cd002783da44982845a37a98196f, type: 3}
+  - {fileID: 468862389381531345, guid: c439db8844b136c45b238e01fa5dcae2, type: 3}
+  - {fileID: 3857699900224658680, guid: 48fa79683352e754ba58c1563972fdc4, type: 3}
+  - {fileID: 5919856246895585953, guid: 9397ea45657301841ba775f1baf928d1, type: 3}
+  shatterSpeed: 3
+  shardLifetime: 1.5

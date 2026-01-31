@@ -33,11 +33,14 @@ public class ShootableButton : MonoBehaviour
         var projectile = other.GetComponent<Projectile>();
         Debug.Log($"[ShootableButton] Projectile component: {(projectile != null ? "FOUND" : "NOT FOUND")}");
 
-        if (projectile != null)
+        if (projectile != null && lastActivatedProjectile != projectile)
         {
+            lastActivatedProjectile = projectile;
             Activate();
         }
     }
+
+    Projectile lastActivatedProjectile;
 
     void Activate()
     {
