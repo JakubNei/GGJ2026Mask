@@ -59,6 +59,9 @@ TagManager:
   - name: Objects
     uniqueID: 3109967191
     locked: 0
+  - name: Frontground
+    uniqueID: 2173551799
+    locked: 0
   - name: UI
     uniqueID: 681491737
     locked: 0

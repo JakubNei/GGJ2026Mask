@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2c71ef57dd9de4e4985e314bf7b22003
+guid: be51b33f083f8ee4db4f7af7031c0336
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3660951755671052382
-    second: bush1_2_0
+      213: 3087212400694726768
+    second: bush2_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,40 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bush1_2_0
+      name: bush2_1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 40
-        height: 36
-      alignment: 9
-      pivot: {x: 0.49658117, y: -0.001424455}
+        x: 1
+        y: 4
+        width: 38
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2af526756cfa13dc0800000000000000
-      internalID: -3660951755671052382
+      spriteID: 0701799525bf7da20800000000000000
+      internalID: 3087212400694726768
       vertices: []
       indices: 
       edges: []
@@ -138,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cff0a24d4e22d8045acfb7eda2e9edb1
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bush1_2_0: -3660951755671052382
+      bush2_1_0: 3087212400694726768
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
