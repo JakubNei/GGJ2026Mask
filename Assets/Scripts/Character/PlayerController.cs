@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] ItemCursor itemCursor;
     [SerializeField] GameObject projectilePf;
+    [SerializeField] GameObject defaultMaskPf;
+
+    ItemBase defaultMask;
 
     public InventoryItems inventoryItems;
    
@@ -31,7 +35,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        SwitchMask(MaskType.Ninja);
+        defaultMask = Instantiate(defaultMaskPf, transform.position, Quaternion.identity).GetComponent<ItemBase>();
+        inventoryItems.AddItem(defaultMask);
+        SwitchMask(MaskType.Default);
+        inventoryItems.EquipItem(defaultMask);
     }
 
     enum InteractPosMethod
@@ -173,6 +180,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+        //PROJECTILE
         if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja) 
         {
             Projectile[] projectiles = FindObjectsOfType<Projectile>();
@@ -183,6 +192,12 @@ public class PlayerController : MonoBehaviour
                 projectile.GetComponent<Projectile>()?.Throw(interactFocusPos);
             }
 
+        }
+
+        //MASK
+        if(inventoryItems.EquippedItem.MaskType != equippedMask) 
+        {
+            SwitchMask(inventoryItems.EquippedItem.MaskType);
         }
 
     }

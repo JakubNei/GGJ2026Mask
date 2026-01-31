@@ -14,10 +14,11 @@ public enum MaskType
 
 public class ItemBase : MonoBehaviour, IInteractable
 {
-    private MaskType type
+    protected MaskType maskType;
+    public MaskType MaskType
     {
-        get { return type; }  
-        set { type = value; } 
+        get { return maskType; }  
+        set { maskType = value; } 
     }
 
     public virtual bool InteractInsteadOfPlace => false;

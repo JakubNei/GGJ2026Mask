@@ -7,6 +7,13 @@ public class InventoryItems : MonoBehaviour
 {
     public List<ItemBase> itemList = new List<ItemBase>();
     private List<Image> itemImages = new List<Image>();
+    public List<GameObject> frames = new List<GameObject>();
+    private ItemBase equippedItem;
+
+    public ItemBase EquippedItem
+    {
+        get { return equippedItem; }
+    }
 
     public ItemBase selectedItem;
 
@@ -35,7 +42,11 @@ public class InventoryItems : MonoBehaviour
 
     private void Update()
     {
-        GetItemBasedOnKeyPressed();
+        ItemBase newItem = GetItemBasedOnKeyPressed();
+        if (newItem != null)
+        {
+            EquipItem(newItem);
+        }
     }
 
     public void AddItem(ItemBase item)
@@ -130,6 +141,22 @@ public class InventoryItems : MonoBehaviour
             {
                 itemImages[i].enabled = false;
             }
+        }
+    }
+
+    public void EquipItem(ItemBase newItem) 
+    {
+        if (equippedItem != newItem)
+        {
+            if (equippedItem != null)
+            {
+                frames[itemList.IndexOf(equippedItem)].SetActive(false); 
+            }
+            
+            equippedItem = newItem;
+            frames[itemList.IndexOf(equippedItem)].SetActive(true);
+
+            Debug.Log("Equipped " + newItem.MaskType);
         }
     }
 }
