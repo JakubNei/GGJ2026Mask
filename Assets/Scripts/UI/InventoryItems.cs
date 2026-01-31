@@ -74,6 +74,10 @@ public class InventoryItems : MonoBehaviour
         itemList.Add(item);
         UpdateItemSprites();
         item.OnPickupToInventory();
+
+        // Play pickup sound
+        AudioManager.i?.PlaySfx(AudioId.PickupMask);
+
         EquipItem(item);
     }
 
@@ -154,6 +158,12 @@ public class InventoryItems : MonoBehaviour
 
             if (newItem != null)
             {
+                // Play switch sound (only if switching from one mask to another, not initial equip)
+                if (equippedItem != null)
+                {
+                    AudioManager.i?.PlaySfxWithVolume(AudioId.SwitchMask, 0.5f);
+                }
+
                 equippedItem = newItem;
                 equippedItem.OnEquip();
                 frames[itemList.IndexOf(equippedItem)].SetActive(true);

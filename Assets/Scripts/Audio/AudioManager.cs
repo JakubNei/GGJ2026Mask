@@ -103,9 +103,8 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     public void PlaySfx(AudioId audioId, bool pauseMusic = false)
     {
-        if (!sfxLookup.ContainsKey(audioId))
+        if (sfxLookup == null || !sfxLookup.ContainsKey(audioId))
         {
-            Debug.LogWarning($"AudioManager: AudioId '{audioId}' not found in sfxList");
             return;
         }
 
