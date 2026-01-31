@@ -9,5 +9,13 @@ public class EssentialObjects : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Ensure SceneTransition exists
+        if (GetComponentInChildren<SceneTransition>() == null)
+        {
+            var transitionGO = new GameObject("SceneTransition");
+            transitionGO.transform.SetParent(transform);
+            transitionGO.AddComponent<SceneTransition>();
+        }
     }
 }

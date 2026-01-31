@@ -305,6 +305,46 @@ public class AudioManager : MonoBehaviour
     public float GetSfxVolume() => sfxVolume;
 
     #endregion
+
+    #region Scene Transition Fades
+
+    float savedMusicVolume;
+    float savedSfxVolume;
+
+    /// <summary>
+    /// Fade out all audio (music and SFX) for scene transitions
+    /// </summary>
+    public void FadeOutAll(float duration)
+    {
+        savedMusicVolume = musicPlayer.volume;
+        savedSfxVolume = sfxVolume;
+
+        // Fade music
+        if (musicPlayer.isPlaying)
+            musicPlayer.DOFade(0, duration);
+
+        // Fade SFX pool
+        foreach (var source in sfxPool)
+        {
+            if (source != null && source.isPlaying)
+                source.DOFade(0, duration);
+        }
+    }
+
+    /// <summary>
+    /// Fade in all audio after scene transition
+    /// </summary>
+    public void FadeInAll(float duration)
+    {
+        // Restore music volume
+        if (musicPlayer.isPlaying)
+            musicPlayer.DOFade(savedMusicVolume > 0 ? savedMusicVolume : originalMusicVol * musicVolume * masterVolume, duration);
+
+        // SFX will play at normal volume for new sounds
+        sfxVolume = savedSfxVolume > 0 ? savedSfxVolume : 1f;
+    }
+
+    #endregion
 }
 
 /// <summary>
