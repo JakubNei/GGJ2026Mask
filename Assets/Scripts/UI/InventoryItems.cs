@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class InventoryItems : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class InventoryItems : MonoBehaviour
 
     public void AddItem(ItemBase item)
     {
+        DontDestroyOnLoad(item.gameObject);
         item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0); 
         if (itemList.Contains(item))
         {
@@ -63,6 +65,9 @@ public class InventoryItems : MonoBehaviour
 
     public void RemoveItem(ItemBase itemPrefab)
     {
+        // undo DontDestroyOnLoad
+        SceneManager.MoveGameObjectToScene(itemPrefab.gameObject, SceneManager.GetActiveScene());
+        
         ItemBase itemToRemove = itemPrefab;
         if (itemToRemove != null)
         {
