@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
 
     public InventoryItems inventoryItems;
-   
+
 
     public static PlayerController Instance { get; private set; }
 
@@ -86,14 +87,18 @@ public class PlayerController : MonoBehaviour
     {
         if (controllingCharacter == null)
         {
-            foreach (var character in FindObjectsByType<Character>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            List<GameObject> resultslist = new List<GameObject>();
+            GameObject.FindGameObjectsWithTag("Player", resultslist);
+            foreach (var c in resultslist)
             {
-                if (character.IsPlayerCharacter)
-                {
-                    controllingCharacter = character;
-                    SwitchMask(inventoryItems.EquippedItem.MaskType);
-                    break;
-                }
+                var character = c.GetComponent<Character>();
+                if (!character)
+                    continue;
+                if (!character.IsPlayerCharacter)
+                    continue;
+                controllingCharacter = character;
+                SwitchMask(inventoryItems.EquippedItem.MaskType);
+                break;
             }
             lastCharacterPosition = controllingCharacter.transform.position;
         }
@@ -209,7 +214,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //PROJECTILE
-        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja)
+        if (interactInput && !interactableGameObject && equippedMask == MaskType.Ninja)
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
@@ -227,7 +232,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //MASK
-        if(inventoryItems.EquippedItem.MaskType != equippedMask)
+        if (inventoryItems.EquippedItem.MaskType != equippedMask)
         {
             SwitchMask(inventoryItems.EquippedItem.MaskType);
         }
@@ -238,7 +243,7 @@ public class PlayerController : MonoBehaviour
 
     void SwitchMask(MaskType newMask)
     {
-        if (equippedMask != newMask) 
+        if (equippedMask != newMask)
         {
             equippedMask = newMask;
             controllingCharacter.SwitchMask(equippedMask);
