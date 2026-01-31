@@ -30,7 +30,6 @@ public class Grandma : MonoBehaviour
                     () =>
                     {
                         character.SetIsDead(true);
-                        GameController.Instance.OnGrandmaScared();
                     }
                   );
             }

@@ -90,7 +90,6 @@ public class NPCController : MonoBehaviour
         StopWalk();
 
         character.LookTowards(initiator.position);
-        GameController.Instance.OnGenericNPCTalkedTo();
 
         yield return null;
     }

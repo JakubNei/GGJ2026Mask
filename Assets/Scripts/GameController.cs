@@ -19,21 +19,12 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
-    [SerializeField] GameObject prefabItemBanana;
-    [SerializeField] GameObject prefabItemPoison;
-    [SerializeField] GameObject prefabItemScissors;
-    [SerializeField] GameObject prefabItemTorch;
-    [SerializeField] GameObject evilDogSideviewUI;
+
 
     [SerializeField] GameObject normalPlane;
     [SerializeField] GameObject astralPlane;
 
-    [SerializeField] OverDog overdog;
 
-    [Header("Quests")]
-    [SerializeField] GameObject quest2;
-    [SerializeField] GameObject quest3;
-    [SerializeField] GameObject quest4;
 
     [SerializeField] List<AudioClip> happySounds;
 
@@ -135,8 +126,6 @@ public class GameController : MonoBehaviour
 
         DOTween.Init();
 
-        overdog = FindObjectOfType<OverDog>(true);
-
         menuController = FindObjectOfType<MenuController>(true);
 
         badJokesJesterPool.Add("My friends say I'm stingy, but I'm not buying it.");
@@ -189,24 +178,6 @@ public class GameController : MonoBehaviour
         dogQuestInProgressDialogsPool.Add("Do I have to do everything myself?");
     }
 
-    private void Start()
-    {
-        //overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh;
-    }
-
-   
-    public void OnGenericNPCTalkedTo()
-    {
-        if (overdog.QuestsState == QuestsState.QuestMakeVillagersLaugh)
-        {
-            StartCoroutine(TellRandomBadJokeToVillager());
-        }
-        else
-        {
-            DialogManager.Instance.QueueDialogToShow("Villager: " + villagerDoesNotWantToTalkToYouPool.TakeRandomLine());            
-        }
-    }
-
     public IEnumerator TellPlayerSelectedBadJoke()
     {
         int[] jokeIndexes = badJokesJesterPool.GetRandomUniqueJokesIndexes(3);
@@ -244,232 +215,10 @@ public class GameController : MonoBehaviour
         yield return DialogManager.Instance.ShowDialogCoroutine(dialog2);
     }
     
-    IEnumerator TellRandomBadJokeToVillager()
-    {
-        if (DialogManager.Instance.isShowing)
-            yield break;
-
-        yield return TellPlayerSelectedBadJoke();
-
-        var dialog3 = new DialogManager.DialogData();
-        dialog3.lines.Add("Villager: " + badJokesVillagerResponsesPool.TakeRandomLine());
-        yield return DialogManager.Instance.ShowDialogCoroutine(dialog3);
-
-        gameState = GameState.FreeRoam;
-
-        numBadJokesToldToVillagers++;
-        if (numBadJokesToldToVillagers >= 3 && overdog.QuestsState == QuestsState.QuestMakeVillagersLaugh)
-        {
-            overdog.QuestsState = QuestsState.QuestMakeVillagersLaugh_Finished;
-            ShowDialogThenFreeRoam("Jester: I can't make them laugh :C", () =>
-            {
-                ShowDialogThenFreeRoam("Dog: Woof woof", () =>
-                {
-                    ShowDialogThenFreeRoam("Jester: Oh, the puppy is sad, maybe I can make it laugh!", () =>
-                    {
-                        overdog.QuestsState = QuestsState.CantMakeVillagersLaughLetsTryDog;
-                        overdog.SetSprite(DogEvilState.CuteSad);
-                        overdog.ChangeSpeechBubble(DogSpeechBubble.Sad);
-                    });
-                });
-            });
-        }
-    }
-
-
-    public void OnPlayerInteractedWithOverDog()
-    {
-        if (overdog.QuestsState == QuestsState.CantMakeVillagersLaughLetsTryDog)
-        {
-            overdog.QuestsState = QuestsState.QuestBanana_GaveBanana;
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Sad);
-
-            ShowDialogThenFreeRoam(
-                "Dog: Hi here is a banana! Use it and make me happy happy happy!",
-                () =>
-                {
-                    SpawnItemInfrontOfDog(prefabItemBanana);
-                }
-            );
-        }
-        else if (overdog.QuestsState == QuestsState.QuestBanana_Finished_SeenPeopleFallNoLongerInterested)
-        {
-            overdog.QuestsState = QuestsState.QuestScareGrandma_GaveScissors;
-            overdog.SetSprite(DogEvilState.CuteSad);
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Sad);
-
-            ShowDialogThenFreeRoam(
-                "Dog: Here are scissors! Use them on something and scare that grandma!",
-                () =>
-                {
-                    SpawnItemInfrontOfDog(prefabItemScissors);
-                }
-            );
-            quest2.SetActive(true);
-        }
-        else if (overdog.QuestsState == QuestsState.QuestScareGrandma_Finished)
-        {
-            overdog.QuestsState = QuestsState.QuestPoisonCake_GavePoison_WaitingForPeopleToDie;
-            overdog.SetSprite(DogEvilState.BigSad);
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Sad);
-
-            ShowDialogThenFreeRoam(
-                "Dog: Find something poisonus! Use it and make me happy happy happy!",
-                () =>
-                {
-                    CakeQuest.StartQuestt();
-                }
-            );
-            quest3.SetActive(true);
-        }
-        else if (overdog.QuestsState == QuestsState.QuestPoisonCake_Finished_PeopleDied)
-        {
-            overdog.QuestsState = QuestsState.QuestBurningHouse;
-            overdog.SetSprite(DogEvilState.DemonSad);
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Sad);
-
-            ShowDialogThenFreeRoam(
-                "Dog: Hey! Take the torch from the house and get it hot in here!"
-            );
-            quest4.SetActive(true);
-        }
-        else if (
-            overdog.QuestsState == QuestsState.EndGame_HousesBurned || 
-            overdog.QuestsState == QuestsState.EndGame_ComeLetMeRewardYou || 
-            overdog.QuestsState == QuestsState.EndGame_YouAreFunAfterAll
-        ) {
-            ShowDialogThenFreeRoam(
-                "Dog: Here is your reward!",
-                () => 
-                {
-                    overdog.EatPlayer();
-                    AudioManager.i.PlaySfx(happySounds[2]);
-                }
-            );
-        }
-        else if (overdog.QuestsState < QuestsState.CantMakeVillagersLaughLetsTryDog)
-        {
-            ShowDialogThenFreeRoam(
-                "Dog: Woof woof.",
-                () =>
-                {
-                    ShowRandomDialogThenFreeRoam(
-                        new[]
-                        {
-                            "Jester: He is so cute.",
-                            "Jester: Cute little puppy!",
-                            "Jester: Awwhhh.",
-                        }
-                    );
-                }
-            );
-        }
-        else if (overdog.QuestsState < QuestsState.QuestBurningHouse_Finished)// during quest
-        {
-            ShowDialogThenFreeRoam("Dog: " + dogQuestInProgressDialogsPool.TakeRandomLine());
-        }
-    }
-    public void OnCharacterHasFallen(Character character)
-    {
-        if (character.IsNPCCharacter)
-        {
-            if (overdog.QuestsState == QuestsState.QuestBanana_GaveBanana)
-            {
-                overdog.QuestsState = QuestsState.QuestBanana_Finished_SeenPeopleFallNoLongerInterested;
-                overdog.SetSprite(DogEvilState.CuteHappy);
-                overdog.ChangeSpeechBubble(DogSpeechBubble.Happy);
-                AudioManager.i.PlaySfx(happySounds[0]);
-                ShowDialogThenFreeRoam("Dog: I'm pleased *hahaha*.");
-            }
-        }
-    }
-
-    public void OnGrandmaScared()
-    {
-        if (overdog.QuestsState == QuestsState.QuestScareGrandma_WaitingForGrandmaScare)
-        {
-            overdog.QuestsState = QuestsState.QuestScareGrandma_Finished;
-            overdog.SetSprite(DogEvilState.BigHappy);
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Happy);
-            AudioManager.i.PlaySfx(happySounds[1]);
-            ShowDialogThenFreeRoam("Dog: *hahaha* goood.");
-
-        }
-    }
-
-
-    public void OnHouseLit()
-    {
-        if (overdog.QuestsState == QuestsState.QuestBurningHouse_Torch_Lit)
-        {
-            overdog.QuestsState = QuestsState.QuestBurningHouse_Finished;
-            overdog.SetSprite(DogEvilState.DemonHappy);
-            overdog.ChangeSpeechBubble(DogSpeechBubble.Happy);
-            AudioManager.i.PlaySfx(happySounds[2]);
-            ShowDialogThenFreeRoam(
-                "Dog: That's what I call a fire *hahh*",
-                () => { 
-                    overdog.QuestsState = QuestsState.EndGame_HousesBurned;
-                    Invoke(nameof(EndGame_YouAreFunAfterAll), 20 + UnityEngine.Random.Range(-5, 5));
-                }
-            );
-        }
-    }
-    void EndGame_YouAreFunAfterAll()
-    {
-        ShowDialogThenFreeRoam(
-            "Dog: The world seems fun like this, maybe you're funny after all.",
-            () =>
-            {
-                overdog.QuestsState = QuestsState.EndGame_YouAreFunAfterAll;
-                Invoke(nameof(EndGame_ComeLetMeRewardYou), 10 + UnityEngine.Random.Range(-5, 5));
-            }
-        );
-    }
-
-    void EndGame_ComeLetMeRewardYou()
-    {
-        ShowDialogThenFreeRoam(
-            "Dog: Come to me for your reward!",
-            () =>
-            {
-                overdog.QuestsState = QuestsState.EndGame_ComeLetMeRewardYou;
-            }
-        );
-    }
-
-    public void OnTorchTaken()
-    {
-        if (overdog.QuestsState == QuestsState.QuestBurningHouse)
-        {
-            overdog.QuestsState = QuestsState.QuestBurningHouse_TorchTaken;
-        }
-    }
-    public void OnTorchLit()
-    {
-        if (overdog.QuestsState == QuestsState.QuestBurningHouse_TorchTaken)
-        {
-            overdog.QuestsState = QuestsState.QuestBurningHouse_Torch_Lit;
-        }
-    }
-
-    public void OnHouseBurned()
-    {
-        if (OverDog.i.QuestsState == QuestsState.QuestBurningHouse_Torch_Lit)
-            houseBurned++;
-    }
-
 
     public void EndGame()
     {
         DialogManager.Instance.QueueDialogToShow("Jester: Who's laughing now?");
-    }
-
-    public void SpawnItemInfrontOfDog(GameObject item)
-    {
-        var banana = Instantiate(item, overdog.gameObject.transform.position + new Vector3(-2, 0, 0), Quaternion.identity);
-        banana.GetComponent<ItemBase>().SnapToTileAtCurrentPosition();
-        gameState = GameState.FreeRoam;
     }
 
     public void PauseGame(bool pause)
@@ -502,44 +251,6 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
-       /* worldCamera.gameObject.SetActive(true);
-        if (playerController.connectCamera)
-        {
-            Vector3 cameraPosition = worldCamera.transform.position;
-            cameraPosition.x = playerController.gameObject.transform.position.x;
-            cameraPosition.y = playerController.gameObject.transform.position.y;
-            worldCamera.transform.position = cameraPosition;
-        }*/
-        /*else if (playerController.Character.IsDead)
-        {
-            if (!openedMenuAfterPlayerDied)
-            {
-                openedMenuAfterPlayerDied = true;
-                Invoke(nameof(OpenMenu), 1);
-            }
-        }
-
-
-        if (overdog.QuestsState == QuestsState.QuestPoisonCake_GavePoison_WaitingForPeopleToDie)
-        {
-            if (NumNPCSPoisoned == 3)
-            {
-                overdog.QuestsState = QuestsState.QuestPoisonCake_Finished_PeopleDied;
-                overdog.ChangeSpeechBubble(DogSpeechBubble.Happy);
-                overdog.SetSprite(DogEvilState.DemonHappy);
-                AudioManager.i.PlaySfx(happySounds[1]);
-                ShowDialogThenFreeRoam("Dog: *hahaha* nice.");
-            }
-        }
-
-        if (gameState == GameState.EvilDogSideview)
-        {
-            evilDogSideviewUI.gameObject.SetActive(true);
-        }
-        else
-        {
-            evilDogSideviewUI.gameObject.SetActive(false);
-        }*/
         if(gameState == GameState.Shaman) 
         {
             astralPlane.SetActive(true);

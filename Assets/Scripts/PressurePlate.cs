@@ -1,11 +1,11 @@
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 [RequireComponent(typeof(Collider2D))]
-public class PressurePlate : SignalSender
+public class PressurePlate : MonoBehaviour
 {
-
-    public override bool IsSendingSignal => isTriggered;
+    public SignalReceiver[] configSendSignalTo;
 
     public float configTimeToReset = -1;
 
@@ -15,6 +15,8 @@ public class PressurePlate : SignalSender
     public float timeToReset = 0;
     void Update()
     {
+        if (isTriggered)
+            configSendSignalTo.ReceiveSignal();
         if (timeToReset <= 0)
             return;
         timeToReset -= Time.deltaTime;
@@ -26,11 +28,17 @@ public class PressurePlate : SignalSender
     {
         SetTrigerred(true);
     }
-    
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (configTimeToReset > 0)
+            return;
+        SetTrigerred(false);
+    }
+
     void SetTrigerred(bool newState)
     {
         timeToReset = configTimeToReset;
         isTriggered = newState;
-        spriteRenderer.color = isTriggered ? Color.red : Color.wheat;
+        spriteRenderer.color = isTriggered ? Color.red : Color.white;
     }
 }
