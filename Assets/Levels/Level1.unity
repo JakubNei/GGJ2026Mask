@@ -358,6 +358,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4334030731729451089, guid: c4dad332718813e4792d63efa6164f51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
     - target: {fileID: 5516410252220565792, guid: c4dad332718813e4792d63efa6164f51, type: 3}
       propertyPath: m_Name
       value: pickaxe (1)
@@ -20862,6 +20866,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4334030731729451089, guid: c4dad332718813e4792d63efa6164f51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
     - target: {fileID: 5516410252220565792, guid: c4dad332718813e4792d63efa6164f51, type: 3}
       propertyPath: m_Name
       value: pickaxe
