@@ -5,15 +5,18 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float stopDistance = 2.4f;
     [SerializeField] float speedMultiplier = 0.5f;
+    [SerializeField] float returnStopDistance = 0.1f;
 
     Character character;
     Rigidbody2D rb;
     Vector2 moveDirection;
+    Vector3 initialPosition;
 
     void Start()
     {
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
+        initialPosition = transform.position;
         character.switchMask(MaskType.Default);
     }
 
@@ -23,18 +26,40 @@ public class EnemyController : MonoBehaviour
         if (player == null)
         {
             moveDirection = Vector2.zero;
+            character.HandleUpdate();
             return;
         }
 
-        Vector3 toPlayer = player.transform.position - transform.position;
+        // Only chase when player has Default mask equipped
+        bool playerHasDefaultMask = InventoryItems.Instance?.EquippedItem?.MaskType == MaskType.Default;
 
-        if (toPlayer.magnitude < stopDistance)
+        if (playerHasDefaultMask)
         {
-            moveDirection = Vector2.zero;
+            // Chase player
+            Vector3 toPlayer = player.transform.position - transform.position;
+
+            if (toPlayer.magnitude < stopDistance)
+            {
+                moveDirection = Vector2.zero;
+            }
+            else
+            {
+                moveDirection = toPlayer.normalized;
+            }
         }
         else
         {
-            moveDirection = toPlayer.normalized;
+            // Return to initial position
+            Vector3 toHome = initialPosition - transform.position;
+
+            if (toHome.magnitude < returnStopDistance)
+            {
+                moveDirection = Vector2.zero;
+            }
+            else
+            {
+                moveDirection = toHome.normalized;
+            }
         }
 
         character.HandleUpdate();

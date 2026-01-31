@@ -53,7 +53,7 @@ public class InventoryItems : MonoBehaviour
     public void AddItem(ItemBase item)
     {
         DontDestroyOnLoad(item.gameObject);
-        item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0); 
+        item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0);
         if (itemList.Contains(item))
         {
             return;
@@ -61,6 +61,7 @@ public class InventoryItems : MonoBehaviour
         itemList.Add(item);
         UpdateItemSprites();
         item.OnPickupToInventory();
+        EquipItem(item);
     }
 
     public void RemoveItem(ItemBase itemPrefab)
