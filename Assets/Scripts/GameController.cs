@@ -254,7 +254,10 @@ public class GameController : MonoBehaviour
         // Restart current scene
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (SceneTransition.Instance != null)
+                SceneTransition.Instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;
         }
 
