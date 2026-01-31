@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1185000105
-  m_SortingLayer: 3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4178046375966092550, guid: 038e8bc5162286443a874e2a60cc08ef, type: 3}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &703168170155122091
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
         else */
         if (interactableGameObject)
         {
-            HighlightSprite.Highlight(interactableGameObject);
+            HighlightSprite.Outline(interactableGameObject, Color.white);
         }
 
         bool interactInput = IsInteractInputKey();
