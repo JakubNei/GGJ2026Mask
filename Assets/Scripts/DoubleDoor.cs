@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class DoubleDoor : SignalReceiver
@@ -7,11 +8,19 @@ public class DoubleDoor : SignalReceiver
 
     public float configMovementDistance = 1;
     public float configMovementSpeed = 0.3f;
+    public MovementAxis configMovementAxis = MovementAxis.Horizontal;
 
     private Vector3 leftDoorOriginalPosition;
     private Vector3 rightDoorOriginalPosition;
     private Vector3 leftDoorVelocity = Vector3.zero;
     private Vector3 rightDoorVelocity = Vector3.zero;
+
+    public enum MovementAxis
+    {
+        Horizontal,
+        Vertical
+    }
+    
 
     public bool opening = false;
 
@@ -34,8 +43,8 @@ public class DoubleDoor : SignalReceiver
     {
         if (opening)
         {
-            Vector3 leftTargetPosition = leftDoorOriginalPosition + new Vector3(configMovementDistance, 0, 0);
-            Vector3 rightTargetPosition = rightDoorOriginalPosition + new Vector3(-configMovementDistance, 0, 0);
+            Vector3 leftTargetPosition = leftDoorOriginalPosition + (configMovementAxis == MovementAxis.Horizontal ? new Vector3(configMovementDistance, 0, 0) : new Vector3(0, configMovementDistance, 0));
+            Vector3 rightTargetPosition = rightDoorOriginalPosition + (configMovementAxis == MovementAxis.Horizontal ? new Vector3(-configMovementDistance, 0, 0) : new Vector3(0, -configMovementDistance, 0));
             configLeftDoor.transform.localPosition = Vector3.SmoothDamp(configLeftDoor.transform.localPosition, leftTargetPosition, ref leftDoorVelocity, configMovementSpeed);
             configRightDoor.transform.localPosition = Vector3.SmoothDamp(configRightDoor.transform.localPosition, rightTargetPosition, ref rightDoorVelocity, configMovementSpeed);
         }
