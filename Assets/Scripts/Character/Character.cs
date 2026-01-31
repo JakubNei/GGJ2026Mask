@@ -193,6 +193,11 @@ public class Character : MonoBehaviour
         if (Physics2D.BoxCast(transform.position + dir, new Vector2(0.2f, 0.2f), 0f, dir, diff.magnitude - 1, collisionLayer) == true)
             return false;
 
+        // Check for HoleCollider triggers (they block player but not projectiles)
+        var hit = Physics2D.OverlapBox(targetPos, new Vector2(0.5f, 0.5f), 0f);
+        if (hit != null && hit.GetComponent<HoleCollider>() != null)
+            return false;
+
         return true;
     }
 
