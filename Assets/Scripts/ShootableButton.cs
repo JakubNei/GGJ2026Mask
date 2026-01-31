@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class ShootableButton : MonoBehaviour
+public class ShootableButton : MonoBehaviour, IInteractable
 {
     [SerializeField] SignalReceiver[] targets;
     [SerializeField] AudioClip activateSound;
@@ -69,5 +69,26 @@ public class ShootableButton : MonoBehaviour
             configOffVisuals.SetActive(true);
             targets.ReceiveSignalOff();
         }
+    }
+
+    public bool CanPickUp()
+    {
+        return false;
+    }
+
+    public int lastFrameInteracted = 0;
+    public void UpdateWhileInteracting()
+    {
+        if (lastFrameInteracted < Time.frameCount - 2)
+        {
+            Activate();
+        }
+        
+        lastFrameInteracted = Time.frameCount;
+    }
+
+    public bool CanInteract()
+    {
+        return true;
     }
 }

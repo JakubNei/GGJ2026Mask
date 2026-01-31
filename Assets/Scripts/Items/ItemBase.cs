@@ -44,6 +44,7 @@ public class ItemBase : MonoBehaviour, IInteractable
     }
 
     public virtual void OnEquip() { }
+    public virtual bool CanUnequip() { return true; }
     public virtual void OnUnequip() { }
 
     void Awake()
