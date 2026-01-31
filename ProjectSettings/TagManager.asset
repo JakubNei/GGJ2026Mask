@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -13,15 +13,15 @@ TagManager:
   - UI
   - 
   - 
-  - SolidObjects
-  - LongGrass
+  - GroundHole
+  - 
   - Interactable
   - Player
-  - FovLayer
-  - Portal
-  - Triggers
-  - Ledges
-  - Grandma
+  - Throwable
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -38,9 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Hidden
     uniqueID: 2549936425
     locked: 0
@@ -49,6 +46,9 @@ TagManager:
     locked: 0
   - name: ForeGround
     uniqueID: 1594888083
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Decoration
     uniqueID: 691473781
@@ -62,3 +62,5 @@ TagManager:
   - name: UI
     uniqueID: 681491737
     locked: 0
+  m_RenderingLayers:
+  - Default

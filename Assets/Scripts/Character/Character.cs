@@ -43,13 +43,6 @@ public class Character : MonoBehaviour
         SetPositionAndSnapToTile(transform.position); // Snap do centra tilu
 
     }
-
-    public void OnEatenByDog()
-    {
-        IsDead = true;
-        gameObject.SetActive(false);
-    }
-
     public void SetPositionAndSnapToTile(Vector2 pos)
     {
         pos.x = Mathf.Floor(pos.x) + 0.5f;
@@ -159,8 +152,6 @@ public class Character : MonoBehaviour
             {
                 transform.DORotateQuaternion(Quaternion.Euler(0, 0, -90), 0.3f);
             }
-
-            GameController.Instance.OnCharacterHasFallen(this);
 
             if (isPoisoned)
             {
