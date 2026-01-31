@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 691473781
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e40ceea626ed57f4e8393beef7a0ab3c, type: 3}
@@ -152,7 +152,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5034188, y: 0.023931663}
+    pivot: {x: 0.5, y: 0.023}
     oldSize: {x: 1, y: 2}
     newSize: {x: 2.1, y: 0.7}
     adaptiveTilingThreshold: 0.5
