@@ -51,6 +51,7 @@ public class InventoryItems : MonoBehaviour
 
     public void AddItem(ItemBase item)
     {
+        item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0); 
         if (itemList.Contains(item))
         {
             return;
