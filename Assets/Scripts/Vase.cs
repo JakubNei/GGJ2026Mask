@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Collider2D))]
 public class Vase : MonoBehaviour
 {
     [Header("Settings")]
@@ -9,8 +10,23 @@ public class Vase : MonoBehaviour
     public float shatterSpeed = 3f;
     public float shardLifetime = 1.5f;
 
-    void Start(){
-        Break();
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        TryBreak(collision.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        TryBreak(collider.gameObject);
+    }
+
+    void TryBreak(GameObject other)
+    {
+        var projectile = other.GetComponent<Projectile>();
+        if (projectile != null)
+        {
+            Break();
+        }
     }
 
     public void Break()
