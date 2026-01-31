@@ -84,7 +84,11 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
 <<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
+<<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
   m_Sprite: {fileID: 6937817954938267909, guid: 8f8705d00de5f704d86efc6717223c51, type: 3}
+=======
+  m_Sprite: {fileID: 6372612021844725048, guid: 833805eded6763e479181ad3031a1606, type: 3}
+>>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
 =======
   m_Sprite: {fileID: 6372612021844725048, guid: 833805eded6763e479181ad3031a1606, type: 3}
 >>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
@@ -136,9 +140,12 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
 <<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
+<<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
     oldSize: {x: 0.31, y: 0.34}
     newSize: {x: 0.31, y: 0.34}
 =======
+=======
+>>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
     oldSize: {x: 0.775, y: 0.85}
     newSize: {x: 0.4, y: 0.72}
 >>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
