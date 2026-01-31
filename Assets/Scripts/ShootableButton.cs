@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class ShootableButton : MonoBehaviour
 {
-    [SerializeField] HoleCover[] targets;
+    [SerializeField] SignalReceiver[] targets;
     [SerializeField] AudioClip activateSound;
 
     void Start()
@@ -42,17 +42,6 @@ public class ShootableButton : MonoBehaviour
         if (activateSound && AudioManager.i)
             AudioManager.i.PlaySfx(activateSound);
 
-        for (int i = 0; i < targets.Length; i++)
-        {
-            if (targets[i] != null)
-            {
-                Debug.Log($"[ShootableButton] Triggering target {i}: {targets[i].name}");
-                targets[i].Trigger();
-            }
-            else
-            {
-                Debug.LogWarning($"[ShootableButton] Target {i} is null!");
-            }
-        }
+        targets.ReceiveSignal();
     }
 }

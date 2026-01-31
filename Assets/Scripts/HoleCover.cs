@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class HoleCover : MonoBehaviour
+public class HoleCover : SignalReceiver
 {
     [SerializeField] AudioClip activateSound;
     [SerializeField] Collider2D[] holeColliders; // Colliders that block when hole is exposed
@@ -47,6 +47,26 @@ public class HoleCover : MonoBehaviour
         {
             if (col != null)
                 col.enabled = enabled;
+        }
+    }
+
+    void Update()
+    {
+        if (IsReceivingSignal)
+        {
+            if (!triggered)
+            {
+                Trigger();
+                triggered = true;
+            }
+        }
+        else
+        {
+            if (triggered)
+            {
+                Trigger();
+                triggered = false;
+            }
         }
     }
 
