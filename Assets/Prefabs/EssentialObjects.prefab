@@ -724,8 +724,6 @@ GameObject:
   - component: {fileID: 9029857838517271012}
   - component: {fileID: 9029857838517271013}
   - component: {fileID: 9029857838517271015}
-  - component: {fileID: 9029857838517271014}
-  - component: {fileID: 1804750652636808277}
   m_Layer: 5
   m_Name: GameController
   m_TagString: Untagged
@@ -787,62 +785,6 @@ MonoBehaviour:
   choiceBox: {fileID: 8537910680635481306}
   dialogText: {fileID: 9029857839731528025}
   lettersPerSecond: 45
---- !u!114 &9029857838517271014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9029857838517271002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef04070a5a7bae6429321b434ab99f8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solidObjectsLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  grassLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  fovLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  portalLayer:
-    serializedVersion: 2
-    m_Bits: 8192
-  triggersLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  ledgeLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  waterLayer:
-    serializedVersion: 2
-    m_Bits: 16
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8192
---- !u!114 &1804750652636808277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9029857838517271002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b99474d1ef18bfc46b0e235c5b9d1fc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textNormalColor: {r: 1, g: 1, b: 1, a: 1}
-  textHighlightedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &9029857838853712806
 GameObject:
   m_ObjectHideFlags: 0
