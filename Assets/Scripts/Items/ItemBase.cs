@@ -3,9 +3,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+public enum MaskType 
+{
+    Default,
+    Shaman, 
+    Tough,
+    Ninja,
+}
+
 public class ItemBase : MonoBehaviour, IInteractable
 {
-    
+    private MaskType type
+    {
+        get { return type; }  
+        set { type = value; } 
+    }
+
+    public virtual bool InteractInsteadOfPlace => false;
+
+
     public virtual Sprite GetIcon()
     {
         return GetComponentInChildren<SpriteRenderer>()?.sprite;
