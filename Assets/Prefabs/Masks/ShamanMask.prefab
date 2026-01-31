@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2809190673221898082}
   - component: {fileID: 837309424628606514}
   - component: {fileID: 703168170155122091}
-  - component: {fileID: -4234604272926076419}
+  - component: {fileID: -4321437357071510694}
   m_Layer: 10
   m_Name: ShamanMask
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9dc530f50527c448a7f01ef56e963a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShamanMask
---- !u!60 &-4234604272926076419
+--- !u!60 &-4321437357071510694
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.36, y: 0.47}
+    oldSize: {x: 0.9, y: 1.175}
     newSize: {x: 0.38, y: 0.55}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -151,15 +151,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.07, y: 0.195}
-      - {x: -0.13, y: 0.175}
-      - {x: -0.14, y: 0.155}
-      - {x: -0.14, y: -0.015}
-      - {x: -0.12, y: -0.125}
-      - {x: -0.06, y: -0.235}
-      - {x: 0.03, y: -0.235}
-      - {x: 0.11, y: -0.185}
-      - {x: 0.17999999, y: -0.085}
-      - {x: 0.17999999, y: 0.105}
-      - {x: 0.14999999, y: 0.195}
+    - - {x: -0.175, y: 0.4875}
+      - {x: -0.32500002, y: 0.4375}
+      - {x: -0.35, y: 0.38750002}
+      - {x: -0.35, y: -0.0375}
+      - {x: -0.3, y: -0.3125}
+      - {x: -0.15, y: -0.58750004}
+      - {x: 0.075, y: -0.58750004}
+      - {x: 0.275, y: -0.4625}
+      - {x: 0.45000002, y: -0.2125}
+      - {x: 0.45000002, y: 0.26250002}
+      - {x: 0.375, y: 0.4875}
   m_UseDelaunayMesh: 1

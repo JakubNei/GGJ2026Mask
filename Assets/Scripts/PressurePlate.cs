@@ -6,13 +6,18 @@ using UnityEngine.Timeline;
 public class PressurePlate : MonoBehaviour
 {
     public SignalReceiver[] configSendSignalTo;
+    [SerializeField] GameObject configOffVisual;
+    [SerializeField] GameObject configOnVisual;
 
     public float configTimeToReset = -1;
 
     public bool isTriggered = false;
 
-    public SpriteRenderer spriteRenderer;
     public float timeToReset = 0;
+    void Start()
+    {
+        SetTrigerred(false);
+    }
     void Update()
     {
         if (isTriggered)
@@ -37,8 +42,9 @@ public class PressurePlate : MonoBehaviour
 
     void SetTrigerred(bool newState)
     {
+        configOnVisual.SetActive(newState);
+        configOffVisual.SetActive(!newState);
         timeToReset = configTimeToReset;
         isTriggered = newState;
-        spriteRenderer.color = isTriggered ? Color.red : Color.white;
     }
 }

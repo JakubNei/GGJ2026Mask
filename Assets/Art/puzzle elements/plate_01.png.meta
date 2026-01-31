@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: da4b90bbef9983641a20c9d23b06b852
+guid: 0a362ceac38e8704eb38725f5b2a1461
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2900425322368481589
-    second: blue_button_0
+      213: -4029855542097144570
+    second: plate_01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_button_0
+      name: plate_01_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 3
-        width: 64
-        height: 53
+        x: 1
+        y: 0
+        width: 39
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc6cda2598e9fb7d0800000000000000
-      internalID: -2900425322368481589
+      spriteID: 605192d4cb31318c0800000000000000
+      internalID: -4029855542097144570
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      blue_button_0: -2900425322368481589
+      plate_01_0: -4029855542097144570
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

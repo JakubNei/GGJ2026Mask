@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2809190673221898082}
   - component: {fileID: 837309424628606514}
   - component: {fileID: 1019628549786924428}
-  - component: {fileID: 2095918272248551372}
+  - component: {fileID: -9107024960135902295}
   m_Layer: 10
   m_Name: ToughMask
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.80157, y: -1.00673, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.31, y: 0.34}
+  m_Size: {x: 0.775, y: 0.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ce21ff7c4f5574b8dc83c2f49169e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultMask
---- !u!60 &2095918272248551372
+--- !u!60 &-9107024960135902295
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,20 +143,20 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.31, y: 0.34}
-    newSize: {x: 0.31, y: 0.34}
+    oldSize: {x: 0.775, y: 0.85}
+    newSize: {x: 0.775, y: 0.85}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.114999995, y: 0.17}
-      - {x: -0.155, y: 0.11}
-      - {x: -0.155, y: -0.089999996}
-      - {x: -0.105, y: -0.17}
-      - {x: 0.125, y: -0.17}
-      - {x: 0.145, y: -0.13}
-      - {x: 0.145, y: 0.089999996}
-      - {x: 0.095, y: 0.17}
+    - - {x: -0.2875, y: 0.425}
+      - {x: -0.38750002, y: 0.275}
+      - {x: -0.38750002, y: -0.22500001}
+      - {x: -0.26250002, y: -0.425}
+      - {x: 0.3125, y: -0.425}
+      - {x: 0.3625, y: -0.32500002}
+      - {x: 0.3625, y: 0.22500001}
+      - {x: 0.2375, y: 0.425}
   m_UseDelaunayMesh: 1
