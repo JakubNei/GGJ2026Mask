@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     }
     InteractPosMethod interactPosMethod;
 
-    MaskType MaskSelectedInUI => inventoryItems.EquippedItem.MaskType;
+    MaskType MaskSelectedInUI => inventoryItems.EquippedItem ? inventoryItems.EquippedItem.MaskType : MaskType.None;
 
     MaskType MaskOnCharacter
     {

@@ -46,9 +46,7 @@ public class Character : MonoBehaviour
         }
         set
         {
-            if (maskDisplay != null)
-                maskDisplay.SwitchMask(value);
-
+            maskDisplay.SwitchMask(value);
         }
     }
     
