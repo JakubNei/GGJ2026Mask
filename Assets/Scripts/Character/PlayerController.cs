@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] ItemCursor itemCursor;
     [SerializeField] GameObject projectilePf;
+    [SerializeField] float shootCooldown = 0.3f;
+    float lastShootTime;
 
     public InventoryItems inventoryItems;
    
@@ -173,16 +175,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja) 
+        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja)
         {
-            Projectile[] projectiles = FindObjectsOfType<Projectile>();
-            if (projectiles.Length < 1)
+            if (Time.time >= lastShootTime + shootCooldown)
             {
-                var facingDir = new Vector3(controllingCharacter.Animator.MoveX, controllingCharacter.Animator.MoveY);
-                GameObject projectile = Instantiate(projectilePf, controllingCharacter.transform.position, Quaternion.identity);
-                projectile.GetComponent<Projectile>()?.Throw(interactFocusPos);
-            }
+                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                var throwDirection = (mouseWorldPosition - controllingCharacter.transform.position);
+                throwDirection.z = 0;
+                throwDirection.Normalize();
 
+                GameObject projectile = Instantiate(projectilePf, controllingCharacter.transform.position, Quaternion.identity);
+                projectile.GetComponent<Projectile>()?.Throw(throwDirection);
+                lastShootTime = Time.time;
+            }
         }
 
     }

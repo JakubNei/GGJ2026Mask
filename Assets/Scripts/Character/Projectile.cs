@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
-    float throwForce = 1f;
+    [SerializeField] float throwForce = 10f;
     Rigidbody2D rb;
 
     void Awake()
@@ -12,12 +12,20 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    void Start()
+    {
+        // Ignore collision with player
+        var playerCollider = PlayerController.Instance.controllingCharacter.GetComponent<Collider2D>();
+        var projectileCollider = GetComponent<Collider2D>();
+        if (playerCollider && projectileCollider)
+        {
+            Physics2D.IgnoreCollision(projectileCollider, playerCollider);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(PlayerController.Instance.controllingCharacter.gameObject != collision.gameObject) 
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     public void Throw(Vector2 throwDirection)
