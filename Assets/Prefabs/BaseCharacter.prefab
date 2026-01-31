@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1111111111111111111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -0.81, z: 0}
+  m_LocalPosition: {x: -0.05000019, y: 0.58000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2317523506061013492}
   - {fileID: 1649715224425523888}
   - {fileID: 3725516871115139987}
-  m_Father: {fileID: 4720159627808179388}
+  m_Father: {fileID: 831704266585546324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3333333333333333333
 MonoBehaviour:
@@ -365,7 +365,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 831704266585546324}
-  - {fileID: 2222222222222222222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4720159627808179394
@@ -511,8 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870da6001b74bf848a14d5767bb7a980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSfx: {fileID: 8300000, guid: 7f6615750e8d3ca45b017b3008dd1791, type: 3}
-  poisonedSprite: {fileID: 0}
   maskDisplay: {fileID: 3333333333333333333}
   moveSpeed: 12
   maskBobFrequency: 12
@@ -522,9 +519,7 @@ MonoBehaviour:
   wobbleAmplitude: 10
   bodyBobAmplitude: 0.05
   bodyBobPhaseOffset: 1.5
-  Name: 
   IsPlayerCharacter: 1
-  allowedFallDirections: 0
   characterAnimator: {fileID: 0}
 --- !u!1 &5437072379948521110
 GameObject:
@@ -646,7 +641,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2222222222222222222}
   m_Father: {fileID: 4720159627808179388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &417785384314121652
@@ -694,8 +690,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1436320721
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 4ceb8ff565ef29d45917aad36d4eee20, type: 3}

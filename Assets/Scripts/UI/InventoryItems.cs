@@ -139,11 +139,14 @@ public class InventoryItems : MonoBehaviour
                 frames[itemList.IndexOf(equippedItem)].SetActive(false);
             }
 
-            equippedItem = newItem;
-            equippedItem.OnEquip();
-            frames[itemList.IndexOf(equippedItem)].SetActive(true);
+            if (newItem != null)
+            {
+                equippedItem = newItem;
+                equippedItem.OnEquip();
+                frames[itemList.IndexOf(equippedItem)].SetActive(true);
+            }
 
-            Debug.Log("Equipped " + newItem.MaskType);
+            Debug.Log($"Equipped {newItem} {newItem.MaskType}");
         }
     }
 }

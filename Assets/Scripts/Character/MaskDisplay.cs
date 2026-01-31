@@ -17,7 +17,7 @@ public class MaskDisplay : MonoBehaviour
     [SerializeField] List<MaskEntry> masks = new List<MaskEntry>();
 
     Dictionary<MaskType, GameObject> maskLookup;
-    MaskType currentMask = MaskType.Default;
+    public MaskType currentMask = MaskType.Default;
 
     void Awake()
     {

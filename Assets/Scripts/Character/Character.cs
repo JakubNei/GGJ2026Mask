@@ -38,7 +38,18 @@ public class Character : MonoBehaviour
     public bool IsPlayerCharacter;
     public bool IsNPCCharacter => !IsPlayerCharacter;
 
-    MaskType equippedMask;
+    public MaskType CurrentMask
+    {
+        get
+        {
+            return maskDisplay.currentMask;
+        }
+        set
+        {
+            maskDisplay.SwitchMask(value);
+        }
+    }
+    
 
     public CharacterAnimator characterAnimator;
 
@@ -48,7 +59,7 @@ public class Character : MonoBehaviour
     {
         animator = GetComponent<CharacterAnimator>();
         //SetPositionAndSnapToTile(transform.position); // Snap do centra tilu
-        SwitchMask(MaskType.Default);
+        CurrentMask = MaskType.Default;
         moveSpeed *= 0.5f; // Slow down movement by 2x
 
         // Initialize bob/wobble transforms
@@ -132,15 +143,6 @@ public class Character : MonoBehaviour
     public CharacterAnimator Animator
     {
         get => animator;
-    }
-
-    public void SwitchMask(MaskType newMaskType)
-    {
-        equippedMask = newMaskType;
-        if (maskDisplay != null)
-        {
-            maskDisplay.SwitchMask(newMaskType);
-        }
     }
 
     public MaskDisplay MaskDisplay => maskDisplay;

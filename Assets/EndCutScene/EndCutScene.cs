@@ -4,10 +4,10 @@ public class EndCutScene : MonoBehaviour
 {
     public void RemovePlayerMask()
     {
-        var player = PlayerController.Instance?.controllingCharacter;
-        if (player != null)
+        var character = PlayerController.Instance?.controllingCharacter;
+        if (character != null)
         {
-            player.SwitchMask(MaskType.None);
+            character.CurrentMask = MaskType.None;
         }
     }
 }
