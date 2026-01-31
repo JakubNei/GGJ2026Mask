@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 public class HoleCover : MonoBehaviour
 {
     [SerializeField] AudioClip activateSound;
+    [SerializeField] Collider2D[] holeColliders; // Colliders that block when hole is exposed
 
     TilemapRenderer tilemapRenderer;
     TilemapCollider2D tilemapCollider;
@@ -34,6 +35,19 @@ public class HoleCover : MonoBehaviour
             tilemapRenderer.enabled = false;
         if (tilemapCollider != null)
             tilemapCollider.enabled = false;
+
+        // Hole colliders start ENABLED (hole is exposed at start)
+        SetHoleCollidersEnabled(true);
+    }
+
+    void SetHoleCollidersEnabled(bool enabled)
+    {
+        if (holeColliders == null) return;
+        foreach (var col in holeColliders)
+        {
+            if (col != null)
+                col.enabled = enabled;
+        }
     }
 
     public void Trigger()
@@ -55,6 +69,9 @@ public class HoleCover : MonoBehaviour
             tilemapRenderer.enabled = show;
         if (tilemapCollider != null)
             tilemapCollider.enabled = show;
+
+        // Hole colliders toggle INVERSELY - disabled when cover is shown
+        SetHoleCollidersEnabled(!show);
 
         if (activateSound && AudioManager.i)
             AudioManager.i.PlaySfx(activateSound);
