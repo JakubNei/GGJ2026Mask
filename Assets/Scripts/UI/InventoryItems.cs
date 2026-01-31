@@ -52,12 +52,12 @@ public class InventoryItems : MonoBehaviour
 
     public void AddItem(ItemBase item)
     {
+        if (itemList.Contains(item))
+            return;
+
+        item.gameObject.transform.parent = null;
         DontDestroyOnLoad(item.gameObject);
         item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0);
-        if (itemList.Contains(item))
-        {
-            return;
-        }
         itemList.Add(item);
         UpdateItemSprites();
         item.OnPickupToInventory();
@@ -68,7 +68,7 @@ public class InventoryItems : MonoBehaviour
     {
         // undo DontDestroyOnLoad
         SceneManager.MoveGameObjectToScene(itemPrefab.gameObject, SceneManager.GetActiveScene());
-        
+
         ItemBase itemToRemove = itemPrefab;
         if (itemToRemove != null)
         {
