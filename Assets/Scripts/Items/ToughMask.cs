@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ItemToughGuyMask : ItemBase
+public class ToughMask : ItemBase
 {
 
-    public ItemToughGuyMask() 
+    public ToughMask() 
     {
         maskType = MaskType.Tough;
     }
