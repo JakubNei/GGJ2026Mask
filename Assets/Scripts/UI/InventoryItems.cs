@@ -122,10 +122,16 @@ public class InventoryItems : MonoBehaviour
             currentItemIndex = 2;
             return selectedItem = itemList.Count >= 3 ? itemList[currentItemIndex] : null;
         }
-        else if (Input.GetKeyDown(KeyCode.Tab))
+        else if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
         {
             if (itemList.Count != 0)
                 currentItemIndex = (currentItemIndex + 1) % itemList.Count;
+            return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (itemList.Count != 0)
+                currentItemIndex = (currentItemIndex - 1 + itemList.Count) % itemList.Count;
             return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
         }
         else
