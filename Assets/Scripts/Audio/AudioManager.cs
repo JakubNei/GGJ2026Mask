@@ -139,15 +139,18 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play sound at world position (3D spatial audio)
+    /// Play sound at world position (3D spatial audio with distance attenuation)
     /// </summary>
-    public void PlaySfxAt(AudioClip clip, Vector3 position, float spatialBlend = 0.5f)
+    public void PlaySfxAt(AudioClip clip, Vector3 position, float minDistance = 1f, float maxDistance = 15f)
     {
         if (clip == null) return;
 
         var source = GetNextSfxSource();
         source.transform.position = position;
-        source.spatialBlend = spatialBlend; // 0 = 2D, 1 = full 3D
+        source.spatialBlend = 1f; // Full 3D
+        source.rolloffMode = AudioRolloffMode.Logarithmic;
+        source.minDistance = minDistance;
+        source.maxDistance = maxDistance;
         source.pitch = 1f;
         source.volume = sfxVolume * masterVolume;
         source.PlayOneShot(clip);
