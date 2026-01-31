@@ -7201,9 +7201,7 @@ CompositeCollider2D:
   m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 536119124}
-    m_ColliderPaths: []
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths: []
   m_VertexDistance: 0.0005
@@ -13448,7 +13446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1346791709
 Transform:
   m_ObjectHideFlags: 0
@@ -15006,10 +15004,62 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1402042489}
     m_Modifications:
+    - target: {fileID: 929015250782944818, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
     - target: {fileID: 1518651817854350899, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 1654842326620163791, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 1914901770116349882, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 2131884171536592150, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 2810669688091226320, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 3159803837733832844, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 3574555254848307218, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 5092413616860844537, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 5407226875558963307, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 5975500733487094528, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 6107677849862323577, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 6494838527666911611, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 6504915909553836036, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
     - target: {fileID: 7034973194416199995, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.354797
@@ -15050,6 +15100,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7193674293608574929, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
+    - target: {fileID: 8679966089371879695, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 460dc42f3a8c5f740a750c390de654dd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2394240194024827442, guid: 3049812984e22b14d8232862eae4c09a, type: 3}
