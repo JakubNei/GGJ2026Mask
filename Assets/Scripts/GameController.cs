@@ -237,7 +237,7 @@ public class GameController : MonoBehaviour
     bool openedMenuAfterPlayerDied = false;
     void OpenMenu()
     {
-        if (!playerController || !playerController.Character || playerController.Character.IsDead)
+        if (!playerController || !playerController.Character/* || playerController.Character.IsDead*/)
         {
             menuController.OpenMenu_PlayerDead();
         }
@@ -251,6 +251,14 @@ public class GameController : MonoBehaviour
     
     private void Update()
     {
+        // Restart current scene
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            return;
+        }
+
+
         if(gameState == GameState.Shaman) 
         {
             astralPlane.SetActive(true);
