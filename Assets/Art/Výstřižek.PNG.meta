@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c021e49cb35a53844a9a7abb1ff2cd85
+guid: 1c89db0b9d9c8ba4b93498c7bb6ed18d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3073862631232679797
-    second: brick-pixel-art-pixel-2_0
+      213: -3527795581531933158
+    second: "V\xFDst\u0159i\u017Eek_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brick-pixel-art-pixel-2_0
+      name: "V\xFDst\u0159i\u017Eek_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 320
-        height: 319
+        width: 604
+        height: 377
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b80570119327755d0800000000000000
-      internalID: -3073862631232679797
+      spriteID: a16b8921c90ca0fc0800000000000000
+      internalID: -3527795581531933158
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      brick-pixel-art-pixel-2_0: -3073862631232679797
+      "V\xFDst\u0159i\u017Eek_0": -3527795581531933158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
