@@ -4,8 +4,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public enum MaskType 
+public enum MaskType
 {
+    None, // Final end cut scene no mask
     Default,
     Shaman, 
     Tough,

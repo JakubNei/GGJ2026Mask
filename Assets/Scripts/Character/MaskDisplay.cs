@@ -47,11 +47,15 @@ public class MaskDisplay : MonoBehaviour
             currentObj.SetActive(false);
         }
 
-        // Show new mask
         currentMask = newMask;
-        if (maskLookup.TryGetValue(currentMask, out var newObj))
+
+        if (newMask != MaskType.None)
         {
-            newObj.SetActive(true);
+            // Show new mask
+            if (maskLookup.TryGetValue(currentMask, out var newObj))
+            {
+                newObj.SetActive(true);
+            }
         }
     }
 

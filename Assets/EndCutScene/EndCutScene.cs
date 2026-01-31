@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class EndCutScene : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void RemovePlayerMask()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var player = PlayerController.Instance?.controllingCharacter;
+        if (player != null)
+        {
+            player.SwitchMask(MaskType.None);
+        }
     }
 }
