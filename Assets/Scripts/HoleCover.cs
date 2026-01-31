@@ -50,24 +50,9 @@ public class HoleCover : SignalReceiver
         }
     }
 
-    void Update()
+    public override void OnReceiveSignalOn()
     {
-        if (IsReceivingSignal)
-        {
-            if (!triggered)
-            {
-                Trigger();
-                triggered = true;
-            }
-        }
-        else
-        {
-            if (triggered)
-            {
-                Trigger();
-                triggered = false;
-            }
-        }
+        Trigger();
     }
 
     public void Trigger()
