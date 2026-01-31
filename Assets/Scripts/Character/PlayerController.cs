@@ -11,7 +11,10 @@ public class PlayerController : MonoBehaviour
     public bool CanPlayerPullObjects = false;
 
     [SerializeField] ItemCursor itemCursor;
+    [SerializeField] GameObject projectilePf;
+
     public InventoryItems inventoryItems;
+   
 
     public static PlayerController Instance { get; private set; }
 
@@ -22,9 +25,13 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 lastCharacterPosition;
     public Vector3 lastCharacterDeltaMovement;
+
+    MaskType equippedMask = MaskType.Default;
+
     private void Awake()
     {
         Instance = this;
+        SwitchMask(MaskType.Ninja);
     }
 
     enum InteractPosMethod
@@ -50,6 +57,7 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.Mouse0);
     }
 
+
     void FixedUpdate()
     {
         if (controllingCharacter == null)
@@ -58,6 +66,7 @@ public class PlayerController : MonoBehaviour
         var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
         rigidBody.MovePosition(rigidBody.position + input.normalized * controllingCharacter.moveSpeed * Time.fixedDeltaTime);
     }
+
 
     void Update()
     {
@@ -164,13 +173,32 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja) 
+        {
+            Projectile[] projectiles = FindObjectsOfType<Projectile>();
+            if (projectiles.Length < 1)
+            {
+                var facingDir = new Vector3(controllingCharacter.Animator.MoveX, controllingCharacter.Animator.MoveY);
+                GameObject projectile = Instantiate(projectilePf, controllingCharacter.transform.position, Quaternion.identity);
+                projectile.GetComponent<Projectile>()?.Throw(interactFocusPos);
+            }
+
+        }
+
+    }
+
+    void SwitchMask(MaskType newMask)
+    {
+        if (equippedMask != newMask) 
+        {
+            equippedMask = newMask;
+        }
     }
 
     public void HandleUpdate()
     {
         controllingCharacter.HandleUpdate();
     }
-
 
     public Character Character => controllingCharacter;
 }
