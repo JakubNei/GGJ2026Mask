@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,16 +35,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 lastCharacterPosition;
     public Vector3 lastCharacterDeltaMovement;
 
-    MaskType equippedMask = MaskType.Default;
-
-    private void Awake()
-    {
-        Instance = this;
-        defaultMask = Instantiate(defaultMaskPf, transform.position, Quaternion.identity).GetComponent<ItemBase>();
-        inventoryItems.AddItem(defaultMask);
-        SwitchMask(MaskType.Default);
-        inventoryItems.EquipItem(defaultMask);
-    }
 
     enum InteractPosMethod
     {
@@ -51,6 +42,31 @@ public class PlayerController : MonoBehaviour
         TowardsMouse,
     }
     InteractPosMethod interactPosMethod;
+
+    MaskType MaskSelectedInUI => inventoryItems.EquippedItem.MaskType;
+
+    MaskType MaskOnCharacter
+    {
+        get
+        {
+            return controllingCharacter == null ? MaskType.None : controllingCharacter.CurrentMask;
+        }
+        set
+        {
+            if (controllingCharacter != null)
+            {
+                controllingCharacter.CurrentMask = value;
+            }
+        }
+    }
+    private void Awake()
+    {
+        Instance = this;
+        defaultMask = Instantiate(defaultMaskPf, transform.position, Quaternion.identity).GetComponent<ItemBase>();
+        inventoryItems.AddItem(defaultMask);
+        MaskOnCharacter = MaskType.Default;
+        inventoryItems.EquipItem(defaultMask);
+    }
 
     public static bool OpenMenuKeyDown()
     {
@@ -97,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 if (!character.IsPlayerCharacter)
                     continue;
                 controllingCharacter = character;
-                SwitchMask(inventoryItems.EquippedItem.MaskType);
+                MaskOnCharacter = MaskSelectedInUI;
                 break;
             }
             lastCharacterPosition = controllingCharacter.transform.position;
@@ -214,7 +230,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //PROJECTILE
-        if (interactInput && !interactableGameObject && equippedMask == MaskType.Ninja)
+        if (interactInput && !interactableGameObject && MaskOnCharacter == MaskType.Ninja)
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
@@ -232,23 +248,15 @@ public class PlayerController : MonoBehaviour
         }
 
         //MASK
-        if (inventoryItems.EquippedItem.MaskType != equippedMask)
+        if (MaskOnCharacter != MaskSelectedInUI)
         {
-            SwitchMask(inventoryItems.EquippedItem.MaskType);
+            MaskOnCharacter = MaskSelectedInUI;
         }
 
         // Bob and wobble is now handled in Character.HandleUpdate()
         controllingCharacter.HandleUpdate();
     }
 
-    void SwitchMask(MaskType newMask)
-    {
-        if (equippedMask != newMask)
-        {
-            equippedMask = newMask;
-            controllingCharacter.SwitchMask(equippedMask);
-        }
-    }
 
     public void HandleUpdate()
     {
