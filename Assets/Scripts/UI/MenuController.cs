@@ -75,7 +75,12 @@ public class MenuController : MonoBehaviour
     void LoadScene(int id)
     {
         SceneManager.MoveGameObjectToScene(EssentialObjects.Instance.gameObject, SceneManager.GetActiveScene());
-        SceneManager.LoadScene(id);
+
+        // Use smooth transition if available
+        if (SceneTransition.Instance != null)
+            SceneTransition.Instance.LoadScene(id);
+        else
+            SceneManager.LoadScene(id);
     }
     void RestartGame()
     {
