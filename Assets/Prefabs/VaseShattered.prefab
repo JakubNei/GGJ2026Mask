@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
 --- !u!1 &3362398748459569680
 GameObject:
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
 --- !u!1 &6254201586264944511
 GameObject:
@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
 --- !u!1 &7064045241013351017
 GameObject:
@@ -798,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
 --- !u!1 &8015863986534801147
 GameObject:
@@ -989,7 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
 --- !u!1 &8476489666805078593
 GameObject:
@@ -1180,5 +1180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShardController
   explosionForce: 500
-  lifetime: 2
+  lifetime: 1
   fadeSpeed: 1
