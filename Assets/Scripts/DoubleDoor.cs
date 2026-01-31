@@ -13,6 +13,8 @@ public class DoubleDoor : SignalReceiver
     private Vector3 leftDoorVelocity = Vector3.zero;
     private Vector3 rightDoorVelocity = Vector3.zero;
 
+    public bool debugOpen = false;
+
     void Start()
     {
         leftDoorOriginalPosition = configLeftDoor.transform.localPosition;
@@ -21,7 +23,7 @@ public class DoubleDoor : SignalReceiver
 
     void Update()
     {
-        if (IsReceivingSignal)
+        if (IsReceivingSignal || debugOpen)
         {
             Vector3 leftTargetPosition = leftDoorOriginalPosition + new Vector3(configMovementDistance, 0, 0);
             Vector3 rightTargetPosition = rightDoorOriginalPosition + new Vector3(-configMovementDistance, 0, 0);
