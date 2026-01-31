@@ -10,8 +10,6 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
-    [SerializeField] AudioClip fallSfx;
-    [SerializeField] Sprite poisonedSprite;
     [SerializeField] MaskDisplay maskDisplay;
     public float moveSpeed;
 
@@ -35,28 +33,12 @@ public class Character : MonoBehaviour
     Vector3 lastFramePosition;
     float currentSpeed;
 
-    [SerializeField] public string Name;
     public bool IsMoving { get; private set; }
-
-    public float OffsetY { get; private set; } = 0.5f;
-
-    public bool HasFallen { get; private set; } = false;
-    public bool IsDead { get; private set; } = false;
-
-    public bool IsAbleToMove => !HasFallen && !IsDead;
 
     public bool IsPlayerCharacter;
     public bool IsNPCCharacter => !IsPlayerCharacter;
 
     MaskType equippedMask;
-
-    public enum AllowedFallDirections
-    {
-        Both,
-        OnlyLeft,
-        OnlyRight,
-    }
-    [SerializeField] AllowedFallDirections allowedFallDirections = AllowedFallDirections.Both;
 
     public CharacterAnimator characterAnimator;
 

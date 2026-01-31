@@ -237,7 +237,7 @@ public class GameController : MonoBehaviour
     bool openedMenuAfterPlayerDied = false;
     void OpenMenu()
     {
-        if (!playerController || !playerController.Character || playerController.Character.IsDead)
+        if (!playerController || !playerController.Character/* || playerController.Character.IsDead*/)
         {
             menuController.OpenMenu_PlayerDead();
         }
