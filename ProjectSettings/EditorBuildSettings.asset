@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level_ExitToJungle.unity
     guid: 81534eaf09e68604688f6bf146e6b26f
+  - enabled: 1
+    path: Assets/Levels/Level_KubaMines.unity
+    guid: ec9998159454cce408e558ccbedbc1fb
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

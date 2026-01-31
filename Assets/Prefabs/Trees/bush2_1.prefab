@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5950203681646915579}
   - component: {fileID: 7746639797220070145}
-  - component: {fileID: -586477338795130953}
+  - component: {fileID: 1336334889341062460}
   m_Layer: 0
-  m_Name: bush1_2_0
+  m_Name: bush2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,20 +79,20 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1185000105
-  m_SortingLayer: 6
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3660951755671052382, guid: 2c71ef57dd9de4e4985e314bf7b22003, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be51b33f083f8ee4db4f7af7031c0336, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 1.8}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
---- !u!60 &-586477338795130953
+--- !u!60 &1336334889341062460
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,18 +129,25 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49658117, y: -0.001424455}
-    oldSize: {x: 2, y: 1.8}
-    newSize: {x: 2, y: 1.8}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.52164155, y: 0.3494476}
-      - {x: -0.3685249, y: 0.15973774}
-      - {x: 0.387708, y: 0.09861455}
-      - {x: 0.42180252, y: 0.41057068}
-      - {x: 0.03760022, y: 0.47948492}
+    - - {x: 0.425, y: 0.3}
+      - {x: 0.35, y: 0.32500002}
+      - {x: -0.22500001, y: 0.32500002}
+      - {x: -0.475, y: 0.025}
+      - {x: -0.475, y: -0.175}
+      - {x: -0.45000002, y: -0.25}
+      - {x: -0.3, y: -0.375}
+      - {x: 0.025, y: -0.4}
+      - {x: 0.3, y: -0.4}
+      - {x: 0.45000002, y: -0.32500002}
+      - {x: 0.475, y: -0.22500001}
+      - {x: 0.475, y: 0.1}
   m_UseDelaunayMesh: 1

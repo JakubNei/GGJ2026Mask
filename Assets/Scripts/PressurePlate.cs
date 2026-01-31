@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -9,32 +10,38 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] GameObject configOffVisual;
     [SerializeField] GameObject configOnVisual;
 
-    public float configTimeToRelease = -1;
 
     public bool isTriggered = false;
 
-    public float currentTimeToRelease = 0;
     void Start()
     {
         SetTrigerred(false);
     }
-    void Update()
-    {
-        if (currentTimeToRelease <= 0)
-            return;
-        currentTimeToRelease -= Time.deltaTime;
-        if (currentTimeToRelease <= 0)
-            SetTrigerred(false);
-    }
 
+    public List<Collider2D> currentlyColliding = new();
     void OnTriggerEnter2D(Collider2D collision)
     {
-        SetTrigerred(true);
+        if (currentlyColliding.Count == 0)
+            SetTrigerred(true);
+        if (!currentlyColliding.Contains(collision))
+            currentlyColliding.Add(collision);
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (configTimeToRelease > 0)
-            return;
+        currentlyColliding.Remove(collision);
+        if (currentlyColliding.Count == 0)
+            SetTrigerred(false);
+    }
+
+    [ContextMenu("Debug Test Trigger On")]
+    void DebugTestTriggerOn()
+    {
+        SetTrigerred(true);
+    }
+
+    [ContextMenu("Debug Test Trigger Off")]
+    void DebugTestTriggerOff()
+    {
         SetTrigerred(false);
     }
 
@@ -44,7 +51,6 @@ public class PressurePlate : MonoBehaviour
             return;
         configOnVisual.SetActive(newState);
         configOffVisual.SetActive(!newState);
-        currentTimeToRelease = configTimeToRelease;
         isTriggered = newState;
         if (isTriggered)
             configSendSignalTo.ReceiveSignalOn();
