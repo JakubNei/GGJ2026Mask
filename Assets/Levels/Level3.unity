@@ -246,7 +246,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 626f5e9147c01c643bbdcffb2f569ee6, type: 2}
+  - {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9219,7 +9219,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f43ef9384f3ae7e4fb57762014b2c8b0, type: 2}
+  - {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12465,7 +12465,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.6037736, g: 0.49270204, b: 0.49270204, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -17, y: -19, z: 0}
   m_Size: {x: 39, y: 33, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
