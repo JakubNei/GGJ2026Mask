@@ -20,8 +20,6 @@ public class PressurePlate : MonoBehaviour
     }
     void Update()
     {
-        if (isTriggered)
-            configSendSignalTo.ReceiveSignal();
         if (timeToReset <= 0)
             return;
         timeToReset -= Time.deltaTime;
@@ -42,9 +40,16 @@ public class PressurePlate : MonoBehaviour
 
     void SetTrigerred(bool newState)
     {
+        if (newState == isTriggered)
+            return;
         configOnVisual.SetActive(newState);
         configOffVisual.SetActive(!newState);
         timeToReset = configTimeToReset;
         isTriggered = newState;
+        if (isTriggered)
+            configSendSignalTo.ReceiveSignalOn();
+        else
+            configSendSignalTo.ReceiveSignalOff();
+
     }
 }

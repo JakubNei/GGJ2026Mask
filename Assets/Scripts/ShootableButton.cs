@@ -42,6 +42,7 @@ public class ShootableButton : MonoBehaviour
         if (activateSound && AudioManager.i)
             AudioManager.i.PlaySfx(activateSound);
 
-        targets.ReceiveSignal();
+        targets.ReceiveSignalOn();
+        targets.ReceiveSignalOff();
     }
 }
