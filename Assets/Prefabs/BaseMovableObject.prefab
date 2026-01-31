@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decef2cfb655d8d49be7522b49459e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovableObject
-  AllowPulling: 1
-  AllowPushing: 1
+  Pullable: 1
+  Pushable: 1
 --- !u!212 &2032989215049104554
 SpriteRenderer:
   serializedVersion: 2
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1185000105
-  m_SortingLayer: 6
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: ba7c7f4c0a8af8f41911bcf2d9e036c2, type: 3}
