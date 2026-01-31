@@ -17,6 +17,19 @@ public class Projectile : MonoBehaviour
         var projectileCollider = GetComponent<Collider2D>();
         Debug.Log($"[Projectile] Started, layer: {gameObject.layer} ({LayerMask.LayerToName(gameObject.layer)}), collider: {projectileCollider?.GetType().Name}, isTrigger: {projectileCollider?.isTrigger}");
 
+        // Log collision matrix info
+        int myLayer = gameObject.layer;
+        for (int i = 0; i < 32; i++)
+        {
+            string layerName = LayerMask.LayerToName(i);
+            if (!string.IsNullOrEmpty(layerName))
+            {
+                bool ignores = Physics2D.GetIgnoreLayerCollision(myLayer, i);
+                if (ignores)
+                    Debug.Log($"[Projectile] Layer {myLayer} ({LayerMask.LayerToName(myLayer)}) IGNORES layer {i} ({layerName})");
+            }
+        }
+
         // Ignore collision with player
         var playerCollider = PlayerController.Instance.controllingCharacter.GetComponent<Collider2D>();
         if (playerCollider && projectileCollider)
