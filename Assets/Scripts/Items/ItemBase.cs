@@ -6,11 +6,11 @@ using UnityEngine;
 
 public enum MaskType
 {
-    None, // Final end cut scene no mask
     Default,
     Shaman, 
     Tough,
     Ninja,
+    None, // Final end cut scene no mask
 }
 
 public class ItemBase : MonoBehaviour, IInteractable
