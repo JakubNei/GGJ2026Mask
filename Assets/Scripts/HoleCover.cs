@@ -52,10 +52,14 @@ public class HoleCover : SignalReceiver
 
     public override void OnReceiveSignalOn()
     {
-        Trigger();
+        Trigger(true);
+    }
+    public override void OnReceiveSignalOff()
+    {
+        Trigger(false);
     }
 
-    public void Trigger()
+    public void Trigger(bool show)
     {
         // Get components if Awake didn't run (object was inactive)
         if (tilemapRenderer == null)
@@ -66,9 +70,6 @@ public class HoleCover : SignalReceiver
         // First activate the GameObject if needed
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
-
-        // Toggle
-        bool show = tilemapRenderer == null || !tilemapRenderer.enabled;
 
         if (tilemapRenderer != null)
             tilemapRenderer.enabled = show;
