@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2809190673221898082}
   - component: {fileID: 837309424628606514}
   - component: {fileID: -3573713862225992854}
-  - component: {fileID: -736218205485469800}
+  - component: {fileID: -2925634689916825064}
   m_Layer: 10
   m_Name: DefaultMask
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51da25813b187ab49923061c3d0caa1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultMask
---- !u!60 &-736218205485469800
+--- !u!60 &-2925634689916825064
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,12 +151,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.35, y: 0.45000002}
-      - {x: -0.35, y: -0.25}
-      - {x: -0.15, y: -0.4}
-      - {x: 0, y: -0.45000002}
-      - {x: 0.1, y: -0.45000002}
-      - {x: 0.35, y: -0.175}
-      - {x: 0.35, y: 0.32500002}
-      - {x: 0.32500002, y: 0.45000002}
+    - - {x: -0.3100299, y: 0.7854411}
+      - {x: -0.3100299, y: 0.20364523}
+      - {x: 0.044858024, y: -0.01564684}
+      - {x: 0.2391581, y: 0.23380913}
+      - {x: 0.275842, y: 0.70120114}
+      - {x: 0.25084212, y: 0.79766923}
   m_UseDelaunayMesh: 1
