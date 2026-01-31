@@ -9,23 +9,21 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] GameObject configOffVisual;
     [SerializeField] GameObject configOnVisual;
 
-    public float configTimeToReset = -1;
+    public float configTimeToRelease = -1;
 
     public bool isTriggered = false;
 
-    public float timeToReset = 0;
+    public float currentTimeToRelease = 0;
     void Start()
     {
         SetTrigerred(false);
     }
     void Update()
     {
-        if (isTriggered)
-            configSendSignalTo.ReceiveSignal();
-        if (timeToReset <= 0)
+        if (currentTimeToRelease <= 0)
             return;
-        timeToReset -= Time.deltaTime;
-        if (timeToReset <= 0)
+        currentTimeToRelease -= Time.deltaTime;
+        if (currentTimeToRelease <= 0)
             SetTrigerred(false);
     }
 
@@ -35,16 +33,23 @@ public class PressurePlate : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (configTimeToReset > 0)
+        if (configTimeToRelease > 0)
             return;
         SetTrigerred(false);
     }
 
     void SetTrigerred(bool newState)
     {
+        if (newState == isTriggered)
+            return;
         configOnVisual.SetActive(newState);
         configOffVisual.SetActive(!newState);
-        timeToReset = configTimeToReset;
+        currentTimeToRelease = configTimeToRelease;
         isTriggered = newState;
+        if (isTriggered)
+            configSendSignalTo.ReceiveSignalOn();
+        else
+            configSendSignalTo.ReceiveSignalOff();
+
     }
 }
