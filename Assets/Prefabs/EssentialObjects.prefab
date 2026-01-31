@@ -76,6 +76,7 @@ MonoBehaviour:
   CanPlayerPullObjects: 0
   itemCursor: {fileID: 5786081609024721157}
   projectilePf: {fileID: 7961238306295408349, guid: bdc115f9889d5ae4f84653ba2401d689, type: 3}
+  defaultMaskPf: {fileID: 5716198307412543048, guid: a6baa3849e8353747aabeb73f04cb8cc, type: 3}
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -162,7 +163,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1185000105
-  m_SortingLayer: 6
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7152ed627e461554f8dba1e8bb542360, type: 3}
@@ -267,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1185000105
-  m_SortingLayer: 6
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
@@ -720,17 +721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  prefabItemBanana: {fileID: 4860821939413108242, guid: e55fdb08469a22c41aef2debde5b3ea2, type: 3}
-  prefabItemPoison: {fileID: 3721610332158844825, guid: 8fbdb68e790a7f94c95880f5036f2fad, type: 3}
-  prefabItemScissors: {fileID: 846060713492789204, guid: 3450eee670de13849b5d236253c51ec7, type: 3}
-  prefabItemTorch: {fileID: 0}
-  evilDogSideviewUI: {fileID: 8145031173458163483}
   normalPlane: {fileID: 0}
   astralPlane: {fileID: 0}
-  overdog: {fileID: 0}
-  quest2: {fileID: 0}
-  quest3: {fileID: 0}
-  quest4: {fileID: 0}
   happySounds:
   - {fileID: 8300000, guid: b9dd12a3338195c46a60516a0a8a966d, type: 3}
   - {fileID: 8300000, guid: 4ca04c806665ab24f8012b00b80cd69d, type: 3}
@@ -1289,11 +1281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938705e8c0a88b547b75cf60ac0ecf37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8145031173458163483 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5728111044007548379, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
-  m_PrefabInstance: {fileID: 4500960902517564096}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8537910680635481306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5191067695397846554, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}

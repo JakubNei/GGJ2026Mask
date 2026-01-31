@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class ItemToughGuyMask : ItemBase
 {
+
+    public ItemToughGuyMask() 
+    {
+        maskType = MaskType.Tough;
+    }
     public override void OnPickupToInventory()
     {
         base.OnPickupToInventory();
