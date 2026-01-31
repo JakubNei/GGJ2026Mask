@@ -1990,7 +1990,7 @@ CompositeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
+  m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -4051,11 +4051,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3907493724669460469, guid: 946818a8449293d4caf1d590817e90fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.44
+      value: 14.98
       objectReference: {fileID: 0}
     - target: {fileID: 3907493724669460469, guid: 946818a8449293d4caf1d590817e90fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 3907493724669460469, guid: 946818a8449293d4caf1d590817e90fc, type: 3}
       propertyPath: m_LocalPosition.z

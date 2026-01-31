@@ -208,7 +208,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //PROJECTILE
-        if(interactInput && !interactableGameObject /* && equippedMask == MaskType.Ninja */) 
+        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja)
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {

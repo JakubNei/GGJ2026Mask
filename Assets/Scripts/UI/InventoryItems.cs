@@ -53,7 +53,7 @@ public class InventoryItems : MonoBehaviour
     public void AddItem(ItemBase item)
     {
         DontDestroyOnLoad(item.gameObject);
-        item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0); 
+        item.transform.position = new Vector3(1000 + 100 * itemList.Count, 1000, 0);
         if (itemList.Contains(item))
         {
             return;
@@ -61,6 +61,7 @@ public class InventoryItems : MonoBehaviour
         itemList.Add(item);
         UpdateItemSprites();
         item.OnPickupToInventory();
+        EquipItem(item);
     }
 
     public void RemoveItem(ItemBase itemPrefab)
@@ -121,10 +122,16 @@ public class InventoryItems : MonoBehaviour
             currentItemIndex = 2;
             return selectedItem = itemList.Count >= 3 ? itemList[currentItemIndex] : null;
         }
-        else if (Input.GetKeyDown(KeyCode.Tab))
+        else if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
         {
             if (itemList.Count != 0)
                 currentItemIndex = (currentItemIndex + 1) % itemList.Count;
+            return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (itemList.Count != 0)
+                currentItemIndex = (currentItemIndex - 1 + itemList.Count) % itemList.Count;
             return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
         }
         else
@@ -150,16 +157,18 @@ public class InventoryItems : MonoBehaviour
         }
     }
 
-    public void EquipItem(ItemBase newItem) 
+    public void EquipItem(ItemBase newItem)
     {
         if (equippedItem != newItem)
         {
             if (equippedItem != null)
             {
-                frames[itemList.IndexOf(equippedItem)].SetActive(false); 
+                equippedItem.OnUnequip();
+                frames[itemList.IndexOf(equippedItem)].SetActive(false);
             }
-            
+
             equippedItem = newItem;
+            equippedItem.OnEquip();
             frames[itemList.IndexOf(equippedItem)].SetActive(true);
 
             Debug.Log("Equipped " + newItem.MaskType);

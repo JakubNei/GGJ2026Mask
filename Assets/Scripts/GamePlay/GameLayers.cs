@@ -13,6 +13,7 @@ public class GameLayers : MonoBehaviour
     [SerializeField] public LayerMask triggersLayer;
     [SerializeField] public LayerMask ledgeLayer;
     [SerializeField] public LayerMask waterLayer;
+    [SerializeField] public LayerMask enemyLayer;
 
     public static GameLayers i { get; set; }
     private void Awake()
@@ -52,4 +53,5 @@ public class GameLayers : MonoBehaviour
 
     public LayerMask LedgeLayer => ledgeLayer;
     public LayerMask WaterLayer => waterLayer;
+    public LayerMask EnemyLayer => enemyLayer;
 }
