@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1111111111111111111}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 4720159627808179391}
   - component: {fileID: 4720159627808179392}
   - component: {fileID: 470596267158020473}
+  - component: {fileID: 8228387308589280830}
   m_Layer: 13
   m_Name: Enemy
   m_TagString: Player
@@ -541,36 +542,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4720159627808179385}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7789e94aa80f9c7469761cda619e85ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkDownSprites:
-  - {fileID: 21300000, guid: 2ecbe9727bc98194abba0edc08766663, type: 3}
-  - {fileID: 21300000, guid: 92546df851d9491419b1d820de5524c1, type: 3}
-  - {fileID: 21300000, guid: 9623458da64da5b4e8e168fd2ed3c70a, type: 3}
-  - {fileID: 21300000, guid: 1f27c2fb2ad13644b89f337045b2ae85, type: 3}
-  - {fileID: 21300000, guid: 8cfa01ffcd55f964bb595c6899b9f1de, type: 3}
-  walkUpSprites:
-  - {fileID: 21300000, guid: d8cd897e127e95347be9674ea62844d1, type: 3}
-  - {fileID: 21300000, guid: 2ff799c961bf5b6458e7625dbe81bd88, type: 3}
-  - {fileID: 21300000, guid: 6f8e646dd846a184797acdef95d78432, type: 3}
-  - {fileID: 21300000, guid: 9b2e7dbf15fce944abf95349cf23f05f, type: 3}
-  - {fileID: 21300000, guid: fdab7b96fa4ad094e8c61331c7837e13, type: 3}
-  walkRightSprites:
-  - {fileID: 21300000, guid: 97eb8a4ad319d894f92cf3e2f4bbcc0e, type: 3}
-  - {fileID: 21300000, guid: e6f995482aeda394fa98d590d2ae6c4f, type: 3}
-  - {fileID: 21300000, guid: 2f2da405096602346b291e8ed2ea3c93, type: 3}
-  - {fileID: 21300000, guid: 2ca7a918cd024d949bc95838fd61bbbc, type: 3}
-  walkLeftSprites:
-  - {fileID: 21300000, guid: 58067d39935e1e34c9ebe48dd2ddd424, type: 3}
-  - {fileID: 21300000, guid: dadae78a85040414083f9473471f84c7, type: 3}
-  - {fileID: 21300000, guid: 764c236ec4264c54ebb86d5b69d388a8, type: 3}
-  - {fileID: 21300000, guid: 1a086b668ba1dfc4ca27da51e834d2ad, type: 3}
+  walkDownSprites: []
+  walkUpSprites: []
+  walkRightSprites: []
+  walkLeftSprites: []
   defaultDirection: 1
   currentFacingDirection: 1
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 417785384314121652}
   scareGameObject: {fileID: 0}
 --- !u!114 &4720159627808179392
 MonoBehaviour:
@@ -591,8 +574,8 @@ MonoBehaviour:
   maskBobFrequency: 12
   maskBobAmplitude: 0.08
   maskBobDelay: 0.05
-  wobbleFrequency: 24
-  wobbleAmplitude: 36
+  wobbleFrequency: 16
+  wobbleAmplitude: 10
   bodyBobAmplitude: 0.05
   bodyBobPhaseOffset: 1.5
   Name: 
@@ -611,8 +594,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d006b16c8112948a48d800ea3174f7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  chaseDelay: 0.5
   stopDistance: 1.2
+  speedMultiplier: 0.5
+  returnStopDistance: 0.1
+--- !u!114 &8228387308589280830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720159627808179385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5582029b972914e3e8be8fa03d241329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WalkAnimator
+  spriteRenderer: {fileID: 417785384314121652}
+  walkSprites:
+  - {fileID: 21300000, guid: 9bad85be86d50ae4c9c2b740b8015fe7, type: 3}
+  - {fileID: 21300000, guid: 9dd750047792f004796175ecc6916095, type: 3}
+  - {fileID: 21300000, guid: dcc149a77d114c84da030e6d45740650, type: 3}
+  - {fileID: 21300000, guid: 059b9d8b856977f41ad13551ec5a144b, type: 3}
+  - {fileID: 21300000, guid: 7a58275dc5062fa47b77a4da7e397667, type: 3}
+  frameRate: 0.1
+  movementLingerTime: 0.1
 --- !u!1 &5437072379948521110
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +790,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 5e9cac2f272fd084ca8149dc4ea56cb5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ceb8ff565ef29d45917aad36d4eee20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
