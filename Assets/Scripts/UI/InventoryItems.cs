@@ -77,34 +77,6 @@ public class InventoryItems : MonoBehaviour
         }
     }
 
-    public void DropAllItemsAndPutThemOnANewPlace(PlayerController player)
-    {
-        hasDropped = true;
-        float maxOffset = 5f;
-
-        foreach (var item in itemList)
-        {
-            GameObject itemGameObject = item.gameObject;
-
-            itemGameObject.transform.position = player.transform.position;
-
-            float randomXOffset = Random.Range(-maxOffset, maxOffset);
-            float randomYOffset = Random.Range(-maxOffset, maxOffset);
-
-            Vector3 destination = new Vector3(randomXOffset, randomYOffset, 0);
-
-            itemGameObject.transform.DOMove(destination, 1f).SetEase(Ease.OutQuad).OnComplete(() =>
-            {
-                itemGameObject.GetComponent<ItemBase>().SnapToTileAtCurrentPosition();
-            });
-        }
-
-        itemList.Clear();
-        currentItemIndex = 0;
-        selectedItem = null;
-        UpdateItemSprites();
-    }
-
     public ItemBase GetItemBasedOnKeyPressed()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

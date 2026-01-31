@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
                 if (character.IsPlayerCharacter)
                 {
                     controllingCharacter = character;
+                    SwitchMask(inventoryItems.EquippedItem.MaskType);
                     break;
                 }
             }
@@ -240,7 +241,7 @@ public class PlayerController : MonoBehaviour
         if (equippedMask != newMask) 
         {
             equippedMask = newMask;
-            controllingCharacter.switchMask(equippedMask);
+            controllingCharacter.SwitchMask(equippedMask);
         }
     }
 
