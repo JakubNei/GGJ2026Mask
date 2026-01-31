@@ -327,8 +327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835323d3c60b1f74bb554d7e3fb73f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraRendererMaterial: {fileID: 2100000, guid: 2b89baaa38324194c956c9d8e0c2cec6, type: 2}
-  replacementMaterial: {fileID: 2100000, guid: 7d2978e30d5831d408c79903372a4d00, type: 2}
 --- !u!1 &5953164400037681728
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1309,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: DebugAddAllMasks.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: 'DebugAddAllMasks.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5716198307412543048, guid: a416146cc774b1e45acf615e65cf9625, type: 3}
+    - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: 'DebugAddAllMasks.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5716198307412543048, guid: 4405e505126ebc84995850d7bac5b3eb, type: 3}
+    - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
+      propertyPath: 'DebugAddAllMasks.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5716198307412543048, guid: b224584db39016948b5095174de1d3ce, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7782823935849529650, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}

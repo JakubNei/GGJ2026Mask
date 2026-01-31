@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 public class InventoryItems : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class InventoryItems : MonoBehaviour
     public bool hasDropped = false;
     public bool HasFreeSlots => itemList.Count < 3;
     public static InventoryItems Instance { get; private set; }
+
+    public GameObject[] DebugAddAllMasks;
 
     private void Awake()
     {
@@ -47,6 +50,16 @@ public class InventoryItems : MonoBehaviour
         if (newItem != null)
         {
             EquipItem(newItem);
+        }
+
+        if (DebugAddAllMasks != null && Input.GetKeyDown(KeyCode.P))
+        {
+            foreach (var p in DebugAddAllMasks)
+            {
+                var i = GameObject.Instantiate(p);
+                AddItem(i.GetComponent<ItemBase>());
+            }
+            DebugAddAllMasks = null;
         }
     }
 
