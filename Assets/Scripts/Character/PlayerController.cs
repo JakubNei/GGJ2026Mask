@@ -16,6 +16,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject defaultMaskPf;
     [SerializeField] float shootCooldown = 0.3f;
 
+    [Header("Movement")]
+    [SerializeField] float accelerationTime = 0.08f;
+    Vector2 currentVelocity;
+    Vector2 smoothVelocityRef;
+
+    [Header("Head Bob")]
+    [SerializeField] float headBobFrequency = 12f;
+    [SerializeField] float headBobAmplitude = 0.08f;
+    Transform headTransform;
+    Vector3 headBasePosition;
+    float headBobTimer;
+
+    [Header("Walk Wobble")]
+    [SerializeField] float wobbleFrequency = 24f;
+    [SerializeField] float wobbleAmplitude = 36f; // degrees
+    [SerializeField] float bodyBobAmplitude = 0.05f; // vertical bob
+    [SerializeField] float bodyBobPhaseOffset = 1.5f; // offset from wobble (radians)
+    Transform spriteTransform;
+    Vector3 spriteBasePosition;
+    float wobbleTimer;
+
     float lastShootTime;
 
     ItemBase defaultMask;
@@ -74,8 +95,12 @@ public class PlayerController : MonoBehaviour
         if (controllingCharacter == null)
             return;
 
+        // Smooth acceleration using critically-damped spring (SmoothDamp)
+        Vector2 targetVelocity = input.normalized;
+        currentVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref smoothVelocityRef, accelerationTime);
+
         var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
-        rigidBody.MovePosition(rigidBody.position + input.normalized * controllingCharacter.moveSpeed * Time.fixedDeltaTime);
+        rigidBody.MovePosition(rigidBody.position + currentVelocity * controllingCharacter.moveSpeed * Time.fixedDeltaTime);
     }
 
 
@@ -92,6 +117,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
             lastCharacterPosition = controllingCharacter.transform.position;
+
+            // Find head (Mask child) for bobbing
+            headTransform = controllingCharacter.transform.Find("Mask");
+            if (headTransform != null)
+                headBasePosition = headTransform.localPosition;
+
+            // Find sprite for wobble (or use character transform)
+            var spriteRenderer = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
+            spriteTransform = spriteRenderer != null ? spriteRenderer.transform : controllingCharacter.transform;
+            spriteBasePosition = spriteTransform.localPosition;
         }
 
         if (controllingCharacter == null)
@@ -185,7 +220,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //PROJECTILE
-        if(interactInput && !interactableGameObject && equippedMask == MaskType.Ninja) 
+        if(interactInput && !interactableGameObject /* && equippedMask == MaskType.Ninja */) 
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
@@ -203,9 +238,48 @@ public class PlayerController : MonoBehaviour
         }
 
         //MASK
-        if(inventoryItems.EquippedItem.MaskType != equippedMask) 
+        if(inventoryItems.EquippedItem.MaskType != equippedMask)
         {
             SwitchMask(inventoryItems.EquippedItem.MaskType);
+        }
+
+        // Head bob (uses smoothed velocity so bob matches actual movement)
+        if (headTransform != null)
+        {
+            if (currentVelocity.magnitude > 0.1f)
+            {
+                headBobTimer += Time.deltaTime * headBobFrequency;
+                float bobOffset = Mathf.Sin(headBobTimer) * headBobAmplitude;
+                headTransform.localPosition = headBasePosition + new Vector3(0, bobOffset, 0);
+            }
+            else
+            {
+                // Smoothly return to rest
+                headTransform.localPosition = Vector3.Lerp(headTransform.localPosition, headBasePosition, Time.deltaTime * 10f);
+                headBobTimer = 0;
+            }
+        }
+
+        // Walk wobble - sway rotation + vertical bob like holding a figurine
+        if (spriteTransform != null)
+        {
+            if (currentVelocity.magnitude > 0.1f)
+            {
+                wobbleTimer += Time.deltaTime * wobbleFrequency;
+                // Rotation wobble
+                float wobbleAngle = Mathf.Sin(wobbleTimer) * wobbleAmplitude;
+                spriteTransform.localRotation = Quaternion.Euler(0, 0, wobbleAngle);
+                // Vertical bob (with phase offset)
+                float bobOffset = Mathf.Sin(wobbleTimer + bodyBobPhaseOffset) * bodyBobAmplitude;
+                spriteTransform.localPosition = spriteBasePosition + new Vector3(0, bobOffset, 0);
+            }
+            else
+            {
+                // Smoothly return to upright and base position
+                spriteTransform.localRotation = Quaternion.Slerp(spriteTransform.localRotation, Quaternion.identity, Time.deltaTime * 10f);
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, spriteBasePosition, Time.deltaTime * 10f);
+                wobbleTimer = 0;
+            }
         }
 
     }
