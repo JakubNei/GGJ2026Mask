@@ -21,24 +21,6 @@ public class PlayerController : MonoBehaviour
     Vector2 currentVelocity;
     Vector2 smoothVelocityRef;
 
-    [Header("Mask Bob")]
-    [SerializeField] float maskBobFrequency = 12f;
-    [SerializeField] float maskBobAmplitude = 0.08f;
-    [SerializeField] float maskBobDelay = 0.05f; // Delay in seconds for mask to follow
-    Transform maskTransform;
-    Vector3 maskBasePosition;
-    float maskBobTimer;
-    float delayedBobOffset; // Smoothed/delayed bob value
-
-    [Header("Walk Wobble")]
-    [SerializeField] float wobbleFrequency = 24f;
-    [SerializeField] float wobbleAmplitude = 36f; // degrees
-    [SerializeField] float bodyBobAmplitude = 0.05f; // vertical bob
-    [SerializeField] float bodyBobPhaseOffset = 1.5f; // offset from wobble (radians)
-    Transform spriteTransform;
-    Vector3 spriteBasePosition;
-    float wobbleTimer;
-
     float lastShootTime;
 
     ItemBase defaultMask;
@@ -119,19 +101,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
             lastCharacterPosition = controllingCharacter.transform.position;
-
-            // Find mask container for bobbing
-            var maskDisplay = controllingCharacter.MaskDisplay;
-            if (maskDisplay != null)
-            {
-                maskTransform = maskDisplay.transform;
-                maskBasePosition = maskTransform.localPosition;
-            }
-
-            // Find sprite for wobble (or use character transform)
-            var spriteRenderer = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
-            spriteTransform = spriteRenderer != null ? spriteRenderer.transform : controllingCharacter.transform;
-            spriteBasePosition = spriteTransform.localPosition;
         }
 
         if (controllingCharacter == null)
@@ -163,11 +132,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Flip mask holder
-        if (maskTransform != null)
+        var maskDisplay = controllingCharacter.MaskDisplay;
+        if (maskDisplay != null)
         {
-            Vector3 maskScale = maskTransform.localScale;
+            Vector3 maskScale = maskDisplay.transform.localScale;
             maskScale.x = shouldFlip ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x);
-            maskTransform.localScale = maskScale;
+            maskDisplay.transform.localScale = maskScale;
         }
 
         // Aim interaction with either mouse or movement
@@ -267,49 +237,8 @@ public class PlayerController : MonoBehaviour
             SwitchMask(inventoryItems.EquippedItem.MaskType);
         }
 
-        // Mask bob with delay (uses smoothed velocity so bob matches actual movement)
-        if (maskTransform != null)
-        {
-            if (currentVelocity.magnitude > 0.1f)
-            {
-                maskBobTimer += Time.deltaTime * maskBobFrequency;
-                float targetBobOffset = Mathf.Sin(maskBobTimer) * maskBobAmplitude;
-                // Smooth delay effect - mask follows with slight lag
-                float delaySpeed = maskBobDelay > 0 ? 1f / maskBobDelay : 100f;
-                delayedBobOffset = Mathf.Lerp(delayedBobOffset, targetBobOffset, Time.deltaTime * delaySpeed);
-                maskTransform.localPosition = maskBasePosition + new Vector3(0, delayedBobOffset, 0);
-            }
-            else
-            {
-                // Smoothly return to rest
-                delayedBobOffset = Mathf.Lerp(delayedBobOffset, 0, Time.deltaTime * 10f);
-                maskTransform.localPosition = Vector3.Lerp(maskTransform.localPosition, maskBasePosition, Time.deltaTime * 10f);
-                maskBobTimer = 0;
-            }
-        }
-
-        // Walk wobble - sway rotation + vertical bob like holding a figurine
-        if (spriteTransform != null)
-        {
-            if (currentVelocity.magnitude > 0.1f)
-            {
-                wobbleTimer += Time.deltaTime * wobbleFrequency;
-                // Rotation wobble
-                float wobbleAngle = Mathf.Sin(wobbleTimer) * wobbleAmplitude;
-                spriteTransform.localRotation = Quaternion.Euler(0, 0, wobbleAngle);
-                // Vertical bob (with phase offset)
-                float bobOffset = Mathf.Sin(wobbleTimer + bodyBobPhaseOffset) * bodyBobAmplitude;
-                spriteTransform.localPosition = spriteBasePosition + new Vector3(0, bobOffset, 0);
-            }
-            else
-            {
-                // Smoothly return to upright and base position
-                spriteTransform.localRotation = Quaternion.Slerp(spriteTransform.localRotation, Quaternion.identity, Time.deltaTime * 10f);
-                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, spriteBasePosition, Time.deltaTime * 10f);
-                wobbleTimer = 0;
-            }
-        }
-
+        // Bob and wobble is now handled in Character.HandleUpdate()
+        controllingCharacter.HandleUpdate();
     }
 
     void SwitchMask(MaskType newMask)
