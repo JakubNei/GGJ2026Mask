@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,13 +138,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad66db03def7d9408118a850b7a80fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PressurePlate
-  configSendSignalTo: []
+  configSendSignalTo:
+  - {fileID: 0}
+  - {fileID: 0}
   configOffVisual: {fileID: 370560537125644178}
   configOnVisual: {fileID: 6420324176813316570}
-  configTimeToReset: -1
   isTriggered: 0
-  spriteRenderer: {fileID: 0}
-  timeToReset: 0
+  currentlyColliding: []
 --- !u!61 &2269996635748474904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
