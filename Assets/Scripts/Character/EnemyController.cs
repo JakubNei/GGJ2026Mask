@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
-        character.CurrentMask = MaskType.Default;
+        character.CurrentMask = MaskType.Tough;
     }
 
     void Update()
