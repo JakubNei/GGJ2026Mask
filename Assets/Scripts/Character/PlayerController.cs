@@ -215,6 +215,7 @@ public class PlayerController : MonoBehaviour
         if (equippedMask != newMask) 
         {
             equippedMask = newMask;
+            controllingCharacter.switchMask(equippedMask);
         }
     }
 
