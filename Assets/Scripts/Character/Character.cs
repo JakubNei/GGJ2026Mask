@@ -12,10 +12,7 @@ public class Character : MonoBehaviour
 
     [SerializeField] AudioClip fallSfx;
     [SerializeField] Sprite poisonedSprite;
-    [SerializeField] GameObject defaultMask;
-    [SerializeField] GameObject toughMask;
-    [SerializeField] GameObject ninjaMask;
-    [SerializeField] GameObject shamanMask;
+    [SerializeField] MaskDisplay maskDisplay;
     public float moveSpeed;
 
     [SerializeField] public string Name;
@@ -30,8 +27,6 @@ public class Character : MonoBehaviour
 
     public bool IsPlayerCharacter;
     public bool IsNPCCharacter => !IsPlayerCharacter;
-
-    Dictionary<MaskType, GameObject> masks = new Dictionary<MaskType, GameObject>();
 
     MaskType equippedMask;
 
@@ -51,10 +46,6 @@ public class Character : MonoBehaviour
     {
         animator = GetComponent<CharacterAnimator>();
         SetPositionAndSnapToTile(transform.position); // Snap do centra tilu
-        masks[MaskType.Default] = defaultMask;
-        masks[MaskType.Tough] = toughMask;
-        masks[MaskType.Ninja] = ninjaMask;
-        masks[MaskType.Shaman] = shamanMask;
         switchMask(MaskType.Default);
     }
     public void SetPositionAndSnapToTile(Vector2 pos)
@@ -245,8 +236,12 @@ public class Character : MonoBehaviour
 
     public void switchMask(MaskType newMaskType)
     {
-        masks[equippedMask].SetActive(false);
         equippedMask = newMaskType;
-        masks[equippedMask].SetActive(true);
+        if (maskDisplay != null)
+        {
+            maskDisplay.SwitchMask(newMaskType);
+        }
     }
+
+    public MaskDisplay MaskDisplay => maskDisplay;
 }

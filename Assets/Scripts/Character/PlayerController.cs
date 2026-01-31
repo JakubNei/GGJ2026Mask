@@ -21,12 +21,14 @@ public class PlayerController : MonoBehaviour
     Vector2 currentVelocity;
     Vector2 smoothVelocityRef;
 
-    [Header("Head Bob")]
-    [SerializeField] float headBobFrequency = 12f;
-    [SerializeField] float headBobAmplitude = 0.08f;
-    Transform headTransform;
-    Vector3 headBasePosition;
-    float headBobTimer;
+    [Header("Mask Bob")]
+    [SerializeField] float maskBobFrequency = 12f;
+    [SerializeField] float maskBobAmplitude = 0.08f;
+    [SerializeField] float maskBobDelay = 0.05f; // Delay in seconds for mask to follow
+    Transform maskTransform;
+    Vector3 maskBasePosition;
+    float maskBobTimer;
+    float delayedBobOffset; // Smoothed/delayed bob value
 
     [Header("Walk Wobble")]
     [SerializeField] float wobbleFrequency = 24f;
@@ -118,10 +120,13 @@ public class PlayerController : MonoBehaviour
             }
             lastCharacterPosition = controllingCharacter.transform.position;
 
-            // Find head (Mask child) for bobbing
-            headTransform = controllingCharacter.transform.Find("Mask");
-            if (headTransform != null)
-                headBasePosition = headTransform.localPosition;
+            // Find mask container for bobbing
+            var maskDisplay = controllingCharacter.MaskDisplay;
+            if (maskDisplay != null)
+            {
+                maskTransform = maskDisplay.transform;
+                maskBasePosition = maskTransform.localPosition;
+            }
 
             // Find sprite for wobble (or use character transform)
             var spriteRenderer = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
@@ -243,20 +248,24 @@ public class PlayerController : MonoBehaviour
             SwitchMask(inventoryItems.EquippedItem.MaskType);
         }
 
-        // Head bob (uses smoothed velocity so bob matches actual movement)
-        if (headTransform != null)
+        // Mask bob with delay (uses smoothed velocity so bob matches actual movement)
+        if (maskTransform != null)
         {
             if (currentVelocity.magnitude > 0.1f)
             {
-                headBobTimer += Time.deltaTime * headBobFrequency;
-                float bobOffset = Mathf.Sin(headBobTimer) * headBobAmplitude;
-                headTransform.localPosition = headBasePosition + new Vector3(0, bobOffset, 0);
+                maskBobTimer += Time.deltaTime * maskBobFrequency;
+                float targetBobOffset = Mathf.Sin(maskBobTimer) * maskBobAmplitude;
+                // Smooth delay effect - mask follows with slight lag
+                float delaySpeed = maskBobDelay > 0 ? 1f / maskBobDelay : 100f;
+                delayedBobOffset = Mathf.Lerp(delayedBobOffset, targetBobOffset, Time.deltaTime * delaySpeed);
+                maskTransform.localPosition = maskBasePosition + new Vector3(0, delayedBobOffset, 0);
             }
             else
             {
                 // Smoothly return to rest
-                headTransform.localPosition = Vector3.Lerp(headTransform.localPosition, headBasePosition, Time.deltaTime * 10f);
-                headBobTimer = 0;
+                delayedBobOffset = Mathf.Lerp(delayedBobOffset, 0, Time.deltaTime * 10f);
+                maskTransform.localPosition = Vector3.Lerp(maskTransform.localPosition, maskBasePosition, Time.deltaTime * 10f);
+                maskBobTimer = 0;
             }
         }
 
