@@ -194,7 +194,9 @@ public class PlayerController : MonoBehaviour
                 throwDirection.z = 0;
                 throwDirection.Normalize();
 
-                GameObject projectile = Instantiate(projectilePf, controllingCharacter.transform.position, Quaternion.identity);
+                var spawnPos = controllingCharacter.transform.position + new Vector3(0, -0.35f, 0);
+                GameObject projectile = Instantiate(projectilePf, spawnPos, Quaternion.identity);
+                projectile.transform.localScale *= 0.33f;
                 projectile.GetComponent<Projectile>()?.Throw(throwDirection);
                 lastShootTime = Time.time;
             }
