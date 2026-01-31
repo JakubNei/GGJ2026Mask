@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -5,6 +6,9 @@ public class ShootableButton : MonoBehaviour
 {
     [SerializeField] SignalReceiver[] targets;
     [SerializeField] AudioClip activateSound;
+    [SerializeField] GameObject configOnVisuals;
+    [SerializeField] GameObject configOffVisuals;
+    public bool turnedOn = false;
 
     void Start()
     {
@@ -42,7 +46,25 @@ public class ShootableButton : MonoBehaviour
         if (activateSound && AudioManager.i)
             AudioManager.i.PlaySfx(activateSound);
 
-        targets.ReceiveSignalOn();
-        targets.ReceiveSignalOff();
+        Turn(!turnedOn);
+    }
+
+    void Turn(bool on)
+    {
+        if (turnedOn == on)
+            return;
+        turnedOn = on;
+        if (on)
+        {
+            configOnVisuals.SetActive(true);
+            configOffVisuals.SetActive(false);
+            targets.ReceiveSignalOn();
+        }
+        else
+        {
+            configOnVisuals.SetActive(false);
+            configOffVisuals.SetActive(true);
+            targets.ReceiveSignalOff();
+        }
     }
 }
