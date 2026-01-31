@@ -77,6 +77,7 @@ MonoBehaviour:
   itemCursor: {fileID: 5786081609024721157}
   projectilePf: {fileID: 7961238306295408349, guid: bdc115f9889d5ae4f84653ba2401d689, type: 3}
   defaultMaskPf: {fileID: 5716198307412543048, guid: a6baa3849e8353747aabeb73f04cb8cc, type: 3}
+  shootCooldown: 0.3
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -649,7 +650,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

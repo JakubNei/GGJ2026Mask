@@ -83,7 +83,11 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
+<<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
   m_Sprite: {fileID: 6937817954938267909, guid: 8f8705d00de5f704d86efc6717223c51, type: 3}
+=======
+  m_Sprite: {fileID: 6372612021844725048, guid: 833805eded6763e479181ad3031a1606, type: 3}
+>>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +127,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -131,26 +135,27 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream:Assets/Prefabs/Masks/ItemToughGuyMask.prefab
     oldSize: {x: 0.31, y: 0.34}
     newSize: {x: 0.31, y: 0.34}
+=======
+    oldSize: {x: 0.775, y: 0.85}
+    newSize: {x: 0.4, y: 0.72}
+>>>>>>> Stashed changes:Assets/Prefabs/ItemToughGuyMask.prefab
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.375, y: 0.8}
-      - {x: 0.275, y: 0.90000004}
-      - {x: -0.075, y: 0.90000004}
-      - {x: -0.25, y: 0.875}
-      - {x: -0.3, y: 0.7}
-      - {x: -0.275, y: -0.125}
-      - {x: -0.375, y: -0.52500004}
-      - {x: -0.375, y: -0.675}
-      - {x: -0.175, y: -0.875}
-      - {x: 0.22500001, y: -0.875}
-      - {x: 0.3, y: -0.85}
-      - {x: 0.375, y: -0.55}
+    - - {x: -0.2875, y: 0.425}
+      - {x: -0.38750002, y: 0.275}
+      - {x: -0.38750002, y: -0.22500001}
+      - {x: -0.26250002, y: -0.425}
+      - {x: 0.3125, y: -0.425}
+      - {x: 0.3625, y: -0.32500002}
+      - {x: 0.3625, y: 0.22500001}
+      - {x: 0.2375, y: 0.425}
   m_UseDelaunayMesh: 1
 --- !u!114 &1019628549786924428
 MonoBehaviour:
