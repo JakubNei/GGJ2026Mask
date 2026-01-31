@@ -30,6 +30,15 @@ public class Character : MonoBehaviour
     Vector3 spriteBasePosition;
     float wobbleTimer;
 
+    [Header("Walking Sound (Continuous)")]
+    [SerializeField] AudioClip walkingLoopSound;
+    [SerializeField] AudioClip spiritWalkingLoopSound;
+    [SerializeField] float walkingSoundVolume = 0.7f; // 30% quieter by default
+    [SerializeField] float walkingSoundPitch = 1.3f; // Speed up the loop
+    [SerializeField] float enemyWalkingMaxDistance = 10f; // Distance at which enemy walking is silent
+    private AudioSource walkingAudioSource;
+    private bool isWalkingSoundPlaying;
+
     Vector3 lastFramePosition;
     float currentSpeed;
 
@@ -71,6 +80,15 @@ public class Character : MonoBehaviour
         spriteTransform = spriteRenderer != null ? spriteRenderer.transform : transform;
         spriteBasePosition = spriteTransform.localPosition;
         lastFramePosition = transform.position;
+
+        // Create dedicated audio source for walking loop
+        var walkingAudioGO = new GameObject("WalkingSound");
+        walkingAudioGO.transform.SetParent(transform);
+        walkingAudioGO.transform.localPosition = Vector3.zero;
+        walkingAudioSource = walkingAudioGO.AddComponent<AudioSource>();
+        walkingAudioSource.loop = true;
+        walkingAudioSource.playOnAwake = false;
+        walkingAudioSource.spatialBlend = 0f; // 2D sound
     }
 
     public void SetPositionAndSnapToTile(Vector2 pos)
@@ -96,6 +114,55 @@ public class Character : MonoBehaviour
         lastFramePosition = transform.position;
 
         UpdateBobAndWobble();
+        UpdateWalkingSound();
+    }
+
+    void UpdateWalkingSound()
+    {
+        if (walkingAudioSource == null) return;
+
+        bool shouldPlay = currentSpeed > 0.1f;
+
+        // Calculate volume with distance attenuation for enemies
+        float volume = walkingSoundVolume;
+        if (!IsPlayerCharacter && PlayerController.Instance != null)
+        {
+            float distance = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
+            float distanceAttenuation = 1f - Mathf.Clamp01(distance / enemyWalkingMaxDistance);
+            volume *= distanceAttenuation;
+        }
+
+        // Get the right clip based on spirit realm state
+        bool inSpiritRealm = GameController.Instance != null &&
+                            GameController.Instance.gameState == GameState.Shaman;
+        AudioClip targetClip = inSpiritRealm ? spiritWalkingLoopSound : walkingLoopSound;
+
+        // Start/stop walking sound
+        if (shouldPlay && volume > 0.01f)
+        {
+            // Switch clip if needed
+            if (walkingAudioSource.clip != targetClip && targetClip != null)
+            {
+                walkingAudioSource.clip = targetClip;
+                if (isWalkingSoundPlaying)
+                    walkingAudioSource.Play();
+            }
+
+            if (!isWalkingSoundPlaying && targetClip != null)
+            {
+                walkingAudioSource.clip = targetClip;
+                walkingAudioSource.Play();
+                isWalkingSoundPlaying = true;
+            }
+
+            walkingAudioSource.volume = volume;
+            walkingAudioSource.pitch = walkingSoundPitch;
+        }
+        else if (isWalkingSoundPlaying)
+        {
+            walkingAudioSource.Stop();
+            isWalkingSoundPlaying = false;
+        }
     }
 
     void UpdateBobAndWobble()

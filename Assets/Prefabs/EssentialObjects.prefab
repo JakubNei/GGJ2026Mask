@@ -443,16 +443,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a757e47672e80943a38d8f6740c2b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxList:
-  - id: 6
-    clip: {fileID: 8300000, guid: f88773b4774e80043b59ad39252afc89, type: 3}
-  - id: 1
-    clip: {fileID: 8300000, guid: 440c81e16846d6648b8cf5ce7fb02a1a, type: 3}
-  - id: 7
-    clip: {fileID: 8300000, guid: cf2f55cc7d36c58419fe2b07ec372982, type: 3}
   musicPlayer: {fileID: 3155516281914687228}
-  sfxPlayer: {fileID: 913838077795549773}
+  sfxPoolSize: 8
+  audioMixer: {fileID: 0}
+  musicGroup: {fileID: 0}
+  sfxGroup: {fileID: 0}
   fadeDuration: 0.75
+  defaultPitchVariation: 0.05
+  sfxList:
+  - id: 1
+    clip: {fileID: 8300000, guid: b6c92507f5d984b73b404e03595a1492, type: 3}
+  - id: 2
+    clip: {fileID: 8300000, guid: 1da8cb45e77884e9ab018caf49694951, type: 3}
+  - id: 4
+    clip: {fileID: 8300000, guid: 391f9417485eb4fa0b24735e729d7a5e, type: 3}
+  - id: 5
+    clip: {fileID: 8300000, guid: ad9a7c8245a24420cb5cd390adb270db, type: 3}
+  - id: 6
+    clip: {fileID: 8300000, guid: 082913f22158e45329cd3777ccf0ae89, type: 3}
+  - id: 8
+    clip: {fileID: 8300000, guid: 9faaa5104a0274614ad91d9edaaad446, type: 3}
+  - id: 9
+    clip: {fileID: 8300000, guid: db04649708aef42fea221be475d7fc23, type: 3}
+  - id: 10
+    clip: {fileID: 8300000, guid: 1df3a383bd1c34722a0012c6d4325894, type: 3}
+  - id: 11
+    clip: {fileID: 8300000, guid: 6f60659b3932d4c07b368846444cd686, type: 3}
+  - id: 12
+    clip: {fileID: 8300000, guid: 1e74974510fa242cdb31d9c2792f7b0d, type: 3}
+  - id: 13
+    clip: {fileID: 8300000, guid: 82bfe593765f74f27a5ae365ec4c8ece, type: 3}
+  - id: 14
+    clip: {fileID: 8300000, guid: cd45e07fe9a784d9989a455b48e31eef, type: 3}
+  - id: 15
+    clip: {fileID: 8300000, guid: 628803eacce484d488cfa4f522b8a5e1, type: 3}
+  - id: 16
+    clip: {fileID: 8300000, guid: 59d83155ba3f24729b3a5d5f295b8f26, type: 3}
+  - id: 17
+    clip: {fileID: 8300000, guid: 423faef82d46c4dfdba0e27bfbc4f1af, type: 3}
+  - id: 18
+    clip: {fileID: 8300000, guid: a621d2985a7d64dcb83a245c098c2c7a, type: 3}
+  - id: 19
+    clip: {fileID: 8300000, guid: 713af894aa6b64d70b1abc56bf00deb8, type: 3}
+  - id: 20
+    clip: {fileID: 8300000, guid: 7edc9f9afc2a24aaeb2060f030ad482f, type: 3}
+  - id: 21
+    clip: {fileID: 8300000, guid: 8bf0d6cb8b5514bc5a2b9863d6884d8d, type: 3}
+  - id: 22
+    clip: {fileID: 8300000, guid: 788cdc647f77f478fbb9077b20bbad0d, type: 3}
 --- !u!1 &7705957040512625002
 GameObject:
   m_ObjectHideFlags: 0
