@@ -14,9 +14,11 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
+        var projectileCollider = GetComponent<Collider2D>();
+        Debug.Log($"[Projectile] Started, layer: {gameObject.layer} ({LayerMask.LayerToName(gameObject.layer)}), collider: {projectileCollider?.GetType().Name}, isTrigger: {projectileCollider?.isTrigger}");
+
         // Ignore collision with player
         var playerCollider = PlayerController.Instance.controllingCharacter.GetComponent<Collider2D>();
-        var projectileCollider = GetComponent<Collider2D>();
         if (playerCollider && projectileCollider)
         {
             Physics2D.IgnoreCollision(projectileCollider, playerCollider);
@@ -25,7 +27,13 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log($"[Projectile] OnCollisionEnter2D with {collision.gameObject.name}, layer: {collision.gameObject.layer} ({LayerMask.LayerToName(collision.gameObject.layer)})");
         Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log($"[Projectile] OnTriggerEnter2D with {collider.gameObject.name}, layer: {collider.gameObject.layer} ({LayerMask.LayerToName(collider.gameObject.layer)})");
     }
 
     public void Throw(Vector2 throwDirection)
