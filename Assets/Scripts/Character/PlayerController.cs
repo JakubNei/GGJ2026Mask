@@ -150,6 +150,25 @@ public class PlayerController : MonoBehaviour
         cameraPos.y = controllingCharacter.transform.position.y;
         Camera.main.transform.position = cameraPos;
 
+        // Face towards mouse cursor (left/right) - flip sprite and mask
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float playerX = controllingCharacter.transform.position.x;
+        bool shouldFlip = mouseWorldPos.x < playerX;
+
+        // Flip player sprite
+        var sr = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.flipX = shouldFlip;
+        }
+
+        // Flip mask holder
+        if (maskTransform != null)
+        {
+            Vector3 maskScale = maskTransform.localScale;
+            maskScale.x = shouldFlip ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x);
+            maskTransform.localScale = maskScale;
+        }
 
         // Aim interaction with either mouse or movement
         Vector3 interactFocusPos = controllingCharacter.transform.position;

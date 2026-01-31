@@ -56,6 +56,7 @@ public class CharacterAnimator : MonoBehaviour
 
         var prevAnim = currentAnim;
 
+        // Handle horizontal facing (left/right) - takes priority for top-down mouse aiming
         if (MoveX == 1)
         {
             currentAnim = walkRightAnim;
