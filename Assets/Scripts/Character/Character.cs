@@ -91,7 +91,10 @@ public class Character : MonoBehaviour
 
     public void HandleUpdate()
     {
-        animator.IsMoving = IsMoving;
+        if (animator != null)
+        {
+            animator.IsMoving = IsMoving;
+        }
 
         // Calculate speed from actual position change
         Vector3 delta = transform.position - lastFramePosition;
