@@ -43,6 +43,7 @@ public class ShamanMask : ItemBase
     {
         NormalPlane.Instance.gameObject.SetActive(false);
         AstralPlane.Instance.gameObject.SetActive(true);
+        AudioManager.i?.PlaySfx(AudioId.AstralTransition);
     }
 
     public override bool CanUnequip()
@@ -57,5 +58,6 @@ public class ShamanMask : ItemBase
     {
         AstralPlane.Instance.gameObject.SetActive(false);
         NormalPlane.Instance.gameObject.SetActive(true);
+        AudioManager.i?.PlaySfx(AudioId.AstralTransition);
     }
 }
