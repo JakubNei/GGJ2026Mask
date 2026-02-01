@@ -5,9 +5,6 @@ public class HoleBlocker : SignalReceiver
 {
     [SerializeField] bool startEnabled = true;
 
-    [SerializeField] Collider2D coolider;
-    [SerializeField] GameObject visual;
-
     void Awake()
     {
         EnableHoleBlocker(startEnabled);
@@ -26,8 +23,7 @@ public class HoleBlocker : SignalReceiver
 
     void EnableHoleBlocker(bool enable)
     {
-        coolider.enabled = enable;
-        visual.SetActive(enable);
+        gameObject.SetActive(enable);
     }
 
 }
