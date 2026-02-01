@@ -4,17 +4,21 @@ using UnityEngine;
 public class WalkAnimator : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private List<Sprite> walkSprites;
+    [SerializeField] private List<Sprite> walkSpritesDown;  // front_ sprites (left/right/down)
+    [SerializeField] private List<Sprite> walkSpritesUp;    // back_ sprites (up)
+    [SerializeField] private Sprite idleSpriteDown;         // idle when facing down (optional, uses walkSpritesDown[0] if not set)
+    [SerializeField] private Sprite idleSpriteUp;           // idle when facing up (optional, uses walkSpritesUp[0] if not set)
     [SerializeField] private float frameRate = 0.1f;
-    [SerializeField] private float movementLingerTime = 0.1f; // How long to keep animating after movement stops
+    [SerializeField] private float movementLingerTime = 0.1f;
 
-
-    private Sprite idleSprite;
     private int currentFrame = 0;
     private float animTimer = 0f;
     private Vector3 lastPosition;
     private bool isAnimating = false;
     private float timeSinceLastMovement = 0f;
+    private FacingDirection currentDirection = FacingDirection.Down;
+
+    public FacingDirection CurrentDirection => currentDirection;
 
     private void Start()
     {
@@ -28,28 +32,19 @@ public class WalkAnimator : MonoBehaviour
             return;
         }
 
-        idleSprite = spriteRenderer.sprite;
         lastPosition = transform.position;
-
-        int validSprites = 0;
-        if (walkSprites != null)
-        {
-            foreach (var s in walkSprites)
-                if (s != null) validSprites++;
-        }
-
-        Debug.Log($"[WalkAnimator] Init: {validSprites} sprites, renderer='{spriteRenderer.gameObject.name}'");
-
-        if (validSprites == 0)
-        {
-            Debug.LogError($"[WalkAnimator] No walk sprites assigned!");
-            enabled = false;
-        }
     }
 
     private void Update()
     {
-        if (spriteRenderer == null || walkSprites == null || walkSprites.Count == 0)
+        if (spriteRenderer == null)
+            return;
+
+        UpdateFacingDirection();
+
+        List<Sprite> currentSprites = currentDirection == FacingDirection.Up ? walkSpritesUp : walkSpritesDown;
+
+        if (currentSprites == null || currentSprites.Count == 0)
             return;
 
         // Detect movement by position change
@@ -58,48 +53,61 @@ public class WalkAnimator : MonoBehaviour
         bool movedThisFrame = sqrDist > 0.0001f;
         lastPosition = currentPos;
 
-        // Track time since last actual movement
         if (movedThisFrame)
-        {
             timeSinceLastMovement = 0f;
-        }
         else
-        {
             timeSinceLastMovement += Time.deltaTime;
-        }
 
-        // Consider "moving" if we moved recently (within linger time)
         bool shouldAnimate = timeSinceLastMovement < movementLingerTime;
 
-        // Started animating
-        if (shouldAnimate && !isAnimating)
+        if (shouldAnimate)
         {
-            Debug.Log($"[WalkAnimator] Started walking");
-            isAnimating = true;
-            currentFrame = 0;
-            animTimer = 0f;
-            spriteRenderer.sprite = walkSprites[currentFrame];
-        }
+            // Animating - cycle through frames
+            if (!isAnimating)
+            {
+                isAnimating = true;
+                currentFrame = 0;
+                animTimer = 0f;
+            }
 
-        // Stopped animating
-        if (!shouldAnimate && isAnimating)
-        {
-            Debug.Log($"[WalkAnimator] Stopped walking");
-            isAnimating = false;
-            spriteRenderer.sprite = idleSprite;
-            return;
-        }
-
-        // Animate while moving
-        if (isAnimating)
-        {
             animTimer += Time.deltaTime;
             if (animTimer >= frameRate)
             {
                 animTimer = 0f;
-                currentFrame = (currentFrame + 1) % walkSprites.Count;
-                spriteRenderer.sprite = walkSprites[currentFrame];
+                currentFrame = (currentFrame + 1) % currentSprites.Count;
             }
+            spriteRenderer.sprite = currentSprites[currentFrame];
         }
+        else
+        {
+            // Idle - show idle sprite or first frame of current direction
+            isAnimating = false;
+            Sprite idleSprite = currentDirection == FacingDirection.Up ? idleSpriteUp : idleSpriteDown;
+            if (idleSprite != null)
+                spriteRenderer.sprite = idleSprite;
+            else if (currentSprites.Count > 0)
+                spriteRenderer.sprite = currentSprites[0];
+        }
+    }
+
+    private void UpdateFacingDirection()
+    {
+        if (Camera.main == null) return;
+
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 playerPos = transform.position;
+        Vector2 dir = new Vector2(mouseWorldPos.x - playerPos.x, mouseWorldPos.y - playerPos.y);
+
+        if (dir.sqrMagnitude < 0.001f) return;
+
+        // Calculate angle from player to mouse (0 = right, 90 = up, 180/-180 = left, -90 = down)
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        // Up = top 120 degrees (from 30 to 150) - uses back_ sprites
+        // Down = bottom 240 degrees - uses front_ sprites
+        if (angle > 30f && angle < 150f)
+            currentDirection = FacingDirection.Up;
+        else
+            currentDirection = FacingDirection.Down;
     }
 }
