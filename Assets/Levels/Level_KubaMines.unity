@@ -9633,7 +9633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4561145205880110584, guid: 01578b168e6fa0b45ae22f35ac120ec5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3766743
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4561145205880110584, guid: 01578b168e6fa0b45ae22f35ac120ec5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11866,6 +11866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleBlocker
   startEnabled: 1
+  coolider: {fileID: 0}
+  visual: {fileID: 0}
 --- !u!61 &2096954108
 BoxCollider2D:
   m_ObjectHideFlags: 0
