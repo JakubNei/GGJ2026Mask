@@ -1,16 +1,31 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float throwForce = 10f;
     [SerializeField] bool rotate = false;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip flyingSound;
+    [SerializeField] float soundVolume = 1f;
+    [SerializeField] float fadeOutDuration = 0.15f;
+
     Rigidbody2D rb;
+    AudioSource audioSource;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // Setup audio source
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = flyingSound;
+        audioSource.volume = soundVolume;
+        audioSource.loop = true;
+        audioSource.playOnAwake = false;
     }
 
     void Start()
@@ -52,7 +67,7 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"[Projectile] OnCollisionEnter2D with {collision.gameObject.name}, layer: {collision.gameObject.layer} ({LayerMask.LayerToName(collision.gameObject.layer)})");
-        Destroy(gameObject);
+        DestroyWithFadeOut();
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -63,5 +78,27 @@ public class Projectile : MonoBehaviour
     public void Throw(Vector2 throwDirection)
     {
         rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
+        if (flyingSound != null)
+            audioSource.Play();
+    }
+
+    void DestroyWithFadeOut()
+    {
+        StartCoroutine(FadeOutAndDestroy());
+    }
+
+    IEnumerator FadeOutAndDestroy()
+    {
+        float startVolume = audioSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < fadeOutDuration)
+        {
+            elapsed += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / fadeOutDuration);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }

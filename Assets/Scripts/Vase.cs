@@ -10,6 +10,10 @@ public class Vase : MonoBehaviour
     public float shatterSpeed = 3f;
     public float shardLifetime = 1.5f;
 
+    [Header("Audio")]
+    public AudioClip breakSound;
+    public float breakSoundVolume = 1f;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         TryBreak(collision.gameObject);
@@ -46,6 +50,10 @@ public class Vase : MonoBehaviour
                 shardScript.Initialize(randomDir, shatterSpeed, shardLifetime);
             }
         }
+
+        // Play break sound
+        if (breakSound != null)
+            AudioSource.PlayClipAtPoint(breakSound, transform.position, breakSoundVolume);
 
         // Hide or Destroy the original vase
         Destroy(gameObject);

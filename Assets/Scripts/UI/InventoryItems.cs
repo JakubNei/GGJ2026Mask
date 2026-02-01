@@ -54,10 +54,9 @@ public class InventoryItems : MonoBehaviour
             itemIndex = 3;
 
       
-        if (itemIndex.HasValue)
+        if (itemIndex.HasValue && itemIndex.Value < itemList.Count)
         {
-            ItemBase newItem = itemList.Count >= 1 ? itemList[itemIndex.Value] : null;
-            EquipItem(newItem);
+            EquipItem(itemList[itemIndex.Value]);
         }
 
         if (DebugAddAllMasks != null && DebugAddAllMasks.Count > 0 && Input.GetKeyDown(KeyCode.P))

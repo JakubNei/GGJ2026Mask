@@ -12,12 +12,17 @@ public class MaskDisplay : MonoBehaviour
     {
         public MaskType maskType;
         public GameObject maskObject;
+        public Sprite spriteFront;  // sprite when facing down (front view)
+        public Sprite spriteBack;   // sprite when facing up (back view)
     }
 
     [SerializeField] List<MaskEntry> masks = new List<MaskEntry>();
+    [SerializeField] int sortingOrderFront = 1;   // sorting order when in front of body
+    [SerializeField] int sortingOrderBack = -1;   // sorting order when behind body
 
-    Dictionary<MaskType, GameObject> maskLookup;
+    Dictionary<MaskType, MaskEntry> maskLookup;
     public MaskType currentMask = MaskType.Default;
+    private FacingDirection currentFacing = FacingDirection.Down;
 
     void Awake()
     {
@@ -26,12 +31,12 @@ public class MaskDisplay : MonoBehaviour
 
     void BuildLookup()
     {
-        maskLookup = new Dictionary<MaskType, GameObject>();
+        maskLookup = new Dictionary<MaskType, MaskEntry>();
         foreach (var entry in masks)
         {
             if (entry.maskObject != null)
             {
-                maskLookup[entry.maskType] = entry.maskObject;
+                maskLookup[entry.maskType] = entry;
             }
         }
     }
@@ -42,9 +47,9 @@ public class MaskDisplay : MonoBehaviour
             BuildLookup();
 
         // Hide current mask
-        if (maskLookup.TryGetValue(currentMask, out var currentObj))
+        if (maskLookup.TryGetValue(currentMask, out var currentEntry))
         {
-            currentObj.SetActive(false);
+            currentEntry.maskObject.SetActive(false);
         }
 
         currentMask = newMask;
@@ -52,12 +57,59 @@ public class MaskDisplay : MonoBehaviour
         if (newMask != MaskType.CutSceneNone)
         {
             // Show new mask
-            if (maskLookup.TryGetValue(currentMask, out var newObj))
+            if (maskLookup.TryGetValue(currentMask, out var newEntry))
             {
-                newObj.SetActive(true);
+                newEntry.maskObject.SetActive(true);
+                UpdateMaskSprite(newEntry);
             }
         }
     }
 
+    public void SetFacingDirection(FacingDirection facing)
+    {
+        if (currentFacing == facing)
+            return;
+
+        currentFacing = facing;
+
+        if (maskLookup == null)
+            BuildLookup();
+
+        if (maskLookup.TryGetValue(currentMask, out var entry))
+        {
+            UpdateMaskSprite(entry);
+        }
+    }
+
+    private void UpdateMaskSprite(MaskEntry entry)
+    {
+        var sr = entry.maskObject.GetComponent<SpriteRenderer>();
+        if (sr == null)
+        {
+            Debug.LogError($"[MaskDisplay] No SpriteRenderer on mask {entry.maskType}");
+            return;
+        }
+
+        if (currentFacing == FacingDirection.Up)
+        {
+            // Facing up - show back sprite, render behind body
+            if (entry.spriteBack != null)
+                sr.sprite = entry.spriteBack;
+            else
+                Debug.LogWarning($"[MaskDisplay] spriteBack is null for {entry.maskType}");
+            sr.sortingOrder = sortingOrderBack;
+        }
+        else
+        {
+            // Facing down/left/right - show front sprite, render in front of body
+            if (entry.spriteFront != null)
+                sr.sprite = entry.spriteFront;
+            else
+                Debug.LogWarning($"[MaskDisplay] spriteFront is null for {entry.maskType}");
+            sr.sortingOrder = sortingOrderFront;
+        }
+    }
+
     public MaskType CurrentMask => currentMask;
+    public FacingDirection CurrentFacing => currentFacing;
 }
