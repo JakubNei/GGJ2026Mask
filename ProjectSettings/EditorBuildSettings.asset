@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Level2.unity
     guid: 2ecb963aad2afaf4f8286f95dad19fe5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/Level2_Maggie.unity
     guid: 1bbf7f8df9278a3438e28bc2db0be6ab
   - enabled: 1

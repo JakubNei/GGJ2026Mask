@@ -250,13 +250,14 @@ public class PlayerController : MonoBehaviour
             if (Time.time >= lastShootTime + shootCooldown)
             {
                 var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var throwDirection = (mouseWorldPosition - controllingCharacter.transform.position);
+                var controllingCharacterThrowPos = new Vector3(controllingCharacter.transform.position.x, controllingCharacter.transform.position.y -1f);
+                var throwDirection = (mouseWorldPosition - controllingCharacterThrowPos);
                 throwDirection.z = 0;
                 throwDirection.Normalize();
 
-                var spawnPos = controllingCharacter.transform.position + new Vector3(0, -0.35f, 0);
+                var spawnPos = controllingCharacter.transform.position + new Vector3(0, -1f, 0);
                 GameObject projectile = Instantiate(projectilePf, spawnPos, Quaternion.identity);
-                projectile.transform.localScale *= 0.33f;
+                projectile.transform.localScale *= 0.65f;
                 projectile.GetComponent<Projectile>()?.Throw(throwDirection);
                 lastShootTime = Time.time;
             }

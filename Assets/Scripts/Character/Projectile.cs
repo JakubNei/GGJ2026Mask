@@ -5,6 +5,7 @@ using UnityEngine.Pool;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] float throwForce = 10f;
+    [SerializeField] bool rotate = false;
     Rigidbody2D rb;
 
     void Awake()
@@ -35,6 +36,16 @@ public class Projectile : MonoBehaviour
         if (playerCollider && projectileCollider)
         {
             Physics2D.IgnoreCollision(projectileCollider, playerCollider);
+        }
+    }
+
+    void Update()
+    {
+        if(rotate)
+        {
+            Vector3 currentRotation = transform.eulerAngles;
+            currentRotation.z += 1000 * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(currentRotation);
         }
     }
 
