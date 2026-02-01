@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     Vector2 currentVelocity;
     Vector2 smoothVelocityRef;
 
+    // External push (from enemies, etc.)
+    Vector2 pushVelocity;
+    [SerializeField] float pushDecay = 10f;
+
     float lastShootTime;
 
     ItemBase defaultMask;
@@ -94,8 +98,19 @@ public class PlayerController : MonoBehaviour
         Vector2 targetVelocity = input.normalized;
         currentVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref smoothVelocityRef, accelerationTime);
 
+        // Combine player input with external push
+        Vector2 totalVelocity = currentVelocity * controllingCharacter.moveSpeed + pushVelocity;
+
         var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
-        rigidBody.MovePosition(rigidBody.position + currentVelocity * controllingCharacter.moveSpeed * Time.fixedDeltaTime);
+        rigidBody.MovePosition(rigidBody.position + totalVelocity * Time.fixedDeltaTime);
+
+        // Decay push velocity over time
+        pushVelocity = Vector2.MoveTowards(pushVelocity, Vector2.zero, pushDecay * Time.fixedDeltaTime);
+    }
+
+    public void ApplyPush(Vector2 force)
+    {
+        pushVelocity += force;
     }
 
 
