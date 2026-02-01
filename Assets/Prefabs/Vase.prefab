@@ -112,6 +112,8 @@ MonoBehaviour:
   - {fileID: 5919856246895585953, guid: 9397ea45657301841ba775f1baf928d1, type: 3}
   shatterSpeed: 3
   shardLifetime: 1.5
+  breakSound: {fileID: 8300000, guid: 4ca5a29fa6be24d6ca6251a9823d9ebd, type: 3}
+  breakSoundVolume: 1
 --- !u!1 &5158900650155158167
 GameObject:
   m_ObjectHideFlags: 0
