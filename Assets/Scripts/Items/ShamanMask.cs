@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
@@ -10,23 +11,26 @@ public class ShamanMask : ItemBase
         maskType = MaskType.Shaman;
     }
 
-    bool PlayersOverlaps(Tilemap tilemap)
+    bool PlayersOverlaps(TilemapCollider2D tilemap)
     {
         if (tilemap == null)
         {
             Debug.LogError("Tilemap is null when checking player overlap");
             return false;
         }
-        var c = PlayerController.Instance.controllingCharacter;
-        var p = c.transform.position;
 
-        var wc = tilemap.WorldToCell(p);
-        var t = tilemap.GetTile(wc);
-        if (t != null)
+        var p = PlayerController.Instance.controllingCharacter.transform.position;
+
+        var cs = Physics2D.OverlapPointAll(p);
+        foreach (var col in cs)
         {
-            Debug.Log($"Player overlaps {tilemap}");
-            return true;
+            if (col == tilemap)
+            {
+                Debug.Log($"Yes! Player overlaps {tilemap}");
+                return true;
+            }
         }
+
         Debug.Log($"Player does not overlap {tilemap}");
         return false;
     }

@@ -50,7 +50,7 @@ public class InventoryItems : MonoBehaviour
             itemIndex = 1;
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             itemIndex = 2;
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
             itemIndex = 3;
 
       
