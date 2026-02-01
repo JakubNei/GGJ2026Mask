@@ -1,7 +1,4 @@
-using System.Security.Cryptography;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class ShamanMask : ItemBase
