@@ -171,3 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   throwForce: 10
   rotate: 1
+  flyingSound: {fileID: 8300000, guid: 282a3dba1edb241518f1e4005b78b8bf, type: 3}
+  soundVolume: 1
+  fadeOutDuration: 0.15
