@@ -59,12 +59,12 @@ MonoBehaviour:
     spriteBack: {fileID: 21300000, guid: a4a2a38639620426281c1215ac88c8f1, type: 3}
   - maskType: 3
     maskObject: {fileID: 3977847633574796988}
-    spriteFront: {fileID: 21300000, guid: b6739b9a3232a7e4bb73f0a7776f1369, type: 3}
-    spriteBack: {fileID: 21300000, guid: 046a51f39d6394fe682bb8c1d44943ef, type: 3}
-  - maskType: 1
-    maskObject: {fileID: 3004156774574265563}
     spriteFront: {fileID: 21300000, guid: 3c1d6f8cde1842b4ba21664475be0c18, type: 3}
     spriteBack: {fileID: 21300000, guid: 4a643068d4a014925a667d44019186b7, type: 3}
+  - maskType: 1
+    maskObject: {fileID: 3004156774574265563}
+    spriteFront: {fileID: 21300000, guid: b6739b9a3232a7e4bb73f0a7776f1369, type: 3}
+    spriteBack: {fileID: 21300000, guid: 046a51f39d6394fe682bb8c1d44943ef, type: 3}
   sortingOrderFront: 1
   sortingOrderBack: -1
   currentMask: 0
