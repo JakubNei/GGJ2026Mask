@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour
     public Vector3 lastMostMovedDir;
 
     public Vector3 interactFocusPos;
-    MaskType MaskSelectedInUI => inventoryItems.EquippedItem ? inventoryItems.EquippedItem.MaskType : MaskType.None;
+    MaskType MaskSelectedInUI => inventoryItems.EquippedItem ? inventoryItems.EquippedItem.MaskType : MaskType.CutSceneNone;
 
     MaskType MaskOnCharacter
     {
         get
         {
-            return controllingCharacter == null ? MaskType.None : controllingCharacter.CurrentMask;
+            return controllingCharacter == null ? MaskType.CutSceneNone : controllingCharacter.CurrentMask;
         }
         set
         {
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //MASK
-        if (MaskOnCharacter != MaskSelectedInUI)
+        if (MaskOnCharacter != MaskSelectedInUI && MaskOnCharacter != MaskType.CutSceneNone)
         {
             MaskOnCharacter = MaskSelectedInUI;
         }

@@ -49,7 +49,7 @@ public class MaskDisplay : MonoBehaviour
 
         currentMask = newMask;
 
-        if (newMask != MaskType.None)
+        if (newMask != MaskType.CutSceneNone)
         {
             // Show new mask
             if (maskLookup.TryGetValue(currentMask, out var newObj))
