@@ -177,7 +177,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // Aim interaction with either mouse or movement
-        interactFocusPos = controllingCharacter.transform.position + lastMostMovedDir;
+        Vector3 interactOriginPos = controllingCharacter.transform.position + Vector3.up * 0.3f;
+        interactFocusPos = interactOriginPos + lastMostMovedDir;
         {
             if (lastMousePosition != Input.mousePosition ||
                 Input.GetKeyDown(KeyCode.Mouse0) ||
@@ -192,12 +193,12 @@ public class PlayerController : MonoBehaviour
             }
 
             // Clamp interact focus pos to be within 0.5 units of player
-            var facing = interactFocusPos - controllingCharacter.transform.position;
+            var facing = interactFocusPos - interactOriginPos;
             facing.z = 0;
             var m = facing.magnitude;
-            var mc = Mathf.Clamp(m, 0, 0.5f);
+            var mc = Mathf.Clamp(m, 0, 0.1f);
             facing = facing / m * mc;
-            interactFocusPos = controllingCharacter.transform.position + facing;
+            interactFocusPos = interactOriginPos + facing;
         }
 
         GameObject interactableGameObject = null;
@@ -253,7 +254,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
-                var spawnPos = controllingCharacter.transform.position;
+                var spawnPos = interactOriginPos;
                 var throwDirection = interactFocusPos - spawnPos;
                 throwDirection.z = 0;
                 throwDirection.Normalize();
