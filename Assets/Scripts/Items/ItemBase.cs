@@ -48,24 +48,7 @@ public class ItemBase : MonoBehaviour, IInteractable
     public virtual bool CanUnequip() { return true; }
     public virtual void OnUnequip() { }
 
-    void Awake()
-    {
-        SnapToTileAtCurrentPosition();
-    }
-    
-    public void SnapToTileAtCurrentPosition()
-    {
-        SetPositionAndSnapToTile(transform.position);
-    }
-
-    public void SetPositionAndSnapToTile(Vector2 pos)
-    {
-        pos.x = Mathf.Floor(pos.x) + 0.5f;
-        pos.y = Mathf.Floor(pos.y) + 0.5f;
-
-        transform.position = pos;
-    }
-
+  
     public void UpdateWhileInteracting()
     {
         Debug.Log("UpdateWhileInteracting");
