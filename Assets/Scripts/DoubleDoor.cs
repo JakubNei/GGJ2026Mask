@@ -3,17 +3,12 @@ using UnityEngine;
 
 public class DoubleDoor : SignalReceiver
 {
-    public GameObject configLeftDoor;
-    public GameObject configRightDoor;
+  
+    public GameObject[] configFrames;
+    public float configFrameDuration = 0.1f;
 
-    public float configMovementDistance = 1;
-    public float configMovementSpeed = 0.3f;
-    public MovementAxis configMovementAxis = MovementAxis.Horizontal;
-
-    private Vector3 leftDoorOriginalPosition;
-    private Vector3 rightDoorOriginalPosition;
-    private Vector3 leftDoorVelocity = Vector3.zero;
-    private Vector3 rightDoorVelocity = Vector3.zero;
+    private int currentFrameIndex = 0;
+    private float frameTimer = 0f;
 
     public enum MovementAxis
     {
@@ -26,8 +21,15 @@ public class DoubleDoor : SignalReceiver
 
     void Start()
     {
-        leftDoorOriginalPosition = configLeftDoor.transform.localPosition;
-        rightDoorOriginalPosition = configRightDoor.transform.localPosition;
+  
+        // Initialize with first frame active
+        if (configFrames != null && configFrames.Length > 0)
+        {
+            for (int i = 0; i < configFrames.Length; i++)
+            {
+                configFrames[i].SetActive(i == 0);
+            }
+        }
     }
 
     override public void OnReceiveSignalOn()
@@ -41,17 +43,34 @@ public class DoubleDoor : SignalReceiver
 
     void Update()
     {
-        if (opening)
+        if (configFrames == null || configFrames.Length == 0) return;
+
+        frameTimer += Time.deltaTime;
+        
+        if (frameTimer >= configFrameDuration)
         {
-            Vector3 leftTargetPosition = leftDoorOriginalPosition + (configMovementAxis == MovementAxis.Horizontal ? new Vector3(configMovementDistance, 0, 0) : new Vector3(0, configMovementDistance, 0));
-            Vector3 rightTargetPosition = rightDoorOriginalPosition + (configMovementAxis == MovementAxis.Horizontal ? new Vector3(-configMovementDistance, 0, 0) : new Vector3(0, -configMovementDistance, 0));
-            configLeftDoor.transform.localPosition = Vector3.SmoothDamp(configLeftDoor.transform.localPosition, leftTargetPosition, ref leftDoorVelocity, configMovementSpeed);
-            configRightDoor.transform.localPosition = Vector3.SmoothDamp(configRightDoor.transform.localPosition, rightTargetPosition, ref rightDoorVelocity, configMovementSpeed);
-        }
-        else
-        {
-            configLeftDoor.transform.localPosition = Vector3.SmoothDamp(configLeftDoor.transform.localPosition, leftDoorOriginalPosition, ref leftDoorVelocity, configMovementSpeed);
-            configRightDoor.transform.localPosition = Vector3.SmoothDamp(configRightDoor.transform.localPosition, rightDoorOriginalPosition, ref rightDoorVelocity, configMovementSpeed);
+            frameTimer = 0f;
+            
+            if (opening)
+            {
+                // Move forward through frames
+                if (currentFrameIndex < configFrames.Length - 1)
+                {
+                    configFrames[currentFrameIndex].SetActive(false);
+                    currentFrameIndex++;
+                    configFrames[currentFrameIndex].SetActive(true);
+                }
+            }
+            else
+            {
+                // Move backward through frames
+                if (currentFrameIndex > 0)
+                {
+                    configFrames[currentFrameIndex].SetActive(false);
+                    currentFrameIndex--;
+                    configFrames[currentFrameIndex].SetActive(true);
+                }
+            }
         }
     }
 }
