@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1d4058d6d2c508e4c8ab7647daac71e9
+guid: 24e9e313d90bcb442a872488023fc172
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8472138142657655318
-    second: tileset_floor_dirt_fade_0
+      213: 3474250494217719542
+    second: Jungle_entrance_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,12 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_floor_dirt_fade_0
+      name: Jungle_entrance_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
+        width: 640
         height: 360
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 612b521e0c4139570800000000000000
-      internalID: 8472138142657655318
+      spriteID: 6fe8298ca64073030800000000000000
+      internalID: 3474250494217719542
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tileset_floor_dirt_fade_0: 8472138142657655318
+      Jungle_entrance_0: 3474250494217719542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

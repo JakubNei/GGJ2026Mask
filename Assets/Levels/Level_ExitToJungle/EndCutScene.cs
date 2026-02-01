@@ -3,11 +3,15 @@ using UnityEngine.Playables;
 
 public class EndCutScene : MonoBehaviour
 {
+    void Start()
+    {
+        PlayerController.Instance.controllingCharacter.CurrentMask = MaskType.Default;
+    }
+
     [ContextMenu("RemovePlayerMask")]
     public void RemovePlayerMask()
     {
-        var character = PlayerController.Instance.controllingCharacter;
-        character.CurrentMask = MaskType.CutSceneNone;
+        PlayerController.Instance.controllingCharacter.CurrentMask = MaskType.CutSceneNone;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
