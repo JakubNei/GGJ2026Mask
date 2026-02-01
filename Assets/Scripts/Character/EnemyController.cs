@@ -48,6 +48,8 @@ public class EnemyController : MonoBehaviour
             character.HandleUpdate();
             return;
         }
+        if (character.temporarilyForbidMovement)
+            return;
 
         // Only chase when player has Default mask equipped
         bool playerHasDefaultMask = InventoryItems.Instance?.EquippedItem?.MaskType == MaskType.Default;

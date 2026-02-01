@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     Vector2 pushVelocity;
     [SerializeField] float pushDecay = 10f;
 
+    public bool temporarilyBlockInoput = false;
+
     float lastShootTime;
 
     ItemBase defaultMask;
@@ -98,7 +100,8 @@ public class PlayerController : MonoBehaviour
     {
         if (controllingCharacter == null)
             return;
-
+        if (controllingCharacter.temporarilyForbidMovement)
+            return;
         // Smooth acceleration using critically-damped spring (SmoothDamp)
         Vector2 targetVelocity = input.normalized;
         currentVelocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref smoothVelocityRef, accelerationTime);
@@ -150,6 +153,9 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controllingCharacter == null)
+            return;
+            
+            if (temporarilyBlockInoput)
             return;
 
         var p = controllingCharacter.transform.position;

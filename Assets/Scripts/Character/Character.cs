@@ -42,6 +42,7 @@ public class Character : MonoBehaviour
     Vector3 lastFramePosition;
     float currentSpeed;
 
+    public bool temporarilyForbidMovement = false;
     public bool IsMoving { get; private set; }
 
     public bool IsPlayerCharacter;
@@ -58,7 +59,7 @@ public class Character : MonoBehaviour
             maskDisplay.SwitchMask(value);
         }
     }
-    
+
 
     public CharacterAnimator characterAnimator;
 
@@ -104,8 +105,10 @@ public class Character : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.IsMoving = IsMoving;
+            animator.IsMoving = IsMoving && !temporarilyForbidMovement;
         }
+        if (temporarilyForbidMovement)
+            return;
 
         // Calculate speed from actual position change
         Vector3 delta = transform.position - lastFramePosition;
