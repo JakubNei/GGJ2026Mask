@@ -35,18 +35,13 @@ public class PlayerController : MonoBehaviour
     public Character controllingCharacter;
 
     public Vector3 lastMousePosition;
+    public float lastMouseMovedTime;
 
     public Vector3 lastCharacterPosition;
     public Vector3 lastCharacterDeltaMovement;
+    public Vector3 lastMostMovedDir;
 
-
-    enum InteractPosMethod
-    {
-        CharacterFacing,
-        TowardsMouse,
-    }
-    InteractPosMethod interactPosMethod;
-
+    public Vector3 interactFocusPos;
     MaskType MaskSelectedInUI => inventoryItems.EquippedItem ? inventoryItems.EquippedItem.MaskType : MaskType.None;
 
     MaskType MaskOnCharacter
@@ -103,6 +98,16 @@ public class PlayerController : MonoBehaviour
 
         var rigidBody = controllingCharacter.GetComponent<Rigidbody2D>();
         rigidBody.MovePosition(rigidBody.position + totalVelocity * Time.fixedDeltaTime);
+
+        // Track the most dominant movement direction
+        if (totalVelocity.sqrMagnitude > 0.01f)
+        {
+            lastMouseMovedTime = 0;
+            if (Mathf.Abs(totalVelocity.x) <= Mathf.Abs(totalVelocity.y))
+                lastMostMovedDir = totalVelocity.y > 0 ? Vector3.up : Vector3.down;
+            else
+                lastMostMovedDir = totalVelocity.x > 0 ? Vector3.right : Vector3.left;
+        }
 
         // Decay push velocity over time
         pushVelocity = Vector2.MoveTowards(pushVelocity, Vector2.zero, pushDecay * Time.fixedDeltaTime);
@@ -172,28 +177,28 @@ public class PlayerController : MonoBehaviour
         }
 
         // Aim interaction with either mouse or movement
-        Vector3 interactFocusPos = controllingCharacter.transform.position;
+        Vector3 interactOriginPos = controllingCharacter.transform.position + Vector3.up * 0.3f;
+        interactFocusPos = interactOriginPos + lastMostMovedDir;
         {
-            if (lastMousePosition != Input.mousePosition)
-            {
-                interactPosMethod = InteractPosMethod.TowardsMouse;
-            }
+            if (lastMousePosition != Input.mousePosition ||
+                Input.GetKeyDown(KeyCode.Mouse0) ||
+                Input.GetKeyDown(KeyCode.Mouse1) ||
+                Input.GetKeyDown(KeyCode.Mouse2)
+            )
+                lastMouseMovedTime = Time.time;
             lastMousePosition = Input.mousePosition;
-            if (interactPosMethod == InteractPosMethod.CharacterFacing)
+            if (lastMouseMovedTime > Time.time - 1)
             {
-                var facingDir = new Vector3(controllingCharacter.Animator.MoveX, controllingCharacter.Animator.MoveY);
-                interactFocusPos = controllingCharacter.transform.position + facingDir * (inventoryItems.selectedItem ? 1f : 0.4f);
+                interactFocusPos = Camera.main.ScreenToWorldPoint(lastMousePosition);
             }
-            else if (interactPosMethod == InteractPosMethod.TowardsMouse)
-            {
-                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var facingDir = mouseWorldPosition - controllingCharacter.transform.position;
-                facingDir.z = 0;
-                var m = facingDir.magnitude;
-                var mc = Mathf.Clamp(m, 0, 1);
-                facingDir = facingDir / m * mc;
-                interactFocusPos = controllingCharacter.transform.position + facingDir;
-            }
+
+            // Clamp interact focus pos to be within 0.5 units of player
+            var facing = interactFocusPos - interactOriginPos;
+            facing.z = 0;
+            var m = facing.magnitude;
+            var mc = Mathf.Clamp(m, 0, 0.1f);
+            facing = facing / m * mc;
+            interactFocusPos = interactOriginPos + facing;
         }
 
         GameObject interactableGameObject = null;
@@ -249,13 +254,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
-                var mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                var controllingCharacterThrowPos = new Vector3(controllingCharacter.transform.position.x, controllingCharacter.transform.position.y -1f);
-                var throwDirection = (mouseWorldPosition - controllingCharacterThrowPos);
+                var spawnPos = interactOriginPos;
+                var throwDirection = interactFocusPos - spawnPos;
                 throwDirection.z = 0;
                 throwDirection.Normalize();
 
-                var spawnPos = controllingCharacter.transform.position + new Vector3(0, -1f, 0);
                 GameObject projectile = Instantiate(projectilePf, spawnPos, Quaternion.identity);
                 projectile.transform.localScale *= 0.65f;
                 projectile.GetComponent<Projectile>()?.Throw(throwDirection);
@@ -280,4 +283,5 @@ public class PlayerController : MonoBehaviour
     }
 
     public Character Character => controllingCharacter;
+
 }

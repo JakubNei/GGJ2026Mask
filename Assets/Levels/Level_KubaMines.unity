@@ -9633,7 +9633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4561145205880110584, guid: 01578b168e6fa0b45ae22f35ac120ec5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3766743
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4561145205880110584, guid: 01578b168e6fa0b45ae22f35ac120ec5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11011,9 +11011,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1499695234253971977, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499695234253971977, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1499695234253971977, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f785729f7b6dc794a9cb976250c28df2, type: 2}
+    - target: {fileID: 4040853799454973829, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040853799454973829, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4040853799454973829, guid: 7c4ae956166ab3f4b82591763782e607, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -11850,6 +11866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleBlocker
   startEnabled: 1
+  coolider: {fileID: 0}
+  visual: {fileID: 0}
 --- !u!61 &2096954108
 BoxCollider2D:
   m_ObjectHideFlags: 0
