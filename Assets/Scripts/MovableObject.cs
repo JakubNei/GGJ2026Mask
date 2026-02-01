@@ -17,6 +17,9 @@ public class MovableObject : MonoBehaviour, IInteractable
     [SerializeField] float maxVolume = 0.4f;
     [SerializeField] float fadeDuration = 0.5f;
 
+    [Header("Player Proximity")]
+    [SerializeField] float playerActivationDistance = 1.5f;
+
     Rigidbody2D rb;
     AudioSource audioSource;
     float targetVolume;
@@ -33,6 +36,7 @@ public class MovableObject : MonoBehaviour, IInteractable
         audioSource.playOnAwake = false;
         audioSource.volume = 0f;
     }
+
     public bool CanInteract()
     {
         return Pullable && PlayerController.Instance.CanPlayerPullObjects;
@@ -72,11 +76,20 @@ public class MovableObject : MonoBehaviour, IInteractable
         // }
 
 
-        if (PlayerController.Instance.CanPlayerPushObjects && Pushable)
+        // Only enable physics when player is close enough to push
+        bool playerClose = false;
+        var player = PlayerController.Instance?.controllingCharacter;
+        if (player != null)
+        {
+            float dist = Vector2.Distance(transform.position, player.transform.position);
+            playerClose = dist <= playerActivationDistance;
+        }
+
+        if (PlayerController.Instance.CanPlayerPushObjects && Pushable && playerClose)
             rb.mass = originalMass;
         else
             // keep dynamic so it sends collisons to PressurePlate
-            // but make it not pushable by player physics
+            // but make it not pushable by physics
             rb.mass = 100000000f;
 
 
