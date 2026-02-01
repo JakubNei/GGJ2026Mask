@@ -26,4 +26,13 @@ public class LevelMusic : MonoBehaviour
         AudioManager.i.SetMusicVolume(volume);
         AudioManager.i.PlayMusic(musicClip, loop, fadeIn);
     }
+
+    void OnDestroy()
+    {
+        // Stop the music when leaving this scene (e.g., transitioning to next level)
+        if (AudioManager.i != null)
+        {
+            AudioManager.i.StopMusic(fade: true);
+        }
+    }
 }
