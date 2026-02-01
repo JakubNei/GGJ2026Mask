@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float pushDecay = 10f;
 
     public bool temporarilyBlockInoput = false;
+    public bool selectMaskFromUI = true;
 
     float lastShootTime;
 
@@ -154,8 +155,8 @@ public class PlayerController : MonoBehaviour
 
         if (controllingCharacter == null)
             return;
-            
-            if (temporarilyBlockInoput)
+
+        if (temporarilyBlockInoput)
             return;
 
         var p = controllingCharacter.transform.position;
@@ -283,7 +284,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //MASK
-        if (MaskOnCharacter != MaskSelectedInUI && MaskOnCharacter != MaskType.CutSceneNone)
+        if (MaskOnCharacter != MaskSelectedInUI && selectMaskFromUI)
         {
             MaskOnCharacter = MaskSelectedInUI;
         }

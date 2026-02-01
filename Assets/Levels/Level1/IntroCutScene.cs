@@ -71,18 +71,34 @@ public class IntroCutScene : MonoBehaviour
     {
         float elapsedTime = 0f;
         Color c = image.color;
+        AudioSource audioSource = image.GetComponent<AudioSource>();
+        float initialVolume = audioSource != null ? audioSource.volume : 0f;
 
         while (elapsedTime < fadeDuration)
         {
   
             elapsedTime += Time.deltaTime;
-            c.a = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            float t = elapsedTime / fadeDuration;
+            c.a = Mathf.Lerp(1f, 0f, t);
             image.color = c;
+            
+            if (audioSource != null)
+            {
+                audioSource.volume = Mathf.Lerp(initialVolume, 0f, t);
+            }
+            
             yield return null;
         }
 
         c.a = 0f;
         image.color = c;
+
+        if (audioSource != null)
+        {
+            audioSource.volume = 0f;
+        }
+
+        image.gameObject.SetActive(false);
     }
 
     void ForbidAllCharaterMovement()

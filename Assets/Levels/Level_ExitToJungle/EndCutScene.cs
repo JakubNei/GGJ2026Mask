@@ -5,6 +5,7 @@ public class EndCutScene : MonoBehaviour
 {
     void Start()
     {
+        PlayerController.Instance.selectMaskFromUI = false;
         PlayerController.Instance.controllingCharacter.CurrentMask = MaskType.Default;
     }
 
