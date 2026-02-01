@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoleBlocker
   startEnabled: 1
-  coolider: {fileID: 5006290625656593727}
-  visual: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!61 &5006290625656593727
 BoxCollider2D:
   m_ObjectHideFlags: 0
