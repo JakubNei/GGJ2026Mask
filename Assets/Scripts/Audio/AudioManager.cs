@@ -385,6 +385,10 @@ public enum AudioId
     NinjaHitVase,
     NinjaHiddenTile,
 
+    // Shaman Mask / Astral Plane
+    AstralTransition,
+    AstralNotAvailable,
+
     // World
     DoorOpen,
 

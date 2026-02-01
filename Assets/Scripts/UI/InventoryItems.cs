@@ -122,13 +122,17 @@ public class InventoryItems : MonoBehaviour
             if (newItem != null && !newItem.CanEquip())
             {
                 Debug.Log($"New item not equippable currently {newItem}");
+                if (newItem.MaskType == MaskType.Shaman)
+                    AudioManager.i?.PlaySfx(AudioId.AstralNotAvailable);
                 return;
-            }            
+            }
             if (equippedItem != null)
             {
                 if (!equippedItem.CanUnequip())
                 {
                     Debug.Log($"Current item not unequippable {equippedItem}");
+                    if (equippedItem.MaskType == MaskType.Shaman)
+                        AudioManager.i?.PlaySfx(AudioId.AstralNotAvailable);
                     return;
                 }
 
