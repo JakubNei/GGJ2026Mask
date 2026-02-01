@@ -80,6 +80,8 @@ MonoBehaviour:
   shootCooldown: 0.3
   accelerationTime: 0.08
   pushDecay: 30
+  temporarilyBlockInoput: 0
+  selectMaskFromUI: 1
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -567,7 +569,9 @@ MonoBehaviour:
   - id: 21
     clip: {fileID: 8300000, guid: 8bf0d6cb8b5514bc5a2b9863d6884d8d, type: 3}
   - id: 22
-    clip: {fileID: 8300000, guid: 788cdc647f77f478fbb9077b20bbad0d, type: 3}
+    clip: {fileID: 8300000, guid: 3ae4d3d0fbf434c4db61d5223b803c41, type: 3}
+  - id: 23
+    clip: {fileID: 8300000, guid: 04bb4e2d3a5384e4ebfc907e045e0201, type: 3}
 --- !u!1 &7705957040512625002
 GameObject:
   m_ObjectHideFlags: 0
