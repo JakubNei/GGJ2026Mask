@@ -10,4 +10,15 @@ public class EndCutScene : MonoBehaviour
             character.CurrentMask = MaskType.None;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        StartCutScene();
+    }
+    
+    [ContextMenu("Start Cut Scene")]
+    void StartCutScene()
+    {
+
+    }
 }
