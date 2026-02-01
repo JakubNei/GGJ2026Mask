@@ -10,7 +10,7 @@ public enum MaskType
     Shaman, 
     Tough,
     Ninja,
-    None, // Final end cut scene no mask
+    CutSceneNone, // Final end cut scene no mask
 }
 
 public class ItemBase : MonoBehaviour, IInteractable
