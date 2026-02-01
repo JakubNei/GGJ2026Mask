@@ -228,6 +228,30 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: walkSprites.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: 'walkSprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 9bad85be86d50ae4c9c2b740b8015fe7, type: 3}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: 'walkSprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 9dd750047792f004796175ecc6916095, type: 3}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: 'walkSprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: dcc149a77d114c84da030e6d45740650, type: 3}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: 'walkSprites.Array.data[3]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 059b9d8b856977f41ad13551ec5a144b, type: 3}
+    - target: {fileID: 8228387308589280829, guid: af092e7b6273c8f45b4aa62458bcb347, type: 3}
+      propertyPath: 'walkSprites.Array.data[4]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a58275dc5062fa47b77a4da7e397667, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

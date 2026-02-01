@@ -173,23 +173,32 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.position = cameraPos;
 
         // Face towards mouse cursor (left/right) - flip sprite and mask
+        // Only flip when facing front (down), not when facing back (up)
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float playerX = controllingCharacter.transform.position.x;
         bool shouldFlip = mouseWorldPos.x < playerX;
 
-        // Flip player sprite
+        // Check if player is facing up - don't flip in that case
+        var walkAnimator = controllingCharacter.GetComponentInChildren<WalkAnimator>();
+        bool facingUp = walkAnimator != null && walkAnimator.CurrentDirection == FacingDirection.Up;
+
+        // Flip player sprite (only when facing down)
         var sr = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
         if (sr != null)
         {
-            sr.flipX = shouldFlip;
+            sr.flipX = facingUp ? false : shouldFlip;
         }
 
-        // Flip mask holder
+        // Update mask display facing and flip (only when facing down)
         var maskDisplay = controllingCharacter.MaskDisplay;
         if (maskDisplay != null)
         {
+            // Update mask sprite and sorting order based on facing direction
+            maskDisplay.SetFacingDirection(walkAnimator != null ? walkAnimator.CurrentDirection : FacingDirection.Down);
+
+            // Flip mask holder (only when facing down)
             Vector3 maskScale = maskDisplay.transform.localScale;
-            maskScale.x = shouldFlip ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x);
+            maskScale.x = facingUp ? Mathf.Abs(maskScale.x) : (shouldFlip ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x));
             maskDisplay.transform.localScale = maskScale;
         }
 
