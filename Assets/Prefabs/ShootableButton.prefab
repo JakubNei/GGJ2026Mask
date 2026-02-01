@@ -141,7 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShootableButton
   targets:
   - {fileID: 0}
-  - {fileID: 0}
   activateSound: {fileID: 0}
   configOnVisuals: {fileID: 5107932515361200031}
   configOffVisuals: {fileID: 952091744777072708}
