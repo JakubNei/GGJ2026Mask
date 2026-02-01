@@ -4766,7 +4766,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 17
-      m_TileSpriteIndex: 17
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8115,14 +8115,16 @@ Tilemap:
     m_Data: {fileID: 725736469, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 1244560708, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -192496014, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -493926409, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1847069737, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1051155491, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: -192496014, guid: 304fffa877fd325408da4bcdd6bfe8e2, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 712
     m_Data:
@@ -23922,9 +23924,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2019089902441091261, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2441840034333334360, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
       propertyPath: m_Name
       value: IntroCutScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541853264441675551, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4532241506221486261, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178850989632091862, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6110374441976944560, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23964,6 +23982,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6110374441976944560, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861738017574121003, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757185181072373218, guid: 7a32474efe8ad00488534c3610c74b78, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

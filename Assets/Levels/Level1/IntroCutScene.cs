@@ -6,7 +6,6 @@ public class IntroCutScene : MonoBehaviour
 
     [SerializeField] UnityEngine.UI.Image[] introImages;
     [SerializeField] float fadeDuration = 0.5f;
-    [SerializeField] float displayDuration = 10f;
 
     void Start()
     {
@@ -26,15 +25,14 @@ public class IntroCutScene : MonoBehaviour
                 introImages[i - 1].gameObject.SetActive(false);
             }
 
-            // Visisble for time
-            float elapsedTime = 0f;
-            while (elapsedTime < displayDuration)
+            // Wait while audio is playing
+            AudioSource audioSource = introImages[i].GetComponent<AudioSource>();
+            while (audioSource != null && audioSource.isPlaying)
             {
                 if (PlayerController.IsInteractInputKeyDown())
                 {
                     break;
                 }
-                elapsedTime += Time.deltaTime;
                 yield return null;
             }
         }
