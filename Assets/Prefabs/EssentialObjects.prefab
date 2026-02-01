@@ -79,6 +79,7 @@ MonoBehaviour:
   defaultMaskPf: {fileID: 5716198307412543048, guid: a6baa3849e8353747aabeb73f04cb8cc, type: 3}
   shootCooldown: 0.3
   accelerationTime: 0.08
+  pushDecay: 30
   inventoryItems: {fileID: 7008709257460884814}
   input: {x: 0, y: 0}
   controllingCharacter: {fileID: 0}
@@ -472,7 +473,7 @@ MonoBehaviour:
   - id: 13
     clip: {fileID: 8300000, guid: 82bfe593765f74f27a5ae365ec4c8ece, type: 3}
   - id: 14
-    clip: {fileID: 8300000, guid: cd45e07fe9a784d9989a455b48e31eef, type: 3}
+    clip: {fileID: 8300000, guid: ce9543c35c94442fbaf223b811f99f87, type: 3}
   - id: 15
     clip: {fileID: 8300000, guid: 628803eacce484d488cfa4f522b8a5e1, type: 3}
   - id: 16

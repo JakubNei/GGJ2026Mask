@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d006b16c8112948a48d800ea3174f7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  stopDistance: 2.4
+  stopDistance: 0.3
   speedMultiplier: 0.5
   returnStopDistance: 0.1
+  pushForce: 5
+  pushRadius: 0.8

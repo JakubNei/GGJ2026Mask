@@ -7,10 +7,18 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float speedMultiplier = 0.5f;
     [SerializeField] float returnStopDistance = 0.1f;
 
+    [Header("Push Player")]
+    [SerializeField] float pushForce = 8f;
+    [SerializeField] float pushRadius = 0.5f;
+
     Character character;
     Rigidbody2D rb;
     Vector2 moveDirection;
     Vector3 initialPosition;
+
+    // Enemy push velocity (same system as player)
+    Vector2 pushVelocity;
+    [SerializeField] float pushDecay = 10f;
 
     void Start()
     {
@@ -67,9 +75,39 @@ public class EnemyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Combine normal movement with push velocity
+        Vector2 totalVelocity = pushVelocity;
         if (moveDirection != Vector2.zero)
         {
-            rb.MovePosition(rb.position + moveDirection * character.moveSpeed * speedMultiplier * Time.fixedDeltaTime);
+            totalVelocity += moveDirection * character.moveSpeed * speedMultiplier;
+        }
+
+        if (totalVelocity != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + totalVelocity * Time.fixedDeltaTime);
+        }
+
+        // Decay push velocity over time
+        pushVelocity = Vector2.MoveTowards(pushVelocity, Vector2.zero, pushDecay * Time.fixedDeltaTime);
+
+        // Push player away if too close (and enemy gets pushed back too)
+        if (PlayerController.Instance != null)
+        {
+            var player = PlayerController.Instance.controllingCharacter;
+            if (player != null)
+            {
+                Vector3 toPlayer = player.transform.position - transform.position;
+                float dist = toPlayer.magnitude;
+
+                if (dist < pushRadius)
+                {
+                    Vector2 pushDirection = ((Vector2)toPlayer).normalized;
+                    // Push player away
+                    PlayerController.Instance.ApplyPush(pushDirection * pushForce);
+                    // Push enemy in opposite direction
+                    pushVelocity += -pushDirection * pushForce;
+                }
+            }
         }
     }
 }
