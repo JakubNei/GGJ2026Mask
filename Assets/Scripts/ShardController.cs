@@ -18,6 +18,13 @@ public class ShardController : MonoBehaviour
         StartCoroutine(FadeAndDestroy(lifetime));
     }
 
+    void FixedUpdate()
+    {
+        if (rb.linearVelocity.magnitude < 0.001f)
+        {
+            StopPhysics();
+        }
+    }
     private IEnumerator FadeAndDestroy(float lifetime)
     {
         float elapsed = 0f;
@@ -26,11 +33,25 @@ public class ShardController : MonoBehaviour
         while (elapsed < lifetime)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / lifetime);
-            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+
+            //float alpha = Mathf.Lerp(1f, 0f, elapsed / lifetime);
+            //spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+
             yield return null;
         }
 
-        Destroy(gameObject);
+        StopPhysics();
+
+        //Destroy(gameObject);
+    }
+
+    void StopPhysics()
+    {
+
+        rb.angularVelocity = 0f;
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+
+        GetComponent<Collider2D>().enabled = false;
     }
 }
