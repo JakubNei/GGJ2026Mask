@@ -20,6 +20,17 @@ public class EnemyController : MonoBehaviour
     Vector2 pushVelocity;
     [SerializeField] float pushDecay = 10f;
 
+
+    [System.Serializable]
+    public class WalkTarget
+    {
+        public Transform target;
+        public float loiterTime;
+    }
+    // Cleaned when reached
+    [Header("Temporarily Walk To Target")]
+    [SerializeField] WalkTarget walkTarget;
+
     void Start()
     {
         character = GetComponent<Character>();
@@ -41,7 +52,26 @@ public class EnemyController : MonoBehaviour
         // Only chase when player has Default mask equipped
         bool playerHasDefaultMask = InventoryItems.Instance?.EquippedItem?.MaskType == MaskType.Default;
 
-        if (playerHasDefaultMask)
+        if (walkTarget != null && walkTarget.target != null)
+        {
+            Vector3 toTarget = walkTarget.target.position - transform.position;
+            if (toTarget.magnitude < stopDistance)
+            {
+                walkTarget.loiterTime -= Time.deltaTime;
+                if (walkTarget.loiterTime <= 0f)
+                {
+                    // Reached target
+                    walkTarget.target = null;
+                    walkTarget = null;
+                }
+                moveDirection = Vector2.zero;
+            }
+            else
+            {
+                moveDirection = toTarget.normalized;
+            }
+        }
+        else if (playerHasDefaultMask)
         {
             // Chase player
             Vector3 toPlayer = player.transform.position - transform.position;
