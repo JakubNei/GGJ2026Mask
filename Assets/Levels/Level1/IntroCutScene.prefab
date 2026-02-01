@@ -123,7 +123,6 @@ MonoBehaviour:
   - {fileID: 7674949564076376659}
   - {fileID: 379510124224334230}
   fadeDuration: 0.5
-  displayDuration: 10
 --- !u!1 &5892268630210177033
 GameObject:
   m_ObjectHideFlags: 0
