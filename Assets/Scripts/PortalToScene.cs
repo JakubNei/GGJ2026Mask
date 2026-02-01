@@ -14,13 +14,26 @@ public class PortalToLevel : MonoBehaviour
             PlayerController.Instance.controllingCharacter &&
             other.gameObject == PlayerController.Instance.controllingCharacter.gameObject)
         {
-            Debug.Log("Loading level: " + levelName);
-
-            // Use smooth transition if available, otherwise fallback to direct load
-            if (SceneTransition.Instance != null)
-                SceneTransition.Instance.LoadScene(levelName);
-            else
-                SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+            GoToNextLevel();
         }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            GoToNextLevel();
+        }
+    }
+
+    void GoToNextLevel()
+    {
+        Debug.Log("Loading level: " + levelName);
+
+        // Use smooth transition if available, otherwise fallback to direct load
+        if (SceneTransition.Instance != null)
+            SceneTransition.Instance.LoadScene(levelName);
+        else
+            SceneManager.LoadScene(levelName, LoadSceneMode.Single);
     }
 }

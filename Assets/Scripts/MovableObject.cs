@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -19,9 +20,13 @@ public class MovableObject : MonoBehaviour, IInteractable
     Rigidbody2D rb;
     AudioSource audioSource;
     float targetVolume;
+
+    public float originalMass;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        originalMass = rb.mass;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = pushSound;
         audioSource.loop = true;
@@ -66,10 +71,14 @@ public class MovableObject : MonoBehaviour, IInteractable
         //     }
         // }
 
-        rb.bodyType =
-                PlayerController.Instance.CanPlayerPushObjects && Pushable ?
-                RigidbodyType2D.Dynamic :
-                RigidbodyType2D.Static;
+
+        if (PlayerController.Instance.CanPlayerPushObjects && Pushable)
+            rb.mass = originalMass;
+        else
+            // keep dynamic so it sends collisons to PressurePlate
+            // but make it not pushable by player physics
+            rb.mass = 100000000f;
+
 
         // Play looping push sound when being pushed
         bool shouldPlaySound = rb.bodyType == RigidbodyType2D.Dynamic &&
