@@ -43,6 +43,7 @@ public class ItemBase : MonoBehaviour, IInteractable
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    public virtual bool CanEquip() { return true; }
     public virtual void OnEquip() { }
     public virtual bool CanUnequip() { return true; }
     public virtual void OnUnequip() { }

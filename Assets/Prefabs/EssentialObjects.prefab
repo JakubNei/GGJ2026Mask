@@ -1312,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
       propertyPath: DebugAddAllMasks.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6860477535659591566, guid: 07e2f283f026abd4b94388a2f140ce75, type: 3}
       propertyPath: 'DebugAddAllMasks.Array.data[0]'

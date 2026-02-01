@@ -19,12 +19,9 @@ public class InventoryItems : MonoBehaviour
 
     public ItemBase selectedItem;
 
-    private int currentItemIndex = 0;
-    public bool hasDropped = false;
-    public bool HasFreeSlots => itemList.Count < 3;
     public static InventoryItems Instance { get; private set; }
 
-    public GameObject[] DebugAddAllMasks;
+    public List<GameObject> DebugAddAllMasks;
 
     private void Awake()
     {
@@ -46,20 +43,28 @@ public class InventoryItems : MonoBehaviour
 
     private void Update()
     {
-        ItemBase newItem = GetItemBasedOnKeyPressed();
-        if (newItem != null)
+         int? itemIndex = null;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            itemIndex = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            itemIndex = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            itemIndex = 2;
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            itemIndex = 3;
+
+      
+        if (itemIndex.HasValue)
         {
+            ItemBase newItem = itemList.Count >= 1 ? itemList[itemIndex.Value] : null;
             EquipItem(newItem);
         }
 
-        if (DebugAddAllMasks != null && Input.GetKeyDown(KeyCode.P))
+        if (DebugAddAllMasks != null && DebugAddAllMasks.Count > 0 && Input.GetKeyDown(KeyCode.P))
         {
-            foreach (var p in DebugAddAllMasks)
-            {
-                var i = GameObject.Instantiate(p);
-                AddItem(i.GetComponent<ItemBase>());
-            }
-            DebugAddAllMasks = null;
+            var i = GameObject.Instantiate(DebugAddAllMasks[0]);
+            AddItem(i.GetComponent<ItemBase>());
+            DebugAddAllMasks.RemoveAt(0);
         }
     }
 
@@ -94,41 +99,6 @@ public class InventoryItems : MonoBehaviour
         }
     }
 
-    public ItemBase GetItemBasedOnKeyPressed()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            currentItemIndex = 0;
-            return selectedItem = itemList.Count >= 1 ? itemList[currentItemIndex] : null;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            currentItemIndex = 1;
-            return selectedItem = itemList.Count >= 2 ? itemList[currentItemIndex] : null;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            currentItemIndex = 2;
-            return selectedItem = itemList.Count >= 3 ? itemList[currentItemIndex] : null;
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.E))
-        {
-            if (itemList.Count != 0)
-                currentItemIndex = (currentItemIndex + 1) % itemList.Count;
-            return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
-        }
-        else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (itemList.Count != 0)
-                currentItemIndex = (currentItemIndex - 1 + itemList.Count) % itemList.Count;
-            return selectedItem = itemList.Count > 0 ? itemList[currentItemIndex] : null;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
     private void UpdateItemSprites()
     {
         for (int i = 0; i < itemImages.Count; i++)
@@ -150,8 +120,19 @@ public class InventoryItems : MonoBehaviour
     {
         if (equippedItem != newItem)
         {
+            if (newItem != null && !newItem.CanEquip())
+            {
+                Debug.Log($"New item not equippable currently {newItem}");
+                return;
+            }            
             if (equippedItem != null)
             {
+                if (!equippedItem.CanUnequip())
+                {
+                    Debug.Log($"Current item not unequippable {equippedItem}");
+                    return;
+                }
+
                 equippedItem.OnUnequip();
                 frames[itemList.IndexOf(equippedItem)].SetActive(false);
             }
