@@ -11862,9 +11862,9 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1594888083
-  m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingLayerID: 169587591
+  m_SortingLayer: -2
+  m_SortingOrder: -2
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -15112,6 +15112,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1133028121}
   - {fileID: 1139867612}
   - {fileID: 2096954109}
   - {fileID: 844602886}
@@ -15121,7 +15122,6 @@ Transform:
   - {fileID: 889552787}
   - {fileID: 218824032}
   - {fileID: 911120259}
-  - {fileID: 1133028121}
   m_Father: {fileID: 1402042489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1402042488

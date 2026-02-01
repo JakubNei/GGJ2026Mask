@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2258791693999903915}
   - component: {fileID: 4889877445466596418}
   - component: {fileID: 6702072687404158558}
-  - component: {fileID: 6348850402996688316}
+  - component: {fileID: 854663328014786736}
   m_Layer: 12
   m_Name: Projectile
   m_TagString: Untagged
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: a2172692fa5a2814fafb9607e1b81b45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d723fd0842e2c2418f727139a263f76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -155,9 +155,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
---- !u!114 &6348850402996688316
+--- !u!114 &854663328014786736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,3 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7de3bb76607394e8ff1dc610bebe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
+  throwForce: 10
+  rotate: 1
