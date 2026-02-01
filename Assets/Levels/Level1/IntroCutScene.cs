@@ -10,17 +10,35 @@ public class IntroCutScene : MonoBehaviour
     void Start()
     {
         ForbidAllCharaterMovement();
-        StartCoroutine(PlayIntroCutscene());
+        StartCoroutine(PlayIntro());
     }
 
-    IEnumerator PlayIntroCutscene()
+    IEnumerator PlayIntro()
     {
 
         for (int i = 0; i < introImages.Length; i++)
         {
             if (i > 0)
             {
-                yield return StartCoroutine(FadeInImage(introImages[i]));
+                var image = introImages[i];
+                float elapsedTime = 0f;
+                Color c = image.color;
+                c.a = 0f;
+                image.color = c;
+                image.gameObject.SetActive(true);
+                
+                yield return null;
+                
+                while (elapsedTime < fadeDuration && !PlayerController.IsInteractInputKeyDown())
+                {
+                    elapsedTime += Time.deltaTime;
+                    c.a = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+                    image.color = c;
+                    yield return null;
+                }
+
+                c.a = 1f;
+                image.color = c;
 
                 introImages[i - 1].gameObject.SetActive(false);
             }
@@ -36,70 +54,49 @@ public class IntroCutScene : MonoBehaviour
                 yield return null;
             }
         }
-        
+
         // Allow character movement
         AllowCharacterMovement();
 
-        // Fade out the current image
-        yield return StartCoroutine(FadeOutImage(introImages[introImages.Length - 1]));
 
-       
-    }
-
-    IEnumerator FadeInImage(UnityEngine.UI.Image image)
-    {
-        float elapsedTime = 0f;
-        Color c = image.color;
-        c.a = 0f;
-        image.color = c;
-        image.gameObject.SetActive(true);
-
-        while (elapsedTime < fadeDuration)
+        // Fade out the last image
         {
-   
-            elapsedTime += Time.deltaTime;
-            c.a = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+            var image = introImages[introImages.Length - 1];
+
+            float elapsedTime = 0f;
+            Color c = image.color;
+            AudioSource audioSource = image.GetComponent<AudioSource>();
+            float initialVolume = audioSource != null ? audioSource.volume : 0f;
+
+            while (elapsedTime < fadeDuration)
+            {
+
+                elapsedTime += Time.deltaTime;
+                float t = elapsedTime / fadeDuration;
+                c.a = Mathf.Lerp(1f, 0f, t);
+                image.color = c;
+
+                if (audioSource != null)
+                {
+                    audioSource.volume = Mathf.Lerp(initialVolume, 0f, t);
+                }
+
+                yield return null;
+            }
+
+            c.a = 0f;
             image.color = c;
-            yield return null;
-        }
 
-        c.a = 1f;
-        image.color = c;
-    }
-
-    IEnumerator FadeOutImage(UnityEngine.UI.Image image)
-    {
-        float elapsedTime = 0f;
-        Color c = image.color;
-        AudioSource audioSource = image.GetComponent<AudioSource>();
-        float initialVolume = audioSource != null ? audioSource.volume : 0f;
-
-        while (elapsedTime < fadeDuration)
-        {
-  
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / fadeDuration;
-            c.a = Mathf.Lerp(1f, 0f, t);
-            image.color = c;
-            
             if (audioSource != null)
             {
-                audioSource.volume = Mathf.Lerp(initialVolume, 0f, t);
+                audioSource.volume = 0f;
             }
-            
-            yield return null;
+
+            image.gameObject.SetActive(false);
         }
 
-        c.a = 0f;
-        image.color = c;
-
-        if (audioSource != null)
-        {
-            audioSource.volume = 0f;
-        }
-
-        image.gameObject.SetActive(false);
     }
+
 
     void ForbidAllCharaterMovement()
     {
