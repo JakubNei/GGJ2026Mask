@@ -16496,13 +16496,13 @@ Tilemap:
   - first: {x: 12, y: -3, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 14
-      m_TileSpriteIndex: 18
+      m_TileIndex: 13
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741826
+      m_AllTileFlags: 1073741825
   - first: {x: 13, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -19621,10 +19621,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 567
+  - m_RefCount: 568
     m_Data: {fileID: 11400000, guid: af6c09c8b33117e4ca633454bf0b6f2f, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 9607b5179edbf9b41b1d33eb9ef1bcb1, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -19656,14 +19656,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 567
+  - m_RefCount: 568
     m_Data: {fileID: 21300000, guid: e31c2157a076343409640054f0312290, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -465528085, guid: eae258be47ca07344b6408f03f0ab3da, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 568
     m_Data:
@@ -31086,6 +31086,10 @@ PrefabInstance:
     - target: {fileID: 5729479469110768158, guid: 54d840f8760fcf045ad972370ab92a77, type: 3}
       propertyPath: m_Name
       value: HoleBlocker
+      objectReference: {fileID: 0}
+    - target: {fileID: 5729479469110768158, guid: 54d840f8760fcf045ad972370ab92a77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7230090318684950881, guid: 54d840f8760fcf045ad972370ab92a77, type: 3}
       propertyPath: m_LocalScale.x
