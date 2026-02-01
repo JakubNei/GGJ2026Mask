@@ -82,6 +82,16 @@ public class PlayerController : MonoBehaviour
             Input.GetKey(KeyCode.Return) ||
             Input.GetKey(KeyCode.Mouse0);
     }
+    public static bool IsInteractInputKeyDown()
+    {
+        return
+            Input.GetKeyDown(KeyCode.Q) ||
+            Input.GetKeyDown(KeyCode.E) ||
+            Input.GetKeyDown(KeyCode.LeftControl) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetKeyDown(KeyCode.Return) ||
+            Input.GetKeyDown(KeyCode.Mouse0);
+    }
 
 
     void FixedUpdate()

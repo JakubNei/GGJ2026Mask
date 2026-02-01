@@ -23005,6 +23005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944114733}
+  - component: {fileID: 1944114734}
   m_Layer: 0
   m_Name: IntroCutScene
   m_TagString: Untagged
@@ -23028,6 +23029,28 @@ Transform:
   - {fileID: 1164958782}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944114734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944114732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608365bc7fadc5a44bc6ea97de8c9d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  introImages:
+  - {fileID: 472810687}
+  - {fileID: 1940939893}
+  - {fileID: 2144885228}
+  - {fileID: 1767606647}
+  - {fileID: 1024961124}
+  - {fileID: 601224758}
+  - {fileID: 601274478}
+  fadeDuration: 1
+  displayDuration: 10
 --- !u!1 &1944481016
 GameObject:
   m_ObjectHideFlags: 0
