@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2379318849132377766}
   - component: {fileID: 4191081133215153751}
   - component: {fileID: 1908207986815867976}
-  - component: {fileID: 7592270094397740321}
   m_Layer: 5
   m_Name: intro_01
   m_TagString: Untagged
@@ -174,17 +173,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7592270094397740321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3698183151475615380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
-  m_AspectMode: 1
-  m_AspectRatio: 1.7787879
