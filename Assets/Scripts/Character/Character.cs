@@ -136,8 +136,7 @@ public class Character : MonoBehaviour
         }
 
         // Get the right clip based on spirit realm state
-        bool inSpiritRealm = GameController.Instance != null &&
-                            GameController.Instance.gameState == GameState.Shaman;
+        bool inSpiritRealm = AstralPlane.Instance?.isActiveAndEnabled ?? false;
         AudioClip targetClip = inSpiritRealm ? spiritWalkingLoopSound : walkingLoopSound;
 
         // Start/stop walking sound

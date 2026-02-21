@@ -34,7 +34,7 @@ public class ShamanMask : ItemBase
 
     public override bool CanEquip()
     {
-        if (AstralPlane.Instance.gameObject.activeSelf)
+        if (AstralPlane.Instance?.gameObject.activeSelf ?? false)
             return true; // fallback, should not happen
 
         return PlayersOverlaps(AstralPlane.Instance.RequiredToSwitchInto);
@@ -48,7 +48,7 @@ public class ShamanMask : ItemBase
 
     public override bool CanUnequip()
     {
-        if (NormalPlane.Instance.gameObject.activeSelf)
+        if (NormalPlane.Instance?.gameObject.activeSelf ?? true)
             return true; // fallback, should not happen
 
         return PlayersOverlaps(NormalPlane.Instance.RequiredToSwitchInto);
