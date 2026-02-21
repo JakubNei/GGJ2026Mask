@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 54d9c252f82293647a38ad798e3c1695
+guid: 04090ee4f5eaca747abd054766df8a3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8244818468645912451
-    second: stairs_up_0
+      213: 2614854530524275640
+    second: kuba_gate_11_0
+  - first:
+      213: 6283484079303387846
+    second: kuba_gate_11_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,9 +52,9 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.46824318, y: 0.5649574}
-  spritePixelsToUnits: 48
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 40
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -101,7 +104,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stairs_up_0
+      name: kuba_gate_11_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 45
-        height: 76
+        x: 1
+        y: 97
+        width: 26
+        height: 41
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38f383dd6ba7b6270800000000000000
-      internalID: 8244818468645912451
+      spriteID: 8b368376754d94420800000000000000
+      internalID: 2614854530524275640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kuba_gate_11_1
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 16
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca63b29a7b633750800000000000000
+      internalID: 6283484079303387846
       vertices: []
       indices: 
       edges: []
@@ -139,7 +164,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      stairs_up_0: 8244818468645912451
+      kuba_gate_11_0: 2614854530524275640
+      kuba_gate_11_1: 6283484079303387846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

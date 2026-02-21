@@ -7,9 +7,10 @@ public class IntroCutScene : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image[] introImages;
     [SerializeField] float fadeDuration = 0.5f;
 
+    public static IntroCutScene Instance => FindFirstObjectByType<IntroCutScene>(FindObjectsInactive.Include);
+
     void Start()
     {
-        ForbidAllCharaterMovement();
         StartCoroutine(PlayIntro());
     }
 
@@ -26,9 +27,9 @@ public class IntroCutScene : MonoBehaviour
                 c.a = 0f;
                 image.color = c;
                 image.gameObject.SetActive(true);
-                
+
                 yield return null;
-                
+
                 while (elapsedTime < fadeDuration && !PlayerController.IsInteractInputKeyDown())
                 {
                     elapsedTime += Time.deltaTime;
@@ -95,7 +96,10 @@ public class IntroCutScene : MonoBehaviour
             image.gameObject.SetActive(false);
         }
 
+        gameObject.SetActive(false);
+
     }
+
 
 
     void ForbidAllCharaterMovement()
