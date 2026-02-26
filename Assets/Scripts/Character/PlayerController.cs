@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     public bool CanPlayerPushObjects = false;
     public bool CanPlayerPullObjects = false;
 
-    [SerializeField] ItemCursor itemCursor;
     [SerializeField] GameObject projectilePf;
     [SerializeField] GameObject defaultMaskPf;
     [SerializeField] float shootCooldown = 0.3f;
@@ -172,36 +171,6 @@ public class PlayerController : MonoBehaviour
         cameraPos.y = controllingCharacter.transform.position.y;
         Camera.main.transform.position = cameraPos;
 
-        // Face towards mouse cursor (left/right) - flip sprite and mask
-        // Only flip when facing front (down), not when facing back (up)
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float playerX = controllingCharacter.transform.position.x;
-        bool shouldFlip = mouseWorldPos.x < playerX;
-
-        // Check if player is facing up - don't flip in that case
-        var walkAnimator = controllingCharacter.GetComponentInChildren<WalkAnimator>();
-        bool facingUp = walkAnimator != null && walkAnimator.CurrentDirection == FacingDirection.Up;
-
-        // Flip player sprite (only when facing down)
-        var sr = controllingCharacter.GetComponentInChildren<SpriteRenderer>();
-        if (sr != null)
-        {
-            sr.flipX = facingUp ? false : shouldFlip;
-        }
-
-        // Update mask display facing and flip (only when facing down)
-        var maskDisplay = controllingCharacter.MaskDisplay;
-        if (maskDisplay != null)
-        {
-            // Update mask sprite and sorting order based on facing direction
-            maskDisplay.SetFacingDirection(walkAnimator != null ? walkAnimator.CurrentDirection : FacingDirection.Down);
-
-            // Flip mask holder (only when facing down)
-            Vector3 maskScale = maskDisplay.transform.localScale;
-            maskScale.x = facingUp ? Mathf.Abs(maskScale.x) : (shouldFlip ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x));
-            maskDisplay.transform.localScale = maskScale;
-        }
-
         // Aim interaction with either mouse or movement
         Vector3 interactOriginPos = controllingCharacter.transform.position + Vector3.up * 0.3f;
         interactFocusPos = interactOriginPos + lastMostMovedDir;
@@ -212,11 +181,26 @@ public class PlayerController : MonoBehaviour
                 Input.GetKeyDown(KeyCode.Mouse2)
             )
                 lastMouseMovedTime = Time.time;
+                
             lastMousePosition = Input.mousePosition;
-            if (lastMouseMovedTime > Time.time - 1)
+            const float secondsThreshold = 1f;
+            if (lastMouseMovedTime > Time.time - secondsThreshold)
             {
                 interactFocusPos = Camera.main.ScreenToWorldPoint(lastMousePosition);
+
+                // Adjust facing direction from mouse position
+                {
+                    Vector3 playerPos = controllingCharacter.transform.position;
+                    Vector2 dir = interactFocusPos - playerPos;
+                    if (dir.sqrMagnitude > 0.001f)
+                    {
+                        var facingFromMouse = WalkAnimator.GetFacingFromDirection(dir);
+                        controllingCharacter.OverrideDirection(facingFromMouse, secondsThreshold);
+                    }
+                }
+
             }
+
 
             // Clamp interact focus pos to be within 0.5 units of player
             var facing = interactFocusPos - interactOriginPos;
@@ -297,6 +281,7 @@ public class PlayerController : MonoBehaviour
         {
             MaskOnCharacter = MaskSelectedInUI;
         }
+
 
         // Bob and wobble is now handled in Character.HandleUpdate()
         controllingCharacter.HandleUpdate();

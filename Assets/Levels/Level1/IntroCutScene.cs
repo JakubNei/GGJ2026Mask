@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class IntroCutScene : MonoBehaviour
+public class    IntroCutScene : MonoBehaviour
 {
 
     [SerializeField] UnityEngine.UI.Image[] introImages;
@@ -12,6 +12,7 @@ public class IntroCutScene : MonoBehaviour
     void Start()
     {
         StartCoroutine(PlayIntro());
+        ForbidAllCharaterMovement();
     }
 
     IEnumerator PlayIntro()
@@ -100,7 +101,10 @@ public class IntroCutScene : MonoBehaviour
 
     }
 
-
+    void OnDisable()
+    {
+        AllowCharacterMovement();       
+    }
 
     void ForbidAllCharaterMovement()
     {

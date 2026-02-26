@@ -79,6 +79,11 @@ public class MaskDisplay : MonoBehaviour
         {
             UpdateMaskSprite(entry);
         }
+
+        // Flip mask holder (only when facing down)
+        Vector3 maskScale = transform.localScale;
+        maskScale.x = currentFacing == FacingDirection.Up ? Mathf.Abs(maskScale.x) : (currentFacing == FacingDirection.Left ? -Mathf.Abs(maskScale.x) : Mathf.Abs(maskScale.x));
+        transform.localScale = maskScale;
     }
 
     private void UpdateMaskSprite(MaskEntry entry)

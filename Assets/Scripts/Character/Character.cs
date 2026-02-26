@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
 {
 
     [SerializeField] MaskDisplay maskDisplay;
+    public MaskDisplay MaskDisplay => maskDisplay;
     public float moveSpeed;
 
     [Header("Mask Bob")]
@@ -60,14 +61,19 @@ public class Character : MonoBehaviour
         }
     }
 
+    public FacingDirection overrideDirection;
+    public float overrideDirectionTimer;
 
-    public CharacterAnimator characterAnimator;
+    public Vector3 lastPosition;
 
-    CharacterAnimator animator;
+    public void OverrideDirection(FacingDirection directon, float forSeconds = 1f)
+    {
+        overrideDirection = directon;
+        overrideDirectionTimer = forSeconds;
+    }
 
     private void Awake()
     {
-        animator = GetComponent<CharacterAnimator>();
         //SetPositionAndSnapToTile(transform.position); // Snap do centra tilu
         CurrentMask = MaskType.Default;
         moveSpeed *= 0.5f; // Slow down movement by 2x
@@ -103,10 +109,6 @@ public class Character : MonoBehaviour
 
     public void HandleUpdate()
     {
-        if (animator != null)
-        {
-            animator.IsMoving = IsMoving && !temporarilyForbidMovement;
-        }
         if (temporarilyForbidMovement)
             return;
 
@@ -118,6 +120,46 @@ public class Character : MonoBehaviour
 
         UpdateBobAndWobble();
         UpdateWalkingSound();
+
+        var walkAnimator = GetComponentInChildren<WalkAnimator>();
+
+        if (MaskDisplay)
+        {
+            MaskDisplay.SetFacingDirection(walkAnimator != null ? walkAnimator.currentDirection : FacingDirection.Down);
+        }
+
+        Vector3 currentPos = transform.position;
+
+        if (overrideDirectionTimer > 0)
+        {
+            overrideDirectionTimer -= Time.deltaTime;
+            if (walkAnimator != null)
+            {
+                walkAnimator.currentDirection = overrideDirection;
+            }
+        }
+        else
+        {
+            Vector2 dir = currentPos - lastPosition;
+            if (dir.sqrMagnitude > 0.0001f)
+            {
+                var newFacing = WalkAnimator.GetFacingFromDirection(dir);
+                if (walkAnimator != null)
+                {
+                    if (newFacing == FacingDirection.Down)
+                    {
+                        // We dont hae down sprites so lets just keep current horizontal facing
+                        if (walkAnimator.currentDirection == FacingDirection.Left ||
+                            walkAnimator.currentDirection == FacingDirection.Right)
+                            newFacing = walkAnimator.currentDirection;
+                    }
+                    
+                    walkAnimator.currentDirection = newFacing;
+                }
+            }
+        }
+
+        lastPosition = currentPos;
     }
 
     void UpdateWalkingSound()
@@ -209,10 +251,4 @@ public class Character : MonoBehaviour
         }
     }
 
-    public CharacterAnimator Animator
-    {
-        get => animator;
-    }
-
-    public MaskDisplay MaskDisplay => maskDisplay;
 }

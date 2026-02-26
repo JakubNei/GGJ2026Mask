@@ -22,7 +22,10 @@ public class PortalToLevel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GoToNextLevel();
+            if (IntroCutScene.Instance  && IntroCutScene.Instance.gameObject.activeInHierarchy)
+                IntroCutScene.Instance.gameObject.SetActive(false);
+            else
+                GoToNextLevel();
         }
     }
 
