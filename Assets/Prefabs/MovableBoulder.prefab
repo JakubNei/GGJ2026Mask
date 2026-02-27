@@ -146,7 +146,7 @@ MonoBehaviour:
   pushVelocityThreshold: 0.1
   maxVolume: 0.4
   fadeDuration: 0.5
-  playerActivationDistance: 1.5
+  playerActivationDistance: 3
   originalMass: 0
 --- !u!50 &2369184038496584170
 Rigidbody2D:
