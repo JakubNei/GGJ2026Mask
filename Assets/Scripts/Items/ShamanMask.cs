@@ -43,8 +43,10 @@ public class ShamanMask : ItemBase
     }
     public override void OnEquip()
     {
-        NormalPlane.Instance.gameObject.SetActive(false);
-        AstralPlane.Instance.gameObject.SetActive(true);
+        if (NormalPlane.Instance)
+            NormalPlane.Instance.gameObject.SetActive(false);
+        if (AstralPlane.Instance)
+            AstralPlane.Instance.gameObject.SetActive(true);
         AudioManager.i?.PlaySfx(AudioId.AstralTransition);
     }
 
@@ -58,10 +60,10 @@ public class ShamanMask : ItemBase
 
     public override void OnUnequip()
     {
-        if (!NormalPlane.Instance || !AstralPlane.Instance)
-            return;
-        AstralPlane.Instance.gameObject.SetActive(false);
-        NormalPlane.Instance.gameObject.SetActive(true);
+        if (AstralPlane.Instance)
+            AstralPlane.Instance.gameObject.SetActive(false);
+        if (NormalPlane.Instance)
+            NormalPlane.Instance.gameObject.SetActive(true);
         AudioManager.i?.PlaySfx(AudioId.AstralTransition);
     }
 }

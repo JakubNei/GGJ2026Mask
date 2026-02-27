@@ -36,19 +36,14 @@ public class ShootableButton : MonoBehaviour, IInteractable
         if (projectile != null && lastActivatedProjectile != projectile)
         {
             lastActivatedProjectile = projectile;
-            Activate();
+            Turn(true);
         }
     }
 
     Projectile lastActivatedProjectile;
 
-    void Activate()
+    void Toggle()
     {
-        Debug.Log($"[ShootableButton] Activating! Targets count: {targets?.Length ?? 0}");
-
-        if (activateSound && AudioManager.i)
-            AudioManager.i.PlaySfx(activateSound);
-
         Turn(!turnedOn);
     }
 
@@ -56,6 +51,10 @@ public class ShootableButton : MonoBehaviour, IInteractable
     {
         if (turnedOn == on)
             return;
+
+        if (activateSound && AudioManager.i)
+            AudioManager.i.PlaySfx(activateSound);
+
         turnedOn = on;
         if (on)
         {
@@ -81,7 +80,7 @@ public class ShootableButton : MonoBehaviour, IInteractable
     {
         if (lastFrameInteracted < Time.frameCount - 2)
         {
-            Activate();
+            Toggle();
         }
         
         lastFrameInteracted = Time.frameCount;
