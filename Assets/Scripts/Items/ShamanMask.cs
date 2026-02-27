@@ -34,6 +34,8 @@ public class ShamanMask : ItemBase
 
     public override bool CanEquip()
     {
+        if (!AstralPlane.Instance)
+            return true;
         if (AstralPlane.Instance?.gameObject.activeSelf ?? false)
             return true; // fallback, should not happen
 
@@ -56,6 +58,8 @@ public class ShamanMask : ItemBase
 
     public override void OnUnequip()
     {
+        if (!NormalPlane.Instance || !AstralPlane.Instance)
+            return;
         AstralPlane.Instance.gameObject.SetActive(false);
         NormalPlane.Instance.gameObject.SetActive(true);
         AudioManager.i?.PlaySfx(AudioId.AstralTransition);

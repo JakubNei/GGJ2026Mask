@@ -471,6 +471,12 @@ MonoBehaviour:
   idleSpriteUp: {fileID: 21300000, guid: 771a6486e6fd14e24a0e93e6c74164c7, type: 3}
   frameRate: 0.1
   movementLingerTime: 0.1
+  currentFrame: 0
+  animTimer: 0
+  lastPosition: {x: 0, y: 0, z: 0}
+  isAnimating: 0
+  timeSinceLastMovement: 0
+  currentDirection: 1
 --- !u!114 &4720159627808179392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +505,9 @@ MonoBehaviour:
   enemyWalkingMaxDistance: 10
   temporarilyForbidMovement: 0
   IsPlayerCharacter: 1
-  characterAnimator: {fileID: 0}
+  overrideDirection: 0
+  overrideDirectionTimer: 0
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &5437072379948521110
 GameObject:
   m_ObjectHideFlags: 0

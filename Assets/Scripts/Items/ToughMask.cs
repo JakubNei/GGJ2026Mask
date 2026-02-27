@@ -10,12 +10,16 @@ public class ToughMask : ItemBase
 
     public override void OnEquip()
     {
+        if (!PlayerController.Instance)
+            return;
         PlayerController.Instance.CanPlayerPushObjects = true;
         PlayerController.Instance.CanPlayerPullObjects = true;
     }
 
     public override void OnUnequip()
     {
+        if (!PlayerController.Instance)
+            return;
         PlayerController.Instance.CanPlayerPushObjects = false;
         PlayerController.Instance.CanPlayerPullObjects = false;
     }
