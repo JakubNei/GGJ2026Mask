@@ -43,14 +43,14 @@ public class InventoryItems : MonoBehaviour
 
     private void Update()
     {
-         int? itemIndex = null;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        int? itemIndex = null;
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.F1))
             itemIndex = 0;
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.F2))
             itemIndex = 1;
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.F3))
             itemIndex = 2;
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.F4))
             itemIndex = 3;
 
       

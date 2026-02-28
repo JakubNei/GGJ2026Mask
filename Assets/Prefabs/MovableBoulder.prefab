@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: decef2cfb655d8d49be7522b49459e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovableObject
-  Pullable: 0
+  Pullable: 1
   Pushable: 1
   pushSound: {fileID: 8300000, guid: ce9543c35c94442fbaf223b811f99f87, type: 3}
   pushVelocityThreshold: 0.1
