@@ -147,6 +147,7 @@ MonoBehaviour:
   maxVolume: 0.4
   fadeDuration: 0.5
   playerActivationDistance: 3
+  configHighlight: {r: 0, g: 0, b: 0, a: 1}
   originalMass: 0
 --- !u!50 &2369184038496584170
 Rigidbody2D:

@@ -144,6 +144,8 @@ MonoBehaviour:
   activateSound: {fileID: 0}
   configOnVisuals: {fileID: 5107932515361200031}
   configOffVisuals: {fileID: 952091744777072708}
+  configOnHighlight: {r: 1, g: 1, b: 1, a: 1}
+  configOffHighlight: {r: 1, g: 0.007575758, b: 0, a: 1}
   turnedOn: 0
   lastFrameInteracted: 0
 --- !u!61 &6591158606027281897

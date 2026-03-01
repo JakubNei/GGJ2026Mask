@@ -8,8 +8,10 @@ public class ShootableButton : MonoBehaviour, IInteractable
     [SerializeField] AudioClip activateSound;
     [SerializeField] GameObject configOnVisuals;
     [SerializeField] GameObject configOffVisuals;
+    [SerializeField] Color configOnHighlight = Color.white;
+    [SerializeField] Color configOffHighlight = Color.red;
     public bool turnedOn = false;
-
+    
     void Start()
     {
         var collider = GetComponent<Collider2D>();
@@ -89,5 +91,15 @@ public class ShootableButton : MonoBehaviour, IInteractable
     public bool CanInteract()
     {
         return true;
+    }
+
+    public Color GetHighlightColor()
+    {
+        return turnedOn ? configOnHighlight : configOffHighlight;
+    }
+
+    public string GetInteractText()
+    {
+        return turnedOn ? "Turn Off" : "Turn On";
     }
 }

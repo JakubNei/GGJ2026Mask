@@ -20,6 +20,9 @@ public class MovableObject : MonoBehaviour, IInteractable
     [Header("Player Proximity")]
     [SerializeField] float playerActivationDistance = 1.5f;
 
+    [Header("Interact")]
+    [SerializeField] Color configHighlight = Color.black;
+
     Rigidbody2D rb;
     AudioSource audioSource;
     float targetVolume;
@@ -120,5 +123,15 @@ public class MovableObject : MonoBehaviour, IInteractable
     public bool CanPickUp()
     {
         return false;
+    }
+
+    public Color GetHighlightColor()
+    {
+        return configHighlight;
+    }
+
+    public string GetInteractText()
+    {
+        return "WSAD Push\nE Pull";
     }
 }

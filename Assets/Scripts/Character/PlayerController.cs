@@ -158,12 +158,25 @@ public class PlayerController : MonoBehaviour
         if (temporarilyBlockInoput)
             return;
 
+
+        //MASK
+        if (MaskOnCharacter != MaskSelectedInUI && selectMaskFromUI)
+        {
+            MaskOnCharacter = MaskSelectedInUI;
+        }
+
+
+
         var p = controllingCharacter.transform.position;
         lastCharacterDeltaMovement = p - lastCharacterPosition;
         lastCharacterPosition = p;
 
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
+
+
+        // Bob and wobble is now handled in Character.HandleUpdate()
+        controllingCharacter.HandleUpdate();
 
 
         var cameraPos = Camera.main.transform.position;
@@ -181,7 +194,7 @@ public class PlayerController : MonoBehaviour
                 Input.GetKeyDown(KeyCode.Mouse2)
             )
                 lastMouseMovedTime = Time.time;
-                
+
             lastMousePosition = Input.mousePosition;
             const float secondsThreshold = 1f;
             if (lastMouseMovedTime > Time.time - secondsThreshold)
@@ -239,28 +252,45 @@ public class PlayerController : MonoBehaviour
             HighlightSprite.Highlight(itemCursor.itemPreview);
         }
         else */
-        if (interactableGameObject)
-        {
-            HighlightSprite.Outline(interactableGameObject, Color.white);
-        }
+        var interactable = interactableGameObject?.GetComponent<IInteractable>() ?? null;
+
 
         bool interactInput = IsInteractInputKey();
-        if (interactInput && interactableGameObject)
+        if (interactable?.CanPickUp() ?? false)
         {
-            interactableGameObject.GetComponent<IInteractable>()?.UpdateWhileInteracting();
-            if (interactableGameObject.GetComponent<IInteractable>().CanPickUp())
+            ItemBase item = interactableGameObject.GetComponent<ItemBase>();
+            if (item)
             {
-                ItemBase item = interactableGameObject.GetComponent<ItemBase>();
-                if (item)
+                HighlightSprite.Outline(interactableGameObject, Color.white);
+                if (interactInput)
                 {
                     Debug.Log("Picking up " + item.name);
                     inventoryItems.AddItem(item);
                 }
+                else
+                {
+                    HintText.ShowHint("E Pickup", item.transform.position);
+                }
+                return;
             }
         }
 
+        if (interactable != null && interactable.CanInteract())
+        {
+            HighlightSprite.Outline(interactableGameObject, interactable.GetHighlightColor());
+            if (interactInput)
+            {
+                interactable.UpdateWhileInteracting();
+            }
+            else
+            {
+                HintText.ShowHint(interactable.GetInteractText(), interactableGameObject.transform.position);
+            }
+            return;
+        }
+
         //PROJECTILE
-        if (interactInput && !interactableGameObject && MaskOnCharacter == MaskType.Ninja)
+        if (!interactableGameObject && MaskOnCharacter == MaskType.Ninja)
         {
             if (Time.time >= lastShootTime + shootCooldown)
             {
@@ -268,23 +298,22 @@ public class PlayerController : MonoBehaviour
                 var throwDirection = interactFocusPos - spawnPos;
                 throwDirection.z = 0;
                 throwDirection.Normalize();
+                if (interactInput)
+                {
 
-                GameObject projectile = Instantiate(projectilePf, spawnPos, Quaternion.identity);
-                projectile.transform.localScale *= 0.65f;
-                projectile.GetComponent<Projectile>()?.Throw(throwDirection);
-                lastShootTime = Time.time;
+                    GameObject projectile = Instantiate(projectilePf, spawnPos, Quaternion.identity);
+                    projectile.transform.localScale *= 0.65f;
+                    projectile.GetComponent<Projectile>()?.Throw(throwDirection);
+                    lastShootTime = Time.time;
+                }
+                else
+                {
+                    HintText.ShowHint("E Shoot", spawnPos + throwDirection);
+                }
+                return;
             }
         }
 
-        //MASK
-        if (MaskOnCharacter != MaskSelectedInUI && selectMaskFromUI)
-        {
-            MaskOnCharacter = MaskSelectedInUI;
-        }
-
-
-        // Bob and wobble is now handled in Character.HandleUpdate()
-        controllingCharacter.HandleUpdate();
     }
 
 

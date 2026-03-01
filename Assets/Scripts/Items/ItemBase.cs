@@ -7,7 +7,7 @@ using UnityEngine;
 public enum MaskType
 {
     Default,
-    Shaman, 
+    Shaman,
     Tough,
     Ninja,
     CutSceneNone, // Final end cut scene no mask
@@ -15,11 +15,15 @@ public enum MaskType
 
 public class ItemBase : MonoBehaviour, IInteractable
 {
+
+    [Header("Interact")]
+    [SerializeField] Color configHighlight = Color.white;
+
     protected MaskType maskType;
     public MaskType MaskType
     {
-        get { return maskType; }  
-        set { maskType = value; } 
+        get { return maskType; }
+        set { maskType = value; }
     }
 
     public virtual bool InteractInsteadOfPlace => false;
@@ -48,7 +52,7 @@ public class ItemBase : MonoBehaviour, IInteractable
     public virtual bool CanUnequip() { return true; }
     public virtual void OnUnequip() { }
 
-  
+
     public void UpdateWhileInteracting()
     {
         Debug.Log("UpdateWhileInteracting");
@@ -62,6 +66,16 @@ public class ItemBase : MonoBehaviour, IInteractable
 
     public bool CanPickUp()
     {
-       return true;
+        return true;
+    }
+
+    public Color GetHighlightColor()
+    {
+        return configHighlight;
+    }
+
+    public string GetInteractText()
+    {
+        return "Pickup";
     }
 }

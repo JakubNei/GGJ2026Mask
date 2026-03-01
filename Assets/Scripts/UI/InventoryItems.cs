@@ -53,10 +53,10 @@ public class InventoryItems : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.F4))
             itemIndex = 3;
 
-      
+
         if (itemIndex.HasValue && itemIndex.Value < itemList.Count)
         {
-            EquipItem(itemList[itemIndex.Value]);
+            EquipItemByIndex(itemIndex.Value);
         }
 
         if (DebugAddAllMasks != null && DebugAddAllMasks.Count > 0 && Input.GetKeyDown(KeyCode.P))
@@ -64,6 +64,14 @@ public class InventoryItems : MonoBehaviour
             var i = GameObject.Instantiate(DebugAddAllMasks[0]);
             AddItem(i.GetComponent<ItemBase>());
             DebugAddAllMasks.RemoveAt(0);
+        }
+    }
+    
+    public void EquipItemByIndex(int index)
+    {
+        if (index >= 0 && index < itemList.Count)
+        {
+            EquipItem(itemList[index]);
         }
     }
 

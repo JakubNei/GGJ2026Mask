@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ce21ff7c4f5574b8dc83c2f49169e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultMask
+  configHighlight: {r: 1, g: 1, b: 1, a: 0}
 --- !u!60 &-7021136284950794571
 PolygonCollider2D:
   m_ObjectHideFlags: 0
